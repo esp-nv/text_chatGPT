@@ -1,0 +1,4297 @@
+Влизане
+1.	Вие казахте:
+може ли оценка https://github.com/esp-nv
+2.	ChatGPT каза:
+Да. Разгледах профила ти в GitHub: esp-nv / GitHub. В момента профилът е позициониран като Junior Developer | C# / .NET | Web Development, а имаш 4 публични repository-та и 1 star. G GitHub
+Оценка: 6.5/10 за Junior C#/.NET кандидат
+Има добра основа, но в момента профилът изглежда повече като учебно портфолио, отколкото като портфолио на човек, готов за работа.
+Какво е добре
+o	Посоката е ясна — C#, .NET, SQL Server, Entity Framework.
+o	Имаш отделено внимание на OOP, SOLID, Clean Code и refactoring, което е правилно за .NET позиция. G GitHub
+o	README-то е чисто и професионално за junior.
+o	Добре е, че показваш и HTML/CSS/JavaScript, защото това подсказва, че можеш да разбираш целия web stack.
+o	Харесва ми изречението, че използваш AI като помощник, но целта ти е да разбираш и прилагаш нещата самостоятелно. Това е много по-добро от това просто да показваш „AI-generated projects“. G GitHub
+Какво те дърпа надолу
+Основният проблем е липсата на силен реален проект.
+Ако аз съм hiring manager и отворя профила, виждам:
+„Уча C#, .NET, SQL Server, EF, OOP...“
+но искам да видя:
+„Ето приложение, което съм изградил от начало до край.“
+Например:
+ASP.NET Core Web API + EF Core + SQL Server + JWT Authentication + React/HTML/JS frontend + Docker + tests
+дори едно такова добре направено приложение би променило доста впечатлението.
+Как бих го направил
+Бих подредил портфолиото така:
+6.	1 голям проект ⭐⭐⭐⭐⭐
+Например система за управление на задачи, inventory, booking или expense tracker.
+7.	2–3 средни проекта ⭐⭐⭐⭐
+Всеки да демонстрира конкретно умение:
+	EF Core + SQL
+	REST API
+	Authentication/Authorization
+	LINQ
+	async/await
+	testing
+8.	CSharp repository като учебна база
+Това е полезно, но не трябва да бъде главната звезда на профила.
+9.	Software-Engineering repository като допълнение
+Добро е за показване на мислене и принципи, но работодателят по-скоро ще гледа реалния код.
+Най-важното
+Ти вече си направил нещо правилно: показваш какво учиш.
+Следващата стъпка е да започнеш да показваш какво можеш да построиш.
+Ако целта ти е Junior .NET работа, бих ти дал следния roadmap:
+C# → OOP → LINQ → async/await → SQL → EF Core → ASP.NET Core Web API → Authentication/JWT → testing → Git → Docker → един сериозен проект
+И тогава бих очаквал профилът ти да стигне около 8–9/10 за Junior, ако проектът е качествен.
+Ако искаш, мога да направя и много по-подробен code review на самите 4 repository-та — структура, C# код, naming, OOP, SOLID, EF/SQL, README-та и какво конкретно бих променил, за да изглеждат като портфолио за кандидатстване.
+G Източници
+3.	Вие казахте:
+https://github.com/esp-nv/CSharp/tree/main/06.CSharp-EntityFramework/03.Entity-Relations/Author-Solutions/01-Student-System може ли с теб да изградим проект asp.net core mvc
+4.	ChatGPT каза:
+Да — и според мен това е много добър проект за следващата ти стъпка. Видях конкретния Student-System в repository-то ти. Той в момента е EF Core console-style проект с Data и StartUp.cs, така че можем да вземем модела и релациите като основа, но да изградим истинско ASP.NET Core MVC приложение от нулата, вместо просто да прехвърляме кода. G GitHub
+Microsoft също има актуална поредица за ASP.NET Core MVC + EF Core, включваща CRUD, relationships, migrations и работа с related data. M Microsoft Learn+1
+Какво предлагам да направим
+Да направим проект примерно:
+Student Management System
+с:
+o	ASP.NET Core MVC
+o	C#
+o	Entity Framework Core
+o	SQL Server
+o	Razor Views
+o	Bootstrap
+o	Dependency Injection
+o	LINQ
+o	async/await
+o	CRUD
+o	Entity Relationships
+o	Validation
+o	Migrations
+o	ViewModels
+o	Search/Filtering
+o	Authentication/Authorization — на по-късен етап
+Архитектура
+Ще започнем сравнително просто:
+StudentManagement
+│
+├── Controllers
+│   ├── HomeController.cs
+│   ├── StudentsController.cs
+│   ├── CoursesController.cs
+│   └── TeachersController.cs
+│
+├── Data
+│   ├── ApplicationDbContext.cs
+│   └── SeedData.cs
+│
+├── Models
+│   ├── Student.cs
+│   ├── Course.cs
+│   ├── Teacher.cs
+│   └── Enrollment.cs
+│
+├── ViewModels
+│   ├── StudentViewModel.cs
+│   └── CourseViewModel.cs
+│
+├── Views
+│   ├── Home
+│   ├── Students
+│   ├── Courses
+│   ├── Teachers
+│   └── Shared
+│
+├── wwwroot
+│   ├── css
+│   ├── js
+│   └── lib
+│
+├── appsettings.json
+└── Program.cs
+Релациите
+Тук вече ще използваме това, което си учил в Student-System.
+Например:
+Student
+   │
+   │ 1
+   │
+   │
+   │ *
+Enrollment
+   │
+   │ *
+   │
+   │ 1
+Course
+Тоест:
+Student → Enrollment → Course
+Това е много полезно, защото няма да учиш MVC отделно от EF Core — ще видиш как EF Core relationships се използват в реално web приложение.
+Искам да го направим заедно, не да ти дам готов проект
+Това според мен е най-важната част.
+Можем да работим така:
+Аз:
+Създай Student.cs с тези properties...
+Ти го пишеш.
+После ми показваш кода.
+Аз:
+Проверявам го → обяснявам всяка грешка → подобряваме го.
+След това:
+1. Create project
+       ↓
+2. Models
+       ↓
+3. DbContext
+       ↓
+4. SQL Server
+       ↓
+5. Migrations
+       ↓
+6. Controllers
+       ↓
+7. Views
+       ↓
+8. CRUD
+       ↓
+9. Relationships
+       ↓
+10. ViewModels
+       ↓
+11. Validation
+       ↓
+12. Search
+       ↓
+13. Authentication
+       ↓
+14. Polish + GitHub
+Така накрая няма просто да имаш проект, а ще можеш да обясниш на интервю защо всяка част е написана по този начин.
+И още нещо важно
+Не бих копирал директно стария Student-System.
+Ще го използваме като учебна основа, но ще направим нов проект с актуален ASP.NET Core MVC. Това е по-смислено и за GitHub портфолиото ти.
+Първата задача
+Ако си готов, започваме от нулата.
+Кажи ми само коя среда използваш:
+o	Visual Studio 2022
+o	VS Code
+o	JetBrains Rider
+и коя версия на .NET имаш (dotnet --version).
+После ще направим Стъпка 1: създаване на ASP.NET Core MVC проекта, като вървим бавно и обяснявам защо правим всяко нещо.
+G M Източници
+5.	Вие казахте:
+стъпка по стъпка
+6.	ChatGPT каза:
+Разбира се. Ще го направим наистина стъпка по стъпка — без да прескачаме и без да ти давам целия проект наведнъж.
+Ще използваме твоя Student-System като основа за идеята, но ще изградим ново ASP.NET Core MVC приложение.
+Стъпка 1 — Създаваме проекта
+Първо ми трябва да знам с какво работиш:
+Visual Studio 2022, VS Code или Rider?
+Ако си с Visual Studio 2022, ще започнем така:
+1.	Отвори Visual Studio 2022.
+2.	Избери Create a new project.
+3.	В търсачката напиши:
+ASP.NET Core Web App (Model-View-Controller)
+4.	Избери точно този template.
+5.	Натисни Next.
+Настройки
+На следващия екран например:
+Project name:
+StudentManagement
+
+Location:
+[папката, в която си държиш проектите]
+
+Solution name:
+StudentManagement
+Натисни Next.
+На следващия екран:
+Framework: .NET 10.0
+Authentication type: None
+Configure for HTTPS: ✓
+Enable Docker: ✗
+Ако при теб няма .NET 10.0, не избирай на сляпо — кажи ми какви версии ти показва.
+След това:
+Create
+________________________________________
+След създаването
+Трябва да получиш нещо подобно:
+StudentManagement
+│
+├── Controllers
+├── Models
+├── Views
+├── wwwroot
+├── Properties
+├── appsettings.json
+├── Program.cs
+└── StudentManagement.csproj
+Това е нашата начална точка.
+Не прави следващите стъпки още.
+Кажи ми „готово“ и продължаваме със Стъпка 2 — разглеждаме какво представляват Models, Views, Controllers и Program.cs, преди да напишем първия код.
+7.	Вие казахте:
+Visual Studio 2022
+8.	ChatGPT каза:
+Супер 👍 Ще работим с Visual Studio 2022 и ще вървим бавно, стъпка по стъпка.
+Стъпка 1 — Проверяваме .NET версията
+Преди да създадем проекта, искам да проверим какви .NET версии имаш.
+В Visual Studio 2022:
+1.	Отвори Visual Studio.
+2.	От менюто избери Create a new project.
+3.	В полето за търсене напиши:
+ASP.NET Core Web App (Model-View-Controller)
+4.	Избери този template.
+5.	Натисни Next.
+Важно
+На следващия екран ще видиш поле Framework.
+Кажи ми точно какво ти показва там.
+Например може да е:
+.NET 8.0
+.NET 9.0
+.NET 10.0
+или няколко от тях.
+Не създавай проекта още. Просто ми напиши какви Framework версии виждаш и оттам продължаваме.
+9.	Вие казахте:
+https://github.com/esp-nv/StudentManagement той е направен само трябва да се довърши но може стъпка и аз ще ти казвам ако съм готова, но може ли с коментари за да уча
+10.	ChatGPT каза:
+Да, точно така е по-добре. Видях repository-то StudentManagement в GitHub — то вече е създадено като ASP.NET Core MVC Student Management system, така че няма смисъл да създаваме нов проект. G GitHub
+Ще го довършим заедно стъпка по стъпка, а не просто ще ти давам готов код.
+И да — ще слагаме коментари в кода, но не прекалено много. Ще обясняваме важните неща, например:
+// DbContext represents a session with the database.
+// Through this class EF Core allows us to query and save entities.
+public class ApplicationDbContext : DbContext
+{
+}
+После ще ти обяснявам защо е нужен DbContext, какво прави DbSet, защо използваме async, защо имаме Controller/View/Model и т.н.
+Как ще работим
+Ще имаме следния принцип:
+Аз давам само една стъпка → ти я правиш → казваш „готово“ → проверяваме → продължаваме.
+Ако получиш грешка, не я заобикаляме. Показваш ми грешката и я разбираме.
+Целта е накрая да можеш сама да кажеш на интервю:
+„Използвам EF Core за достъп до базата, Controller обработва HTTP request-а, View отговаря за представянето, а ViewModel ми позволява да не подавам директно Entity към View.“
+Това е много по-ценно от това просто проектът да работи.
+Стъпка 1 — Отваряме съществуващия проект
+В Visual Studio 2022:
+1.	Отвори:
+File → Open → Project/Solution
+2.	Намери папката:
+StudentManagement
+3.	Отвори:
+4.	StudentManagement.sln
+5.	Изчакай Visual Studio да зареди проекта.
+6.	В Solution Explorer разгледай какво има вътре.
+Не променяй нищо още.
+Искам само да ми изпратиш снимка на Solution Explorer-а или да копираш тук структурата, която виждаш.
+Например:
+StudentManagement
+│
+├── Controllers
+├── Models
+├── Views
+├── wwwroot
+├── Data
+├── Program.cs
+└── appsettings.json
+Оттам ще направим Стъпка 2: разбираме твоята текуща структура и проверяваме какво вече е направено, преди да пишем какъвто и да е код.
+G Източници
+11.	Вие казахте:
+да
+12.	ChatGPT каза:
+Разбира се 😊 Кажи ми какво искаш да направим.
+13.	Вие казахте:
+тя е като репо
+14.	ChatGPT каза:
+Ако имаш предвид „тя е като репо“ като израз — можеш да ми дадеш малко контекст какво искаш да кажеш с „репо“, за да ти отговоря точно.
+15.	Вие казахте:
+https://github.com/esp-nv/StudentManagement/tree/main/StudentManagement
+16.	ChatGPT каза:
+Да, вече виждам кое имаш предвид. Това е репото esp-nv/StudentManagement.
+В папката StudentManagement има стандартна ASP.NET Core MVC структура:
+o	Controllers
+o	Models
+o	Views
+o	wwwroot
+o	Program.cs
+o	appsettings.json
+o	StudentManagement.csproj G github.com
+Ако това е проектът, за който каза „тя е като репо“, кажи ми какво точно искаш да направим с него — например да го разгледаме, обясним как работи, поправим грешка или да добавим функционалност.
+G Източници
+17.	Вие казахте:
+да добавим функционалност.
+18.	ChatGPT каза:
+Да 👍 Можем да добавим функционалност директно върху този проект. Прегледах структурата на репото — то е ASP.NET Core MVC проект с Controllers, Models, Views, wwwroot, Program.cs и .csproj. G GitHub
+Кажи ми каква функционалност трябва да добавим. Например:
+o	🔍 търсене на студенти
+o	📊 оценки и изчисляване на среден успех
+o	📅 присъствие/отсъствия
+o	👤 профил на студент
+o	📝 добавяне/редактиране/изтриване на студенти
+o	🔐 login/register и роли
+o	📚 предмети и записване на студенти към предмети
+o	📈 dashboard със статистики
+o	🖨️ генериране на справка/документ
+o	или нещо конкретно от заданието ти
+Ако имаш задание, просто го изпрати тук (текст или снимка) и ще го направим стъпка по стъпка върху точно това репо, включително кои файлове да промениш и готовия код.
+G Източници
+19.	Вие казахте:
+но стъпка по стъпка
+20.	ChatGPT каза:
+Разбира се. Ще го правим много бавно и стъпка по стъпка, без да прескачаме. Ще променяме по нещо, ще го пускаш и ще проверяваме дали работи.
+Вече потвърдих структурата на проекта — имаме Controllers, Models, Views, wwwroot, Program.cs и .csproj. G GitHub
+Стъпка 1
+Първо ми кажи каква точно функционалност трябва да добавим.
+Ако имаш условие от преподавател/задание, копирай го тук или изпрати снимка.
+След това ще ти кажа само:
+1. кой файл да отвориш
+2. какво точно да добавиш
+3. как да го стартираш
+4. какво трябва да видиш
+И чак когато потвърдиш, че първата стъпка работи, продължаваме към Стъпка 2.
+G Източници
+21.	Вие казахте:
+правим заедно с теб Student Management System
+22.	ChatGPT каза:
+Да. Ще го направим заедно от нулата, стъпка по стъпка, като използваме точно твоето репо StudentManagement в GitHub.
+В момента проектът има основната ASP.NET структура — Controllers, Models, Views, wwwroot, Program.cs и т.н. G GitHub
+Планът
+Ще изградим Student Management System, като постепенно добавяме:
+1.	👨‍🎓 Students — добавяне, преглед, редактиране и изтриване
+2.	🔍 Search — търсене на студент
+3.	📚 Courses/Subjects — предмети
+4.	📝 Grades — оценки
+5.	📊 Average Grade — автоматично изчисляване на среден успех
+6.	📅 Attendance — присъствия
+7.	👤 Student Details — подробна страница за студент
+8.	🎨 По-добър интерфейс
+9.	💾 Database — ако текущият проект още не е настроен правилно за нея
+10.	🔐 Login/roles — ако искаме системата да има администратор и потребители
+Но няма да правим всичко наведнъж. Първо ще направим една малка част, ще я стартираш и ще проверим.
+Стъпка 1 — кажи ми само това
+Отвори проекта в Visual Studio или Visual Studio Code и го стартирай с Ctrl + F5 / dotnet run.
+След това ми кажи:
+„Стартира“ — ако сайтът се отваря,
+или
+„Дава грешка“ — и ми копирай грешката.
+Оттам започваме Стъпка 2.
+G Източници
+23.	Вие казахте:
+готово
+24.	ChatGPT каза:
+Супер! 🚀 Започваме.
+Стъпка 2 — да видим какво вече имаме
+Преди да пишем нов код, ще разгледаме съществуващия проект, за да не счупим нещо.
+В Solution Explorer намери папката:
+Models
+и ми напиши какви файлове има вътре.
+Например:
+Models
+ ├── Student.cs
+ ├── ...
+Само ми изпрати имената на файловете в Models. След това ще направим първата функционалност.
+25.	Вие казахте:
+https://github.com/esp-nv/StudentManagement/tree/main/StudentManagement ето линк
+26.	ChatGPT каза:
+Да, точно този линк ми трябва. 👍 Проверих го директно и виждам структурата на проекта. В StudentManagement има Controllers, Models, Views, wwwroot, Program.cs и останалите файлове. G GitHub
+Нека не гадаем какво има вътре, а да започнем от реалния код.
+Стъпка 2.1
+Натисни в GitHub:
+Models → Student.cs
+ако има такъв файл.
+Ако няма Student.cs, натисни Models и ми изпрати какви файлове виждаш вътре.
+Може просто да ми копираш списъка, например:
+Models
+- Student.cs
+- ErrorViewModel.cs
+След това ще ти кажа точно какво да направиш в първия файл. Няма да прескачаме напред.
+G Източници
+27.	Вие казахте:
+няма фаил-а Student.cs
+28.	ChatGPT каза:
+Точно така — тогава започваме от модела Student. Това е логичната първа стъпка за Student Management System. 👍
+Стъпка 2 — създаваме Student.cs
+Във Visual Studio:
+1.	В Solution Explorer намери папката Models.
+2.	Натисни десен бутон върху Models.
+3.	Избери Add → Class...
+4.	Име на файла:
+5.	Student.cs
+6.	Натисни Add.
+В новия Student.cs ще има някакъв готов код. Изтрий всичко и постави:
+using System.ComponentModel.DataAnnotations;
+
+namespace StudentManagement.Models
+{
+    public class Student
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        public string Course { get; set; }
+
+        public int Age { get; set; }
+    }
+}
+Какво направихме?
+Създадохме обект Student, който има:
+o	Id — уникален номер
+o	FirstName — име
+o	LastName — фамилия
+o	Email — имейл
+o	Course — курс/специалност
+o	Age — възраст
+[Required] означава, че полето не трябва да бъде празно, а [EmailAddress] проверява дали имейлът е във валиден формат.
+Сега не прави нищо друго. Запази файла с Ctrl + S и ми напиши „готово“. След това продължаваме със следващата стъпка.
+29.	Вие казахте:
+готово и е качен в gitHub
+30.	ChatGPT каза:
+Супер! 🎉 Значи първата част е готова и вече имаме Student.cs в GitHub.
+Стъпка 3 — създаваме базата с данни
+Сега ще направим така, че приложението да може да съхранява студентите.
+Първо трябва да проверим дали проектът вече има DbContext.
+Направи само това:
+В Solution Explorer потърси папка или файл с име:
+Data
+или файл:
+ApplicationDbContext.cs
+или:
+StudentManagementContext.cs
+Ако намериш такъв, не го променяй.
+Просто ми кажи какво намери, например:
+Имам папка Data и вътре ApplicationDbContext.cs
+или
+Нямам нищо такова.
+После ще направим само следващата стъпка. 🚀
+31.	Вие казахте:
+Нямам нищо такова.
+32.	ChatGPT каза:
+Перфектно. 👍 Тогава ще създадем базата сами.
+Стъпка 3.1 — инсталираме Entity Framework Core
+Ще използваме Entity Framework Core, за да може нашият Student модел да се записва в база данни.
+Ако си във Visual Studio:
+1.	От горното меню избери Tools → NuGet Package Manager → Manage NuGet Packages for Solution.
+2.	Отвори Browse.
+3.	Потърси:
+4.	Microsoft.EntityFrameworkCore.SqlServer
+5.	Инсталирай пакета в проекта StudentManagement.
+След това потърси и инсталирай:
+Microsoft.EntityFrameworkCore.Tools
+Важно
+Не инсталирай още други пакети и не променяй кода.
+Когато и двата пакета са инсталирани, ми напиши:
+„Инсталирани са“
+и продължаваме със следващата малка стъпка. 🚀
+33.	Вие казахте:
+може ли десен бутон върху самия solution от там да избера Manage NuGet Packages for Solution.
+34.	ChatGPT каза:
+Да, точно така. 👍 Даже това е удобен начин.
+Направи следното:
+1.	В Solution Explorer натисни десен бутон върху Solution StudentManagement.
+2.	Избери:
+Manage NuGet Packages for Solution...
+3.	В таба Browse потърси:
+Microsoft.EntityFrameworkCore.SqlServer
+4.	Избери твоя проект StudentManagement и натисни Install.
+5.	После потърси:
+Microsoft.EntityFrameworkCore.Tools
+6.	Отново избери проекта StudentManagement и натисни Install.
+След инсталацията трябва да ги виждаш в:
+Dependencies → Packages
+като приблизително:
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools
+Когато ги инсталираш, кажи ми „готово“ и продължаваме. 🚀
+35.	Вие казахте:
+Microsoft.EntityFrameworkCore.SqlServer дава версия 10.0.11
+36.	ChatGPT каза:
+Да, това е нормално — но не я инсталирай още. 🙂
+Версия 10.0.11 е от новото поколение EF Core и е важно да съобразим версията с .NET версията на твоя проект. Ако проектът е например на .NET 8, по-добре ще използваме EF Core 8; ако е .NET 9 — EF Core 9 и т.н.
+Направи само това:
+В Solution Explorer натисни десен бутон върху проекта:
+StudentManagement → Properties
+После намери:
+Target Framework
+и ми кажи какво пише там.
+Например:
+.NET 8.0
+или
+.NET 9.0
+или
+.NET 10.0
+Не инсталирай пакета още. Кажи ми Target Framework-а и ще ти кажа точно коя версия да избереш.
+37.	Вие казахте:
+8.0
+38.	ChatGPT каза:
+Перфектно 👍 Проектът е на .NET 8.0, затова ще използваме EF Core 8, а не 10.
+Стъпка 3.1 — правилната версия
+В Manage NuGet Packages for Solution:
+1.	Потърси:
+Microsoft.EntityFrameworkCore.SqlServer
+2.	Намери падащото меню за Version.
+3.	Избери най-новата версия, започваща с 8.0 — например 8.0.x.
+4.	Отбележи проекта StudentManagement.
+5.	Натисни Install.
+След това потърси:
+Microsoft.EntityFrameworkCore.Tools
+и пак избери 8.0.x и инсталирай.
+Важно
+Не избирай:
+10.0.11 ❌
+Избираме:
+8.0.x ✅
+След като и двата пакета са инсталирани, не прави следващата стъпка още.
+Напиши ми „готово“, когато приключиш.
+39.	Вие казахте:
+8.0.30
+40.	ChatGPT каза:
+Да! ✅ 8.0.30 е правилният избор за проект на .NET 8.0.
+Избери 8.0.30 за:
+o	Microsoft.EntityFrameworkCore.SqlServer
+o	Microsoft.EntityFrameworkCore.Tools
+и ги инсталирай в проекта StudentManagement.
+След това провери в:
+Dependencies → Packages
+да виждаш нещо подобно:
+Microsoft.EntityFrameworkCore.SqlServer 8.0.30
+Microsoft.EntityFrameworkCore.Tools       8.0.30
+Като ги видиш и двата, кажи „готово“. Тогава ще създадем ApplicationDbContext.cs. 🚀
+41.	Вие казахте:
+готово
+42.	ChatGPT каза:
+Супер! 🚀 Вече имаме модела Student и Entity Framework Core 8.0.30.
+Стъпка 3.2 — създаваме ApplicationDbContext
+Сега ще направим връзката между нашия Student клас и базата данни.
+1. Създай папка Data
+В Solution Explorer:
+o	десен бутон върху проекта StudentManagement
+o	Add → New Folder
+o	кръсти папката:
+Data
+2. Създай ApplicationDbContext.cs
+Десен бутон върху новата папка Data:
+Add → Class...
+Име:
+ApplicationDbContext.cs
+3. Замени кода
+Изтрий всичко във файла и постави:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Models;
+
+namespace StudentManagement.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Student> Students { get; set; }
+    }
+}
+Какво направихме?
+Този ред:
+public DbSet<Student> Students { get; set; }
+казва на Entity Framework:
+„В базата данни искам таблица за студентите.“
+Следващата стъпка ще бъде да свържем този DbContext с SQL Server, но засега спираме тук.
+Запази с Ctrl + S и ми кажи „готово“.
+43.	Вие казахте:
+може ли стъпка по стъпка за начинаещ и с коментари
+44.	ChatGPT каза:
+Разбира се. 👍 Оттук нататък ще работим като с човек, който тепърва започва с ASP.NET, и няма да прескачаме стъпки.
+Ще ти обяснявам:
+o	къде да натиснеш;
+o	какво да създадеш;
+o	какво да напишеш;
+o	какво прави всеки ред чрез коментари;
+o	и след всяка малка стъпка ще спираме, за да провериш.
+Стъпка 3.2 — папката Data
+В момента трябва да имаш нещо подобно:
+StudentManagement
+│
+├── Controllers
+├── Models
+│   ├── ErrorViewModel.cs
+│   └── Student.cs
+├── Views
+├── wwwroot
+├── Program.cs
+└── ...
+1. Създаваме папка
+В Solution Explorer:
+6.	Намери проекта StudentManagement.
+7.	Натисни върху него с десен бутон.
+8.	Избери Add → New Folder.
+9.	Напиши:
+Data
+5.	Натисни Enter.
+Вече трябва да виждаш:
+StudentManagement
+│
+├── Controllers
+├── Data          ← новата папка
+├── Models
+├── Views
+└── wwwroot
+Спираме тук 🛑
+Не създавай файла още.
+Напиши ми само „имам Data“, когато папката е създадена. След това ще направим само файла ApplicationDbContext.cs и ще ти обясня ред по ред какво означава.
+45.	Вие казахте:
+<Project Sdk="Microsoft.NET.Sdk.Web"> <PropertyGroup> <TargetFramework>net8.0</TargetFramework> <Nullable>enable</Nullable> <ImplicitUsings>enable</ImplicitUsings> </PropertyGroup> <ItemGroup> <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.30" /> <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.30"> <PrivateAssets>all</PrivateAssets> <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets> </PackageReference> </ItemGroup> <ItemGroup> <Folder Include="Data\" /> </ItemGroup> </Project>
+46.	ChatGPT каза:
+Да — точно така трябва да изглежда. 👍 Виждам, че:
+o	проектът е на .NET 8;
+o	Microsoft.EntityFrameworkCore.SqlServer е 8.0.30;
+o	Microsoft.EntityFrameworkCore.Tools е 8.0.30;
+o	папката Data вече е създадена.
+Тоест сме готови за следващата малка стъпка.
+Стъпка 3.3 — създаваме ApplicationDbContext.cs
+Сега само това:
+5.	В Solution Explorer намери папката Data.
+6.	Десен бутон върху Data.
+7.	Избери Add → Class...
+8.	Напиши име:
+ApplicationDbContext.cs
+5.	Натисни Add.
+Вътре ще се появи някакъв код.
+Изтрий кода
+Изтрий всичко, което Visual Studio е сложило автоматично.
+След това постави този код:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Models;
+
+namespace StudentManagement.Data
+{
+    // Този клас управлява връзката между нашето приложение
+    // и базата данни.
+    public class ApplicationDbContext : DbContext
+    {
+        // Конструкторът получава настройките за базата данни.
+        public ApplicationDbContext(
+            DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        // Това представлява таблицата Students в базата данни.
+        // Всеки запис в нея ще бъде един Student.
+        public DbSet<Student> Students { get; set; }
+    }
+}
+Какво означава най-важната част?
+Това:
+public DbSet<Student> Students { get; set; }
+означава приблизително:
+„Искам в базата данни да имам колекция/таблица, която съдържа Student обекти.“
+Тоест по-късно ще получим нещо подобно:
+Students
+------------------------------------------------
+Id | FirstName | LastName | Email | Course | Age
+------------------------------------------------
+1  | Ivan      | Petrov   | ...   | IT     | 20
+2  | Maria     | Ivanova  | ...   | CS     | 21
+Не се притеснявай, ако все още не виждаш тази таблица. На този етап само сме описали как трябва да изглежда тя.
+Сега спираме. 🛑
+Запази с Ctrl + S.
+След това ми кажи само:
+„ApplicationDbContext.cs е готов“
+И чак тогава ще направим следващата стъпка — ще свържем ApplicationDbContext с приложението в Program.cs.
+47.	Вие казахте:
+може ли едно уточнение
+48.	ChatGPT каза:
+Разбира се. Кажи какво искаш да уточним. 🙂
+49.	Вие казахте:
+кода които ще слагаме там да няма коментари а те да са отвън
+50.	ChatGPT каза:
+Да, разбира се. 👍 Даже за начинаещ е по-удобно така.
+Оттук нататък ще правим така:
+Във файла — само чист код:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Models;
+
+namespace StudentManagement.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(
+            DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Student> Students { get; set; }
+    }
+}
+А извън кода — аз ще обяснявам подробно, например:
+o	using Microsoft.EntityFrameworkCore; — позволява ни да използваме Entity Framework Core.
+o	using StudentManagement.Models; — позволява на този файл да вижда класа Student.
+o	ApplicationDbContext — класът, който ще управлява връзката с базата данни.
+o	DbSet<Student> Students — казва, че ще имаме таблица за студентите.
+Така кодът ще остане чист и професионален, а обясненията ще са отделно.
+Ще спазваме това правило за всички следващи стъпки. ✅
+51.	Вие казахте:
+така става
+52.	ChatGPT каза:
+Да, точно така. 👍
+Продължаваме по този начин:
+1.	Давам ти една малка стъпка.
+2.	Давам ти чист код без коментари.
+3.	След кода обяснявам всеки важен ред на разбираем език.
+4.	Ти го правиш и ми казваш „готово“.
+5.	Едва тогава минаваме към следващата стъпка.
+В момента сме на ApplicationDbContext.cs. Ако вече си поставил кода и си го запазил, следващото ще бъде свързването му с Program.cs.
+Кажи „готово“ и продължаваме. 🚀
+53.	Вие казахте:
+може ли и още едо уточнение само ако се налага чрез /// <summary> /// /// </summary>
+54.	ChatGPT каза:
+Да, разбира се. 👍 Това даже е добра практика в C#.
+Оттук нататък ще използваме /// <summary> само когато наистина има смисъл — например за класове, публични методи или свойства, които е полезно да имат документация.
+Няма да слагаме излишни коментари на всеки ред.
+Например:
+/// <summary>
+/// Представлява връзката между приложението и базата данни.
+/// </summary>
+public class ApplicationDbContext : DbContext
+{
+    /// <summary>
+    /// Създава нова инстанция на ApplicationDbContext.
+    /// </summary>
+    public ApplicationDbContext(
+        DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+    {
+    }
+
+    public DbSet<Student> Students { get; set; }
+}
+А когато не е необходимо описание, ще оставяме кода чист.
+Нашето правило оттук нататък:
+o	❌ Без // коментари вътре в кода, освен ако наистина са необходими.
+o	✅ /// <summary> — само когато е полезно.
+o	✅ Основните обяснения — извън кода, стъпка по стъпка.
+o	✅ Няма да ти давам огромни парчета код наведнъж.
+Готови сме да продължим с ApplicationDbContext.cs → Program.cs. 🚀
+55.	Вие казахте:
+да
+56.	ChatGPT каза:
+Супер. 👍 Продължаваме бавно и само с една стъпка.
+Стъпка 3.4 — свързваме базата с Program.cs
+Вече имаме:
+Data
+└── ApplicationDbContext.cs
+Сега трябва да кажем на ASP.NET Core:
+„Използвай ApplicationDbContext и SQL Server.“
+1. Отвори Program.cs
+В Solution Explorer намери:
+Program.cs
+Отвори го.
+Вероятно вътре вече имаш код, подобен на този:
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+
+// ...
+Не изтривай целия файл.
+2. Добавяме using
+Най-отгоре на Program.cs добави:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+Това позволява на Program.cs да използва:
+o	EntityFrameworkCore
+o	нашия ApplicationDbContext
+3. Добавяме регистрацията на базата
+Намери този ред:
+builder.Services.AddControllersWithViews();
+Непосредствено преди него добави:
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+Така началото на Program.cs трябва да изглежда приблизително така:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddControllersWithViews();
+Какво направихме?
+Тази част:
+builder.Services.AddDbContext<ApplicationDbContext>
+регистрира нашия ApplicationDbContext в ASP.NET Core.
+А тази:
+options.UseSqlServer(...)
+казва:
+„Ще използваме Microsoft SQL Server като база данни.“
+А това:
+builder.Configuration.GetConnectionString("DefaultConnection")
+казва:
+„Вземи настройките за връзка от appsettings.json, от connection string с име DefaultConnection.“
+⚠️ Все още нямаме DefaultConnection в appsettings.json. Това е нарочно — ще го направим в следващата стъпка.
+Сега спираме. 🛑
+Запази Program.cs с Ctrl + S.
+Ако Visual Studio показва червени линии, не се притеснявай — възможно е да е заради липсващия connection string.
+Кажи ми „готово“ и ще направим следващата стъпка: appsettings.json.
+57.	Вие казахте:
+namespace StudentManagement { public class Program { public static void Main(string[] args) { var builder = WebApplication.CreateBuilder(args); // Add services to the container. builder.Services.AddControllersWithViews(); var app = builder.Build(); // Configure the HTTP request pipeline. if (!app.Environment.IsDevelopment()) { app.UseExceptionHandler("/Home/Error"); // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts. app.UseHsts(); } app.UseHttpsRedirection(); app.UseStaticFiles(); app.UseRouting(); app.UseAuthorization(); app.MapControllerRoute( name: "default", pattern: "{controller=Home}/{action=Index}/{id?}"); app.Run(); } } } имам това
+58.	ChatGPT каза:
+Да 👍 Това е напълно нормален Program.cs за ASP.NET Core MVC. Няма проблем, че при теб е с namespace StudentManagement и class Program.
+Ще работим върху твоя код, без да го пренаписваме излишно.
+Стъпка 3.4 — първо добавяме using
+В самото начало на файла, преди:
+namespace StudentManagement
+добави:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+Така началото трябва да стане:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+
+namespace StudentManagement
+{
+    public class Program
+    {
+Защо?
+Microsoft.EntityFrameworkCore ни дава достъп до Entity Framework Core.
+StudentManagement.Data ни позволява да използваме нашия:
+ApplicationDbContext
+________________________________________
+Стъпка 3.5 — добавяме връзката с базата
+Сега намери:
+builder.Services.AddControllersWithViews();
+Непосредствено над него постави:
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+Следователно тази част от твоя Program.cs трябва да изглежда така:
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddControllersWithViews();
+Какво означава това?
+AddDbContext<ApplicationDbContext> казва на приложението:
+Използвай нашия ApplicationDbContext.
+UseSqlServer казва:
+Базата данни ще бъде SQL Server.
+GetConnectionString("DefaultConnection") казва:
+Вземи информацията за връзката от appsettings.json, където по-късно ще създадем DefaultConnection.
+________________________________________
+Важно 🛑
+При теб има готови коментари като:
+// Add services to the container.
+и:
+// Configure the HTTP request pipeline.
+Засега не ги пипай. Те са стандартни коментари, генерирани от Visual Studio. Когато стигнем до почистване на проекта, ще решим кои да оставим.
+Също така не променяй нищо друго в Program.cs.
+Направи само тези две промени и натисни Ctrl + S.
+После ми покажи целия Program.cs, както го направи сега, за да го проверим заедно, преди да продължим.
+59.	Вие казахте:
+using Microsoft.EntityFrameworkCore; using StudentManagement.Data; namespace StudentManagement { public class Program { public static void Main(string[] args) { var builder = WebApplication.CreateBuilder(args); builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer( builder.Configuration.GetConnectionString("DefaultConnection"))); // Add services to the container. builder.Services.AddControllersWithViews(); var app = builder.Build(); // Configure the HTTP request pipeline. if (!app.Environment.IsDevelopment()) { app.UseExceptionHandler("/Home/Error"); // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts. app.UseHsts(); } app.UseHttpsRedirection(); app.UseStaticFiles(); app.UseRouting(); app.UseAuthorization(); app.MapControllerRoute( name: "default", pattern: "{controller=Home}/{action=Index}/{id?}"); app.Run(); } } }
+60.	ChatGPT каза:
+Да — кодът ти е правилен. ✅ Няма грешка в добавената част.
+Само бих оправил подравняването, за да бъде по-четим. Функционално е същото.
+Твоят Program.cs с по-добро форматиране
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+
+namespace StudentManagement
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
+
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Run();
+        }
+    }
+}
+Какво проверихме?
+Имаш правилно:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+и:
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+Това е връзката между ASP.NET Core → Entity Framework Core → SQL Server.
+⚠️ Има само едно нещо: DefaultConnection все още не съществува. Това ще го направим в appsettings.json.
+Следваща стъпка
+Не променяй нищо повече в Program.cs.
+Запази файла с Ctrl + S и ми кажи „готово“.
+После ще отворим appsettings.json и ще направим само connection string-а, като ще ти обясня какво представлява.
+61.	Вие казахте:
+готово
+62.	ChatGPT каза:
+Супер! 👍 Program.cs е готов.
+Стъпка 3.6 — appsettings.json
+Сега ще кажем на приложението къде се намира SQL Server базата.
+1. Намери файла
+В Solution Explorer намери:
+appsettings.json
+Обикновено е директно в проекта:
+StudentManagement
+│
+├── Controllers
+├── Data
+├── Models
+├── Views
+├── wwwroot
+├── appsettings.json   ← този файл
+├── Program.cs
+└── StudentManagement.csproj
+Отвори appsettings.json.
+2. Покажи ми какво има вътре
+Засега нищо не променяй.
+Копирай съдържанието на appsettings.json и го изпрати тук.
+Ще го погледнем заедно и след това ще добавим DefaultConnection. Така няма да рискуваме да изтрием нещо, което вече е настроено. 👍
+63.	Вие казахте:
+{ "Logging": { "LogLevel": { "Default": "Information", "Microsoft.AspNetCore": "Warning" } }, "AllowedHosts": "*" }
+64.	ChatGPT каза:
+Перфектно. 👍 Файлът е чист и можем спокойно да добавим connection string.
+Стъпка 3.7 — добавяме ConnectionStrings
+В твоя appsettings.json в момента имаш:
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+Ще добавим ConnectionStrings между Logging и AllowedHosts.
+Замени съдържанието на файла с:
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=StudentManagementDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+  },
+  "AllowedHosts": "*"
+}
+Какво направихме?
+Тази част:
+"ConnectionStrings": {
+съдържа настройките за връзка с базата.
+Тази част:
+"DefaultConnection":
+е името на връзката.
+То е същото име, което използвахме в Program.cs:
+builder.Configuration.GetConnectionString("DefaultConnection")
+А това:
+Server=(localdb)\mssqllocaldb
+казва, че ще използваме SQL Server LocalDB, който обикновено се използва за локална разработка с Visual Studio.
+Това:
+Database=StudentManagementDb
+е името на нашата база данни.
+И така:
+ASP.NET Core
+     ↓
+ApplicationDbContext
+     ↓
+SQL Server LocalDB
+     ↓
+StudentManagementDb
+🛑 Важна проверка
+След като поставиш кода:
+1.	Натисни Ctrl + S.
+2.	Виж дали appsettings.json има червени вълнообразни линии.
+3.	Засега не стартирай миграция и не създавай база.
+Кажи ми само „готово“, ако няма грешки, и следващата ни стъпка ще бъде да проверим дали проектът се компилира успешно преди да създаваме базата.
+65.	Вие казахте:
+готово
+66.	ChatGPT каза:
+Супер! 👌 Вече имаме трите основни части:
+Student
+    ↓
+ApplicationDbContext
+    ↓
+Connection String
+Сега няма да правим база данни още. Първо ще проверим дали всичко, което направихме досега, се компилира.
+Стъпка 3.8 — проверяваме проекта
+Във Visual Studio:
+1.	От менюто избери Build.
+2.	Натисни Build Solution.
+Или използвай клавишната комбинация:
+Ctrl + Shift + B
+Какво трябва да видиш?
+В долната част на Visual Studio ще се появи:
+Build succeeded.
+Ако видиш:
+Build succeeded.
+    0 Error(s)
+значи всичко дотук е наред. ✅
+Ако има грешки
+Не се опитвай да ги поправяш сам.
+Копирай ми грешката точно както я показва Visual Studio и ще я разгледаме заедно.
+🛑 Засега не прави нищо друго.
+Направи Ctrl + Shift + B и ми кажи какво показва Build.
+67.	Вие казахте:
+Build started at 9:28 PM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>D:\GitHub\StudentManagement\StudentManagement\Models\Student.cs(10,23,10,32): warning CS8618: Non-nullable property 'FirstName' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. 1>D:\GitHub\StudentManagement\StudentManagement\Models\Student.cs(13,23,13,31): warning CS8618: Non-nullable property 'LastName' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. 1>D:\GitHub\StudentManagement\StudentManagement\Models\Student.cs(17,23,17,28): warning CS8618: Non-nullable property 'Email' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. 1>D:\GitHub\StudentManagement\StudentManagement\Models\Student.cs(19,23,19,29): warning CS8618: Non-nullable property 'Course' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll 1>Done building project "StudentManagement.csproj". ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 9:28 PM and took 05.416 seconds ==========
+68.	ChatGPT каза:
+Перфектно! 🎉 Проектът се компилира успешно.
+Най-важният ред е:
+Build: 1 succeeded, 0 failed
+Тоест нямаме грешки. Имаме само 4 предупреждения (warning).
+Какви са предупрежденията?
+Те са в Student.cs и са за:
+o	FirstName
+o	LastName
+o	Email
+o	Course
+Причината е, че в проекта сме включили:
+<Nullable>enable</Nullable>
+Това кара C# да проверява дали string свойствата могат да бъдат null.
+Например:
+public string FirstName { get; set; }
+C# казва:
+„Ти ми казваш, че FirstName никога няма да бъде null, но не си дал начална стойност.“
+Ще го поправим ли?
+Да, но нека го направим сега, преди да продължим. Това е добра практика и ще изчистим предупрежденията.
+Отвори:
+Models
+└── Student.cs
+и ми изпрати текущото съдържание на Student.cs.
+Ще го коригираме заедно, като запазим правилото ни: чист код без обикновени коментари, а обясненията — извън кода.
+69.	Вие казахте:
+using System.ComponentModel.DataAnnotations; namespace StudentManagement.Models { public class Student { public int Id { get; set; } [Required] public string FirstName { get; set; } [Required] public string LastName { get; set; } [Required] [EmailAddress] public string Email { get; set; } public string Course { get; set; } public int Age { get; set; } } }
+70.	ChatGPT каза:
+Да, това е текущият ти Student.cs. 👍
+Ще поправим предупрежденията по най-лесния начин за начинаещ.
+Стъпка 3.9 — поправяме предупрежденията
+Замени съдържанието на Student.cs с това:
+using System.ComponentModel.DataAnnotations;
+
+namespace StudentManagement.Models
+{
+    public class Student
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string FirstName { get; set; } = string.Empty;
+
+        [Required]
+        public string LastName { get; set; } = string.Empty;
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+
+        public string Course { get; set; } = string.Empty;
+
+        public int Age { get; set; }
+    }
+}
+Какво променихме?
+Например преди имахме:
+public string FirstName { get; set; }
+Сега имаме:
+public string FirstName { get; set; } = string.Empty;
+string.Empty означава празен текст ("").
+Така казваме на C#:
+„Това свойство започва с празна стойност, а не с null.“
+Направихме същото с:
+o	FirstName
+o	LastName
+o	Email
+o	Course
+Атрибутите:
+[Required]
+и:
+[EmailAddress]
+остават. Те са важни за валидацията на данните.
+Сега направи само това
+5.	Замени кода.
+6.	Натисни Ctrl + S.
+7.	Натисни Ctrl + Shift + B.
+8.	Провери резултата.
+Очакваме:
+Build: 1 succeeded, 0 failed
+и предупрежденията от Student.cs да са изчезнали.
+Изпрати ми резултата от Build, както направи преди. После продължаваме. 🚀
+71.	Вие казахте:
+Build started at 9:33 PM... ========== Build: 0 succeeded, 0 failed, 1 up-to-date, 0 skipped ========== ========== Build completed at 9:33 PM and took 00.033 seconds ==========
+72.	ChatGPT каза:
+Перфектно! ✅ Това също е успешен резултат.
+Този път Visual Studio казва:
+Build: 0 succeeded, 0 failed, 1 up-to-date
+Какво означава up-to-date?
+Visual Studio е проверил проекта и е установил:
+„Нищо не се е променило, което да изисква ново компилиране.“
+Тоест:
+o	❌ 0 failed → нямаме грешки
+o	✅ 1 up-to-date → проектът вече е компилиран и няма нужда от повторно компилиране
+o	✅ всичко е наред
+Следваща стъпка — проверяваме с Rebuild
+За да сме напълно сигурни след промяната в Student.cs, направи:
+Build → Rebuild Solution
+или натисни:
+Ctrl + Alt + F7
+Това ще компилира проекта отначало, вместо да използва вече компилираните файлове.
+После ми изпрати резултата.
+Очакваме нещо подобно:
+Build: 1 succeeded, 0 failed
+Ако няма warnings — още по-добре. 👍
+73.	Вие казахте:
+using System.ComponentModel.DataAnnotations; namespace StudentManagement.Models { public class Student { public int Id { get; set; } [Required] public string FirstName { get; set; } = string.Empty; [Required] public string LastName { get; set; } = string.Empty; [Required] [EmailAddress] public string Email { get; set; } = string.Empty; public string Course { get; set; } = string.Empty; public int Age { get; set; } } }
+74.	ChatGPT каза:
+Да — Student.cs вече е напълно наред. ✅
+Точно този код искаме да имаме:
+o	Id — идентификатор на студента.
+o	FirstName — име.
+o	LastName — фамилия.
+o	Email — имейл.
+o	Course — курс/специалност.
+o	Age — възраст.
+o	[Required] — задължително поле.
+o	[EmailAddress] — проверява формата на имейла.
+o	= string.Empty — премахва предупрежденията за null.
+Не променяй нищо повече в този файл.
+Следващата ни цел
+Вече имаме:
+Student.cs
+       ↓
+ApplicationDbContext.cs
+       ↓
+Program.cs
+       ↓
+appsettings.json
+Следващата важна стъпка е да създадем базата данни чрез Migration.
+Но преди това ще направим една кратка проверка, за да сме сигурни, че ApplicationDbContext.cs е точно както трябва.
+👉 Изпрати ми текущия код от ApplicationDbContext.cs и ще го проверим заедно.
+75.	Вие казахте:
+Build started at 9:35 PM... ========== Build: 0 succeeded, 0 failed, 1 up-to-date, 0 skipped ========== ========== Build completed at 9:35 PM and took 00.029 seconds ==========
+76.	ChatGPT каза:
+Да, това е ОК. ✅
+Build: 0 succeeded, 0 failed, 1 up-to-date
+Най-важното е:
+o	0 failed → няма грешки.
+o	1 up-to-date → проектът вече е компилиран и Visual Studio няма какво ново да компилира.
+Значи можем да продължим. 👍
+Следваща стъпка — проверяваме ApplicationDbContext.cs
+Преди да създадем базата, искам да проверим последната част от настройката.
+Отвори:
+Data
+└── ApplicationDbContext.cs
+и ми копирай целия код от файла тук.
+Ще го проверим ред по ред, и ако всичко е наред, ще преминем към Migration. 🚀
+77.	Вие казахте:
+using Microsoft.EntityFrameworkCore; using StudentManagement.Models; namespace StudentManagement.Data { public class ApplicationDbContext : DbContext { public ApplicationDbContext( DbContextOptions<ApplicationDbContext> options) : base(options) { } public DbSet<Student> Students { get; set; } } }
+78.	ChatGPT каза:
+Да, точно това искаме. ✅ ApplicationDbContext.cs е правилен.
+Само ще направим една малка подобрявка, за да избегнем евентуално предупреждение за Students.
+Стъпка 3.10 — малка поправка
+Промени:
+public DbSet<Student> Students { get; set; }
+на:
+public DbSet<Student> Students { get; set; } = null!;
+Целият файл ще бъде:
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Models;
+
+namespace StudentManagement.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(
+            DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Student> Students { get; set; } = null!;
+    }
+}
+Защо = null!?
+DbSet ще бъде създаден и зададен от Entity Framework Core.
+C# обаче не знае това предварително и може да ни покаже предупреждение за null.
+null! означава:
+„Знам какво правя — не предупреждавай компилатора за тази стойност.“
+Това е често използван подход при DbSet в Entity Framework Core.
+Сега:
+1.	Направи промяната.
+2.	Натисни Ctrl + S.
+3.	Направи Build → Rebuild Solution.
+4.	Изпрати ми резултата.
+След това, ако всичко е чисто, ще преминем към първата Migration и ще започнем реално да създаваме базата данни. 🚀
+79.	Вие казахте:
+ctr+shift+b
+80.	ChatGPT каза:
+Да 👍 Ctrl + Shift + B е Build Solution.
+Направи сега:
+1.	Натисни Ctrl + Shift + B.
+2.	Изчакай да приключи.
+3.	Копирай резултата отдолу и ми го изпрати.
+Ако получиш:
+Build: 1 succeeded, 0 failed
+или:
+0 failed
+значи сме добре. ✅
+Не прави Migration още. Първо ще проверим резултата от Build.
+81.	Вие казахте:
+Build started at 9:40 PM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 9:40 PM and took 01.057 seconds ==========
+82.	ChatGPT каза:
+Перфектно! 🎉
+Това е точно резултатът, който искаме:
+Build: 1 succeeded, 0 failed
+И най-хубавото — нямаме никакви warnings. ✅
+Дотук сме направили:
+Student.cs
+     ↓
+ApplicationDbContext.cs
+     ↓
+Program.cs
+     ↓
+appsettings.json
+     ↓
+Build успешно ✅
+Стъпка 4 — създаваме базата данни
+Сега ще използваме Migration.
+Migration е начинът, по който Entity Framework Core превръща моделите ни (Student) в структура на база данни.
+Първата Migration ще бъде нещо като:
+Student модел
+      ↓
+EF Core Migration
+      ↓
+Students таблица
+      ↓
+SQL Server база
+Първо само отваряме конзолата
+Във Visual Studio отиди на:
+Tools → NuGet Package Manager → Package Manager Console
+Ще се отвори прозорец в долната част на Visual Studio.
+⚠️ Не въвеждай команда още.
+Когато видиш конзолата с нещо подобно на:
+PM>
+ми напиши „отворих я“.
+След това ще ти дам само първата команда и ще ти обясня какво прави.
+83.	Вие казахте:
+отворих я
+84.	ChatGPT каза:
+Супер. 👍 Сега ще направим само първата Migration.
+Стъпка 4.1 — създаваме първата Migration
+В Package Manager Console трябва да виждаш:
+PM>
+До него напиши точно:
+Add-Migration InitialCreate
+и натисни Enter.
+Какво прави тази команда?
+Add-Migration казва на Entity Framework Core:
+„Виж какви модели имам в проекта и създай описание на промените, които трябва да направим в базата.“
+InitialCreate е просто името на Migration-а.
+Можехме да го наречем и CreateDatabase, но InitialCreate е стандартно и ясно име за първата Migration.
+Какво трябва да се случи?
+Ако всичко е наред, Visual Studio ще създаде нова папка:
+Migrations
+с няколко файла вътре.
+Например:
+Migrations
+├── 20260829xxxxxx_InitialCreate.cs
+├── 20260829xxxxxx_InitialCreate.Designer.cs
+└── ApplicationDbContextModelSnapshot.cs
+Не променяй тези файлове ръчно.
+🛑 След командата
+Не изпълнявай друга команда.
+Копирай ми целия резултат, който се появи в Package Manager Console след:
+Add-Migration InitialCreate
+Ако има грешка — няма проблем. Ще я разгледаме заедно.
+85.	Вие казахте:
+може ли да настроим и Microsoft SQL Server Manager - аз използвам 22 и conection string-а , server name->DESKTOP-O6FIRML\SQLEXPRESS022
+86.	ChatGPT каза:
+Да, може — и според мен е по-добре да го настроим с твоя SQL Server, вместо с LocalDB. 👍
+Твоят SQL Server instance е:
+DESKTOP-O6FIRML\SQLEXPRESS022
+И понеже използваш SQL Server Management Studio 22, ще настроим приложението да използва този SQL Server.
+Важно преди да продължим
+Не изпълнявай Add-Migration още. Първо ще сменим connection string-а.
+Стъпка 4.1 — променяме appsettings.json
+Отвори:
+appsettings.json
+В момента имаш нещо подобно:
+"ConnectionStrings": {
+  "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=StudentManagementDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+}
+Замени само стойността на DefaultConnection с:
+"ConnectionStrings": {
+  "DefaultConnection": "Server=DESKTOP-O6FIRML\\SQLEXPRESS022;Database=StudentManagementDb;Trusted_Connection=True;TrustServerCertificate=True"
+}
+Какво означава?
+Server=DESKTOP-O6FIRML\SQLEXPRESS022
+казва на приложението:
+Свържи се с SQL Server instance SQLEXPRESS022 на моя компютър.
+Database=StudentManagementDb
+казва:
+Базата, която ще използваме, се казва StudentManagementDb.
+Trusted_Connection=True
+означава:
+Използвай Windows удостоверяването, с което си влязъл в Windows.
+TrustServerCertificate=True
+позволява на локалната връзка да приеме сертификата на SQL Server.
+Защо има \\?
+В JSON единичната обратна наклонена черта \ е специален символ.
+Затова:
+DESKTOP-O6FIRML\SQLEXPRESS022
+се записва в JSON като:
+DESKTOP-O6FIRML\\SQLEXPRESS022
+Но реалното име на SQL Server остава:
+DESKTOP-O6FIRML\SQLEXPRESS022
+________________________________________
+🛑 Засега спираме тук
+Не изпълнявай Add-Migration още.
+Направи промяната в appsettings.json, запази с Ctrl + S и ми кажи:
+„готово“
+След това ще направим проверка на връзката към DESKTOP-O6FIRML\SQLEXPRESS022, преди да създаваме Migration-а.
+87.	Вие казахте:
+за сега ще е local-но
+88.	ChatGPT каза:
+Да, разбира се. 👍 Оставаме с LocalDB засега. Това е дори по-лесно за началото и няма нужда да настройваме SQL Server Express.
+Значи не променяме нищо от текущия appsettings.json.
+Оставаме с:
+"ConnectionStrings": {
+  "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=StudentManagementDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+}
+Това означава:
+o	LocalDB → локална база на твоя компютър.
+o	StudentManagementDb → името на нашата база.
+o	Trusted_Connection=True → използва Windows удостоверяване.
+o	Не е необходимо да стартираш SQL Server Management Studio, за да работи приложението.
+Следващото
+Вече сме готови за командата:
+Add-Migration InitialCreate
+Но ще я направим само когато ти кажеш.
+Ако си оставил appsettings.json както беше с LocalDB, напиши „готово“ и ще продължим с Migration-а. 🚀
+89.	Вие казахте:
+DESKTOP-O6FIRML\SQLEXPRESS02 ми е сървара
+90.	ChatGPT каза:
+Да, разбрах. 👍 Тогава имаме SQL Server Express, чийто Server Name е:
+DESKTOP-O6FIRML\SQLEXPRESS02
+Но щом каза, че засега искаш да работим локално, има два различни варианта:
+o	LocalDB — (localdb)\mssqllocaldb
+o	Твоят SQL Server Express — DESKTOP-O6FIRML\SQLEXPRESS02
+И двата са локални на твоя компютър. Ако искаш базата да се вижда директно в SQL Server Management Studio 22, тогава е по-добре да използваме твоя SQL Server Express.
+Ако изберем SQL Server Express
+В appsettings.json ще бъде:
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=DESKTOP-O6FIRML\\SQLEXPRESS02;Database=StudentManagementDb;Trusted_Connection=True;TrustServerCertificate=True"
+  },
+  "AllowedHosts": "*"
+}
+Това ще създаде/използва база:
+DESKTOP-O6FIRML\SQLEXPRESS02
+        │
+        └── StudentManagementDb
+                │
+                └── Students
+Моят съвет: щом вече имаш SQL Server Express и искаш да използваш SSMS 22, нека използваме него. Така после ще можеш да отваряш StudentManagementDb директно в SQL Server Management Studio и да виждаш таблицата Students.
+Ако си съгласен, следващата ни стъпка е само да сменим connection string-а — няма да пускаме Migration още.
+91.	Вие казахте:
+смених го { "Logging": { "LogLevel": { "Default": "Information", "Microsoft.AspNetCore": "Warning" } }, "ConnectionStrings": { "DefaultConnection": "Server=DESKTOP-O6FIRML\\SQLEXPRESS02;Database=StudentManagementDb;Trusted_Connection=True;TrustServerCertificate=True" }, "AllowedHosts": "*" }
+92.	ChatGPT каза:
+Да. ✅ Точно така трябва да изглежда appsettings.json.
+Връзката вече е:
+ASP.NET Core
+     ↓
+Entity Framework Core
+     ↓
+DESKTOP-O6FIRML\SQLEXPRESS02
+     ↓
+StudentManagementDb
+Нека проверим нещо важно
+Преди да създаваме Migration, искам да се уверим, че SQL Server instance-ът наистина се казва точно:
+DESKTOP-O6FIRML\SQLEXPRESS02
+В SQL Server Management Studio 22 при свързване трябва да имаш:
+o	Server type: Database Engine
+o	Server name: DESKTOP-O6FIRML\SQLEXPRESS02
+o	Authentication: това, с което обичайно се свързваш
+Ако вече си се свързал успешно с този Server Name в SSMS — супер. 👍
+Следващата малка стъпка
+Върни се във Visual Studio → Package Manager Console.
+Провери най-долу полето:
+Default project
+То трябва да е:
+StudentManagement
+⚠️ Все още не изпълнявай команда.
+Кажи ми какво пише при Default project.
+93.	Вие казахте:
+Each package is licensed to you by its owner. NuGet is not responsible for, nor does it grant any licenses to, third-party packages. Some packages may include dependencies which are governed by additional licenses. Follow the package source (feed) URL to determine any dependencies. Package Manager Console Host Version 6.14.3.1 Type 'get-help NuGet' to see all available NuGet commands. PM>
+94.	ChatGPT каза:
+Да, това е нормално. 👍 Това е стандартният текст, който Visual Studio показва при отваряне на Package Manager Console.
+Най-важното е, че долу виждаш:
+PM>
+Това означава, че конзолата е готова за команда.
+Стъпка 4.1 — проверяваме Default project
+В горната част на Package Manager Console трябва да има падащо меню:
+Default project:
+Провери дали е избрано:
+StudentManagement
+Ако е избрано — не въвеждай нищо в PM> още.
+Кажи ми само:
+„StudentManagement е избран“
+и тогава ще изпълним първата Migration команда. 🚀
+95.	Вие казахте:
+избран
+96.	ChatGPT каза:
+Супер! 👍 Всичко е настроено правилно.
+Стъпка 4.2 — създаваме първата Migration
+В Package Manager Console, където пише:
+PM>
+въведи:
+Add-Migration InitialCreate
+и натисни Enter.
+Какво ще направи командата?
+Entity Framework Core ще вземе нашия модел:
+Student.cs
+и ще създаде инструкции за базата данни.
+Ще се появи папка:
+Migrations
+с файлове вътре.
+Не променяй тези файлове ръчно.
+🛑 След командата
+Не изпълнявай друга команда.
+Копирай ми целия резултат от Package Manager Console, който се появи след:
+Add-Migration InitialCreate
+Ако има грешка — спокойно. Ще я разгледаме стъпка по стъпка.
+97.	Вие казахте:
+PM> Add-Migration InitialCreate Build started... Build succeeded. To undo this action, use Remove-Migration. PM>
+98.	ChatGPT каза:
+Перфектно! 🎉 Migration-ът е създаден успешно.
+Това:
+Build succeeded.
+To undo this action, use Remove-Migration.
+означава, че Entity Framework Core е успял да анализира Student модела и да създаде Migration-а.
+Какво имаме вече?
+В Solution Explorer би трябвало да се е появила папка:
+StudentManagement
+│
+├── Controllers
+├── Data
+│   └── ApplicationDbContext.cs
+├── Migrations        ← нова папка
+│   ├── ...InitialCreate.cs
+│   ├── ...InitialCreate.Designer.cs
+│   └── ApplicationDbContextModelSnapshot.cs
+├── Models
+│   └── Student.cs
+├── Views
+├── wwwroot
+├── appsettings.json
+└── Program.cs
+Не променяй нищо в Migrations.
+Какво следва?
+В момента Migration-ът е само описание на промените. Базата данни все още трябва да бъде създадена.
+Следващата команда ще бъде:
+Update-Database
+Тя ще каже на Entity Framework:
+„Изпълни Migration-а върху SQL Server и създай StudentManagementDb.“
+Но още не я изпълнявай. 🛑
+Първо отвори SQL Server Management Studio 22 и провери дали можеш да се свържеш към:
+DESKTOP-O6FIRML\SQLEXPRESS02
+Ако вече си свързан — кажи ми „свързан съм“ и ще направим Update-Database заедно.
+99.	Вие казахте:
+ок
+100.	ChatGPT каза:
+Супер. 👍 Нека продължим само с една стъпка.
+Стъпка 4.3 — Update-Database
+Върни се във Visual Studio → Package Manager Console.
+Трябва да виждаш:
+PM>
+Въведи:
+Update-Database
+и натисни Enter.
+Какво ще направи?
+Тази команда ще вземе Migration-а:
+InitialCreate
+и ще го приложи към твоя SQL Server:
+DESKTOP-O6FIRML\SQLEXPRESS02
+Ще се създаде:
+StudentManagementDb
+а вътре ще има таблица за студентите.
+🛑 Важно
+След като натиснеш Enter, не изпълнявай друга команда.
+Копирай ми целия резултат от:
+PM> Update-Database
+Ако е успешно — ще проверим базата в SQL Server Management Studio 22. Ако има грешка — ще я оправим заедно.
+101.	Вие казахте:
+PM> Update-Database Build started... Build succeeded. Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (242ms) [Parameters=[], CommandType='Text', CommandTimeout='60'] CREATE DATABASE [StudentManagementDb]; Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (54ms) [Parameters=[], CommandType='Text', CommandTimeout='60'] IF SERVERPROPERTY('EngineEdition') <> 5 BEGIN ALTER DATABASE [StudentManagementDb] SET READ_COMMITTED_SNAPSHOT ON; END; Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30'] SELECT 1 Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30'] CREATE TABLE [__EFMigrationsHistory] ( [MigrationId] nvarchar(150) NOT NULL, [ProductVersion] nvarchar(32) NOT NULL, CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId]) ); Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30'] SELECT 1 Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30'] SELECT OBJECT_ID(N'[__EFMigrationsHistory]'); Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30'] SELECT [MigrationId], [ProductVersion] FROM [__EFMigrationsHistory] ORDER BY [MigrationId]; Microsoft.EntityFrameworkCore.Migrations[20402] Applying migration '20260829190300_InitialCreate'. Applying migration '20260829190300_InitialCreate'. Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30'] CREATE TABLE [Students] ( [Id] int NOT NULL IDENTITY, [FirstName] nvarchar(max) NOT NULL, [LastName] nvarchar(max) NOT NULL, [Email] nvarchar(max) NOT NULL, [Course] nvarchar(max) NOT NULL, [Age] int NOT NULL, CONSTRAINT [PK_Students] PRIMARY KEY ([Id]) ); Microsoft.EntityFrameworkCore.Database.Command[20101] Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30'] INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20260829190300_InitialCreate', N'8.0.30'); Done. PM>
+102.	ChatGPT каза:
+🎉 Перфектно! Базата е създадена успешно.
+Точно това искахме да получим.
+Какво се случи?
+Най-важните редове са:
+CREATE DATABASE [StudentManagementDb];
+Това означава, че SQL Server е създал базата:
+StudentManagementDb
+След това Entity Framework е създал таблицата:
+CREATE TABLE [Students]
+И таблицата съдържа:
+Id
+FirstName
+LastName
+Email
+Course
+Age
+Тоест в момента имаме:
+SQL Server
+└── StudentManagementDb
+    │
+    ├── Students
+    │   ├── Id
+    │   ├── FirstName
+    │   ├── LastName
+    │   ├── Email
+    │   ├── Course
+    │   └── Age
+    │
+    └── __EFMigrationsHistory
+__EFMigrationsHistory е вътрешна таблица на Entity Framework Core, която следи кои Migration-и вече са приложени.
+А това:
+Done.
+означава, че всичко е приключило успешно. ✅
+Следващата стъпка
+Сега няма да пишем нов код.
+Първо ще отворим SQL Server Management Studio 22 и ще проверим с очите си дали:
+StudentManagementDb
+    └── Tables
+        └── dbo.Students
+наистина съществува.
+Това е важно, защото така ще видиш връзката:
+C# модел → EF Core → Migration → SQL Server → таблица
+Направи само това
+В SQL Server Management Studio 22:
+1.	Намери твоя сървър:
+DESKTOP-O6FIRML\SQLEXPRESS02
+2.	Отвори Databases.
+3.	Потърси:
+StudentManagementDb
+4.	Разгъни я.
+5.	Разгъни Tables.
+Кажи ми какво виждаш вътре в Tables.
+Очаквам да има:
+dbo.Students
+dbo.__EFMigrationsHistory
+И после ще направим първата истинска функционалност на системата — добавяне на студент. 👨‍🎓
+103.	Вие казахте:
+ок
+104.	ChatGPT каза:
+Супер. 👍
+Тогава направи само проверката в SQL Server Management Studio 22:
+Databases → StudentManagementDb → Tables
+Трябва да виждаш:
+o	dbo.Students
+o	dbo.__EFMigrationsHistory
+Ако ги виждаш, напиши „виждам ги“.
+После започваме с първата функционалност: страница за добавяне и управление на студенти. 👨‍🎓
+105.	Вие казахте:
+виждам ги
+106.	ChatGPT каза:
+Супер! 🎉 Значи базата работи и връзката е успешна.
+Сега започваме първата реална функционалност на нашия Student Management System:
+Стъпка 5 — Students
+Искаме потребителят да може да:
+o	вижда всички студенти;
+o	добавя студент;
+o	редактира студент;
+o	изтрива студент;
+o	разглежда подробности за студент.
+За това ще използваме MVC Controller + Views.
+Стъпка 5.1 — създаваме StudentsController
+В Solution Explorer:
+6.	Намери папката:
+Controllers
+2.	Натисни десен бутон върху нея.
+3.	Избери:
+Add → Controller...
+4.	Ще се появи прозорец Add New Scaffolded Item.
+5.	Избери:
+MVC Controller - Empty
+6.	Натисни Add.
+7.	За име въведи:
+StudentsController
+8.	Натисни Add.
+Трябва да получиш:
+Controllers
+├── HomeController.cs
+└── StudentsController.cs
+Какво представлява Controller?
+В MVC имаме:
+Model
+  ↓
+Controller
+  ↓
+View
+При нас:
+Student.cs
+   ↓
+StudentsController.cs
+   ↓
+HTML страниците
+StudentsController ще отговаря за действията със студентите.
+Например по-късно ще имаме:
+Index   → списък със студенти
+Create  → добавяне
+Edit    → редактиране
+Details → подробности
+Delete  → изтриване
+🛑 Засега спираме
+Не пишем код още.
+Създай StudentsController и ми изпрати какво има вътре в него.
+Така ще работим върху твоя реален код и ще добавяме нещата едно по едно.
+107.	Вие казахте:
+using Microsoft.AspNetCore.Mvc; namespace StudentManagement.Controllers; public class StudentsController : Controller { public IActionResult Index() { return View(); } }
+108.	ChatGPT каза:
+Да, перфектно. 👍 Това е стандартният празен MVC controller. И понеже искаме да го разбереш, няма да добавяме всичко наведнъж.
+Стъпка 5.2 — свързваме Controller-а с базата
+В момента StudentsController знае само как да показва Index:
+public IActionResult Index()
+{
+    return View();
+}
+Но той още не знае за ApplicationDbContext.
+Ще го свържем с него.
+1. Добавяме using
+Най-отгоре добави:
+using StudentManagement.Data;
+Получаваш:
+using Microsoft.AspNetCore.Mvc;
+using StudentManagement.Data;
+
+namespace StudentManagement.Controllers;
+
+public class StudentsController : Controller
+{
+    public IActionResult Index()
+    {
+        return View();
+    }
+}
+2. Добавяме ApplicationDbContext
+Сега вътре в класа, преди Index(), добави:
+private readonly ApplicationDbContext _context;
+След това добавяме конструктор:
+public StudentsController(ApplicationDbContext context)
+{
+    _context = context;
+}
+Целият файл вече трябва да изглежда така:
+using Microsoft.AspNetCore.Mvc;
+using StudentManagement.Data;
+
+namespace StudentManagement.Controllers;
+
+public class StudentsController : Controller
+{
+    private readonly ApplicationDbContext _context;
+
+    public StudentsController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+}
+Какво направихме?
+Това:
+private readonly ApplicationDbContext _context;
+създава променлива _context, чрез която Controller-ът ще разговаря с базата.
+А това:
+public StudentsController(ApplicationDbContext context)
+{
+    _context = context;
+}
+казва:
+„Когато ASP.NET създаде StudentsController, дай му ApplicationDbContext.“
+ASP.NET Core знае как да го направи, защото по-рано в Program.cs написахме:
+builder.Services.AddDbContext<ApplicationDbContext>(...)
+Това се нарича Dependency Injection.
+🛑 Спираме тук
+Не добавяй още Create, Edit, Delete и т.н.
+Постави кода, запази с Ctrl + S и направи:
+Ctrl + Shift + B
+После ми изпрати резултата от Build.
+109.	Вие казахте:
+Build started at 10:24 PM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 10:24 PM and took 04.105 seconds ==========
+110.	ChatGPT каза:
+Перфектно! ✅
+Build: 1 succeeded, 0 failed
+Това означава, че StudentsController вече е успешно свързан с ApplicationDbContext и проектът се компилира без грешки.
+Стъпка 5.3 — взимаме студентите от базата
+Сега ще направим само едно нещо: Index() да прочете студентите от базата.
+В момента имаш:
+public IActionResult Index()
+{
+    return View();
+}
+Замени само този метод с:
+public async Task<IActionResult> Index()
+{
+    var students = await _context.Students.ToListAsync();
+
+    return View(students);
+}
+Но ще ни трябва още един using.
+Най-отгоре на файла добави:
+using Microsoft.EntityFrameworkCore;
+Така целият StudentsController.cs ще бъде:
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+
+namespace StudentManagement.Controllers;
+
+public class StudentsController : Controller
+{
+    private readonly ApplicationDbContext _context;
+
+    public StudentsController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var students = await _context.Students.ToListAsync();
+
+        return View(students);
+    }
+}
+Какво прави новият код?
+public async Task<IActionResult> Index()
+async означава, че методът може да изчаква операция, без да блокира приложението.
+var students = await _context.Students.ToListAsync();
+Това е най-важният ред.
+Казваме:
+„Отиди в таблицата Students, вземи всички записи и ги превърни в списък.“
+Получаваме:
+Database
+   ↓
+Students
+   ↓
+ToListAsync()
+   ↓
+List<Student>
+А:
+return View(students);
+подава получения списък към Index.cshtml.
+Но има един проблем
+Все още нямаме View, което да може да покаже този списък.
+Това е следващата ни стъпка.
+🛑 Засега:
+1.	Постави кода.
+2.	Ctrl + S
+3.	Ctrl + Shift + B
+4.	Изпрати ми резултата от Build.
+Не създавай View още. Ще го направим заедно на следващата стъпка.
+111.	Вие казахте:
+Build started at 10:27 PM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 10:27 PM and took 01.164 seconds ==========
+112.	ChatGPT каза:
+Перфектно! 🎉 Отново:
+Build: 1 succeeded, 0 failed
+Значи кодът е правилен и вече можем да продължим.
+Стъпка 5.4 — създаваме View за студентите
+В StudentsController имаме:
+return View(students);
+Това означава, че ASP.NET ще търси View на следния адрес:
+Views/Students/Index.cshtml
+В момента тази папка вероятно не съществува.
+1. Създаваме папка Students
+В Solution Explorer:
+1.	Намери папката:
+Views
+2.	Десен бутон върху Views.
+3.	Избери Add → New Folder.
+4.	Кръсти я:
+Students
+Трябва да получиш:
+Views
+├── Home
+├── Shared
+└── Students
+2. Създаваме Index.cshtml
+Сега:
+2.	Десен бутон върху новата папка Students.
+3.	Add → New Item...
+4.	Потърси Razor View.
+5.	Име:
+Index.cshtml
+5.	Натисни Add.
+Ако Visual Studio ти предложи шаблон, можеш да избереш Empty.
+🛑 Спираме тук
+Не пишем HTML още.
+Искам първо да сме сигурни, че имаш:
+Views
+└── Students
+    └── Index.cshtml
+Когато го създадеш, кажи ми „готово“.
+След това ще направим първата ни страница, която ще показва студентите от SQL Server. 👨‍🎓
+113.	Вие казахте:
+имам Razor Component
+114.	ChatGPT каза:
+Да — спри там, не избирай Razor Component. 👍
+За нашия проект използваме MVC с Razor Views, защото StudentsController връща:
+return View(students);
+Razor Component е различно нещо.
+Стъпка 5.4 — правилният начин
+Понеже Visual Studio при теб показва Razor Component, ще направим файла ръчно. Това е напълно нормално.
+1. В папката Views/Students
+Направи:
+десен бутон върху Students → Add → New Item...
+2. Потърси
+В полето за търсене напиши:
+Razor View
+Ако няма Razor View, не избирай Razor Component.
+3. Ако пак не го намира
+Тогава ще създадем файла ръчно:
+десен бутон върху Students → Add → New Item...
+Потърси:
+Text File
+и го кръсти точно:
+Index.cshtml
+Трябва да получим:
+Views
+└── Students
+    └── Index.cshtml
+Защо .cshtml?
+.cshtml е Razor View файлът, който ASP.NET Core MVC използва за генериране на HTML страница.
+Нашият:
+StudentsController
+има:
+Index()
+и когато посетим:
+/Students
+MVC ще търси:
+Views/Students/Index.cshtml
+________________________________________
+🛑 Засега не добавяй код в Index.cshtml.
+Първо само създай файла Index.cshtml.
+Ако не намираш нито Razor View, нито Text File, кажи ми какви опции ти показва Add → New Item..., и ще те насоча точно според твоя Visual Studio.
+115.	Вие казахте:
+има Text Editor >Razor(Asp.net core)>general; scroll bars и tabs
+116.	ChatGPT каза:
+Да — това, което виждаш:
+Text Editor → Razor (ASP.NET Core) → General / Scroll Bars / Tabs
+е настройка на редактора, а не шаблон за създаване на файл. Няма проблем. 👍
+Нека го направим по най-сигурния начин.
+Стъпка 5.4 — създаваме Index.cshtml ръчно
+1. Намери папката Students
+В Solution Explorer трябва да имаш:
+Views
+├── Home
+├── Shared
+└── Students
+2. Десен бутон върху Students
+Избери:
+Add → New Item...
+3. В прозореца Add New Item
+Горе вдясно има поле за търсене.
+Напиши:
+Text File
+Ако намериш Text File, избери го.
+Името на файла трябва да бъде:
+Index.cshtml
+След това Add.
+4. Провери
+В Solution Explorer трябва да получиш:
+Views
+└── Students
+    └── Index.cshtml
+⚠️ Ако Visual Studio създаде:
+Index.cshtml.txt
+това не е правилно. Кажи ми, ако стане така, и ще го поправим.
+🛑 Засега не пиши код
+Само създай:
+Index.cshtml
+Когато го виждаш в Views → Students, напиши „имам Index.cshtml“.
+После ще сложим първия Razor код и ще ти обясня как работи.
+117.	Вие казахте:
+още няколко неща
+118.	ChatGPT каза:
+Разбира се. 👍 Кажи ми всички уточнения наведнъж.
+Ще ги спазвам оттук нататък, за да не се налага да променяме начина, по който работим.
+119.	Вие казахте:
+asp.net core web app(razor pages); razor class library; use the new razor formating engine in the ide (require restart); formating(Text Editor → Razor (ASP.NET Core) →Advanced)
+120.	ChatGPT каза:
+Да, разбрах. 👍 Това са настройки/шаблони на Visual Studio, които виждаш, и е важно да ги разграничим от самото създаване на MVC View.
+Нашият проект е ASP.NET Core MVC, а не Razor Pages. Затова:
+o	❌ ASP.NET Core Web App (Razor Pages) — не го избираме.
+o	❌ Razor Class Library — не ни трябва.
+o	❌ Razor Component — не го избираме.
+o	⚙️ Use the new Razor formatting engine in the IDE — това е настройка на Visual Studio и няма отношение към създаването на Index.cshtml.
+o	⚙️ Text Editor → Razor (ASP.NET Core) → Advanced — това са настройки за форматиране/редактиране на Razor файловете, не типът на View.
+Защо е важно?
+Нашата структура е MVC:
+Controller
+    ↓
+View
+    ↓
+HTML
+Имаме:
+Controllers
+└── StudentsController.cs
+и той използва:
+return View(students);
+Затова View-то трябва да бъде:
+Views
+└── Students
+    └── Index.cshtml
+а не:
+Pages
+└── Students
+което би било характерно за Razor Pages.
+Нека не правим нищо на сляпо
+Понеже при твоя Visual Studio не виждаме стандартния шаблон Razor View, най-сигурно е първо да видим точно какво ти предлага менюто.
+Направи:
+десен бутон върху Views → Students → Add → New Item...
+и ми изпрати снимка на прозореца Add New Item.
+Така ще ти кажа точно кое да натиснеш при твоята версия на Visual Studio, вместо да те карам да избираш нещо на случаен принцип. 👍
+121.	Вие казахте:
+стандартния шаблон Razor View как мога да си го добавя
+122.	ChatGPT каза:
+Да. 👍 И всъщност при ASP.NET Core MVC е най-добре да имаш шаблона Razor View, за да можем удобно да създаваме Index.cshtml, Create.cshtml, Edit.cshtml и т.н.
+При теб вероятно липсва компонентът за ASP.NET/Web development scaffolding във Visual Studio.
+Стъпка 1 — отваряме Visual Studio Installer
+Затвори Visual Studio или го остави отворен.
+След това:
+1.	Отвори Visual Studio Installer.
+2.	Намери твоята инсталация на Visual Studio.
+3.	Натисни Modify.
+Стъпка 2 — проверяваме Workloads
+В таба Workloads потърси:
+ASP.NET and web development
+Трябва да е отметнато:
+☑ ASP.NET and web development
+Това е основният workload, който ни трябва за ASP.NET Core MVC.
+Ако не е отметнато:
+4.	Отметни го.
+5.	Натисни Modify / Install.
+6.	Изчакай инсталацията да приключи.
+Стъпка 3 — проверяваме Individual components
+Ако ASP.NET and web development вече е инсталиран, не инсталирай нищо на сляпо.
+Отиди на:
+Individual components
+и потърси:
+scaffolding
+или:
+ASP.NET
+Ако видиш компоненти, свързани с ASP.NET Core scaffolding, ще ги проверим.
+Важно
+Не ти препоръчвам да променяш настройки като:
+Use the new Razor formatting engine in the IDE
+Това няма да добави Razor View шаблона. То е само за начина, по който Visual Studio форматира Razor кода.
+________________________________________
+Но има и по-лесен вариант
+Дори ако шаблонът Razor View не се появи, можем спокойно да създадем:
+Views/Students/Index.cshtml
+като обикновен файл. Не е задължително да имаш шаблона, за да работи MVC View.
+Аз лично бих предпочел първо да проверим дали ASP.NET and web development е инсталиран, преди да променяме каквото и да е.
+👉 Отвори Visual Studio Installer → Modify → Workloads и ми кажи дали ASP.NET and web development е отметнато.
+123.	Вие казахте:
+има отметка
+124.	ChatGPT каза:
+Да, тогава не пипаме Workload-а. 👍 Той вече е инсталиран.
+Има още една важна подробност: за MVC scaffolding в Visual Studio понякога липсват отделни компоненти, въпреки че ASP.NET and web development е отметнат.
+Стъпка 2 — проверяваме Individual components
+В Visual Studio Installer → Modify:
+1.	Натисни Individual components.
+2.	В полето за търсене напиши:
+scaffolding
+3.	Кажи ми какви резултати ти показва.
+🛑 Засега не слагай нови отметки.
+Ще видим точно какво имаш и ще ти кажа кое ни трябва.
+125.	Вие казахте:
+имам катинари навсякъде
+126.	ChatGPT каза:
+Да, това е нормално. 👍 Катинарите означават, че тези компоненти са вече инсталирани или са управлявани от избрания workload/инсталацията.
+След като ASP.NET and web development е отметнат и компонентите са заключени, не е нужно да инсталираме нищо допълнително.
+И тук има една важна корекция от мен: не е необходимо да имаме шаблона Razor View, за да продължим. Можем да създадем .cshtml файла ръчно и той ще работи абсолютно нормално като MVC View.
+Да се върнем към проекта
+Затвори Visual Studio Installer и се върни в проекта.
+В:
+Views
+└── Students
+направи:
+Right click → Add → New Item...
+Ако не намираш Razor View, избери Text File и го кръсти:
+Index.cshtml
+Това е напълно достатъчно.
+Важно
+Не избирай:
+o	ASP.NET Core Web App (Razor Pages)
+o	Razor Class Library
+o	Razor Component
+Те са за други сценарии.
+Нашият проект е:
+ASP.NET Core MVC
+и ще използваме:
+StudentsController
+       ↓
+Views/Students/Index.cshtml
+👉 Ако вече си създал Index.cshtml, кажи „имам го“. Ако още не си, направи го като Text File и ми кажи какво се появи в Solution Explorer.
+127.	Вие казахте:
+имам razor page- empty; razor view - empty; razor layout; razor view start; razor view imports
+128.	ChatGPT каза:
+А, това е точно което ни трябва! 👍
+Имаш:
+Razor View - Empty
+Това е правилният шаблон за нашия MVC проект.
+Стъпка 5.4 — създаваме Index.cshtml
+В Views → Students:
+1.	Десен бутон върху папката Students.
+2.	Add → New Item...
+3.	Избери:
+Razor View - Empty
+4.	Натисни Add.
+5.	За име въведи:
+Index.cshtml
+6.	Натисни Add.
+Трябва да получиш:
+Views
+└── Students
+    └── Index.cshtml
+Важно
+Избери точно:
+Razor View - Empty
+а не:
+o	Razor Page - Empty
+o	Razor Layout
+o	Razor View Start
+o	Razor View Imports
+За нашия StudentsController правилният избор е Razor View - Empty. ✅
+🛑 Засега не слагай код в Index.cshtml.
+Когато файлът е създаден и го виждаш под:
+Views → Students → Index.cshtml
+напиши „готово“.
+После ще направим първата View, която ще прочете и покаже студентите от базата. 🚀
+129.	Вие казахте:
+готово и ето кода там @* For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860 *@ @{ }
+130.	ChatGPT каза:
+Да, това е напълно нормално. 👍 Visual Studio е създал празен Razor View и е добавил стандартния си шаблон.
+Тъй като се разбрахме да няма обикновени коментари вътре в кода, ще изчистим този шаблон.
+Стъпка 5.5 — подготвяме Index.cshtml
+Изтрий всичко в Index.cshtml и постави само:
+@model IEnumerable<StudentManagement.Models.Student>
+
+<h1>Students</h1>
+Какво направихме?
+Първият ред:
+@model IEnumerable<StudentManagement.Models.Student>
+казва на View-то:
+„Тази страница ще получи списък от обекти Student.“
+Това съответства на нашия Controller:
+var students = await _context.Students.ToListAsync();
+
+return View(students);
+Тоест:
+Database
+   ↓
+_context.Students
+   ↓
+ToListAsync()
+   ↓
+List<Student>
+   ↓
+Index.cshtml
+А:
+<h1>Students</h1>
+засега просто ще покаже заглавието Students.
+Важно
+Няма да правим таблицата още. Искам първо да проверим, че Controller → View връзката работи правилно.
+1.	Запази с Ctrl + S.
+2.	Направи Ctrl + Shift + B.
+3.	Изпрати ми резултата.
+След това ще стартираме приложението и ще отворим:
+/Students
+Тогава ще видим първата ни страница от Student Management System. 🚀
+131.	Вие казахте:
+Build started at 11:37 PM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 11:37 PM and took 07.575 seconds ==========
+132.	ChatGPT каза:
+Перфектно! ✅
+Build: 1 succeeded, 0 failed
+Нямаме грешки. Вече имаме работещата връзка:
+Student.cs
+    ↓
+ApplicationDbContext
+    ↓
+SQL Server
+    ↓
+StudentsController
+    ↓
+Index.cshtml
+Стъпка 5.6 — стартираме приложението
+Сега за първи път ще проверим страницата в браузъра.
+В Visual Studio натисни зеления бутон ▶ за стартиране на проекта.
+Може да пише нещо подобно:
+https
+или:
+StudentManagement
+Ще се отвори браузър с началната страница.
+След това
+В адресната лента добави:
+/Students
+Например ако браузърът е отворил:
+https://localhost:7xxx/
+отвори:
+https://localhost:7xxx/Students
+Какво очакваме?
+Трябва да видиш:
+Students
+Това ще докаже, че:
+/Students
+    ↓
+StudentsController
+    ↓
+Index()
+    ↓
+Index.cshtml
+    ↓
+<h1>Students</h1>
+работи.
+🛑 Засега не добавяме таблица и бутони.
+Стартирай проекта и отвори /Students.
+Кажи ми какво се показва в браузъра.
+133.	Вие казахте:
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Home Page - StudentManagement</title> <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" /> <link rel="stylesheet" href="/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0" /> <link rel="stylesheet" href="/StudentManagement.styles.css?v=J8HIlgePW9NlpQzb3tFrnxtS-y0GhZ_fh9sumvG8ORY" /> </head> <body> <header b-y9obw7rtys> <nav b-y9obw7rtys class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"> <div b-y9obw7rtys class="container-fluid"> <a class="navbar-brand" href="/">StudentManagement</a> <button b-y9obw7rtys class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span b-y9obw7rtys class="navbar-toggler-icon"></span> </button> <div b-y9obw7rtys class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> <ul b-y9obw7rtys class="navbar-nav flex-grow-1"> <li b-y9obw7rtys class="nav-item"> <a class="nav-link text-dark" href="/">Home</a> </li> <li b-y9obw7rtys class="nav-item"> <a class="nav-link text-dark" href="/Home/Privacy">Privacy</a> </li> </ul> </div> </div> </nav> </header> <div b-y9obw7rtys class="container"> <main b-y9obw7rtys role="main" class="pb-3"> <div class="text-center"> <h1 class="display-4">Welcome</h1> <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> </div> </main> </div> <footer b-y9obw7rtys class="border-top footer text-muted"> <div b-y9obw7rtys class="container"> &copy; 2026 - StudentManagement - <a href="/Home/Privacy">Privacy</a> </div> </footer> <script src="/lib/jquery/dist/jquery.min.js"></script> <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <script src="/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo"></script> <!-- Visual Studio Browser Link --> <script type="text/javascript" src="/_vs/browserLink" async="async" id="__browserLink_initializationData" data-requestId="6c9234b0695a4aebbde5603f5ad8053e" data-requestMappingFromServer="false" data-connectUrl="http://localhost:61289/107dce9254d640adaf13a9f080ab7503/browserLink"></script> <!-- End Browser Link --> <script src="/_framework/aspnetcore-browser-refresh.js"></script></body> </html>
+134.	ChatGPT каза:
+Да, виждам какво се е случило. 👍 Приложението работи, но в момента си отворил Home страницата, а не Students.
+HTML-ът, който ми изпрати, съдържа:
+<title>Home Page - StudentManagement</title>
+и:
+<h1 class="display-4">Welcome</h1>
+Това е Home/Index, не нашата Students/Index.
+Стъпка 5.7 — отваряме Students
+В браузъра, който се е отворил от Visual Studio, погледни адреса.
+Вероятно е нещо като:
+https://localhost:xxxx/
+След последната / добави:
+Students
+Така трябва да стане например:
+https://localhost:xxxx/Students
+Не копирай xxxx буквално — остави номера на порта, който вече имаш.
+Какво трябва да видиш?
+Трябва да се появи:
+Students
+Това е заглавието от нашия:
+Views
+└── Students
+    └── Index.cshtml
+и доказва, че:
+/Students
+   ↓
+StudentsController
+   ↓
+Index()
+   ↓
+Index.cshtml
+работи. ✅
+🛑 Засега не променяме нищо по кода.
+Отвори /Students и ми кажи какво виждаш.
+135.	Вие казахте:
+само главно меню без линк към страницата, но https://localhost:7295/Students съществува
+136.	ChatGPT каза:
+Точно така. 👍 Това всъщност е добър знак.
+https://localhost:7295/Students съществува, което означава, че маршрутът и страницата работят. Просто в главното меню още няма линк към Students.
+Стъпка 5.8 — добавяме Students в главното меню
+Главното меню, което виждаш, идва от:
+Views
+└── Shared
+    └── _Layout.cshtml
+Този файл съдържа навигацията:
+Home | Privacy
+Ще добавим:
+Home | Students | Privacy
+1. Отвори _Layout.cshtml
+В Solution Explorer:
+Views
+└── Shared
+    └── _Layout.cshtml
+Отвори файла.
+2. Намери тази част
+Трябва да има нещо подобно:
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+</li>
+3. Между Home и Privacy добавяме
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+</li>
+Получава се:
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+</li>
+Какво означава това?
+Тук:
+asp-controller="Students"
+казваме:
+Линкът води към StudentsController.
+А:
+asp-action="Index"
+казва:
+Използвай метода Index().
+Така:
+Students → StudentsController → Index()
+и браузърът отива към:
+/Students
+🛑 След това
+1.	Запази с Ctrl + S.
+2.	Не променяй нищо друго.
+3.	Върни се в браузъра и презареди страницата с Ctrl + F5.
+4.	Трябва да се появи:
+Home   Students   Privacy
+Натисни Students.
+Ако те отведе към https://localhost:7295/Students и покаже Students, значи навигацията вече работи. ✅
+137.	Вие казахте:
+ок
+138.	ChatGPT каза:
+Супер! 👍
+Значи вече имаме работеща основа:
+o	✅ Student модел
+o	✅ ApplicationDbContext
+o	✅ SQL Server връзка
+o	✅ InitialCreate Migration
+o	✅ StudentManagementDb
+o	✅ Students таблица
+o	✅ StudentsController
+o	✅ Students/Index.cshtml
+o	✅ линк Students в главното меню
+Следваща стъпка — показваме студентите като таблица
+В момента /Students вероятно показва само:
+Students
+Следващото, което ще направим, е да превърнем страницата в нещо подобно:
+Id	First Name	Last Name	Email	Course	Age
+—	—	—	—	—	—
+След това ще добавим бутон Create Student, с който ще можем да запишем първия студент в SQL Server.
+Но ще вървим една малка стъпка наведнъж.
+👉 Кажи ми, когато си на страницата:
+https://localhost:7295/Students
+и виждаш Students. Тогава ще направим таблицата.
+139.	Вие казахте:
+готово
+140.	ChatGPT каза:
+Чудесно. 👍 Сега ще направим само таблицата, без добавяне, редактиране или изтриване още.
+Стъпка 5.9 — показваме студентите в таблица
+Отвори:
+Views
+└── Students
+    └── Index.cshtml
+Изтрий текущото съдържание:
+@model IEnumerable<StudentManagement.Models.Student>
+
+<h1>Students</h1>
+и постави това:
+@model IEnumerable<StudentManagement.Models.Student>
+
+<h1>Students</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.Email</td>
+                <td>@student.Course</td>
+                <td>@student.Age</td>
+            </tr>
+        }
+    </tbody>
+</table>
+Какво прави кодът?
+Тази част:
+@model IEnumerable<StudentManagement.Models.Student>
+казва, че View-то получава списък от студенти.
+Тази част:
+@foreach (var student in Model)
+обикаля през всички студенти, които Controller-ът е получил от базата.
+За всеки студент създаваме един <tr> — един ред в таблицата.
+Например:
+<td>@student.FirstName</td>
+показва името на студента.
+Важното в момента
+Нашата база данни все още е празна.
+Затова след зареждането на /Students ще видиш заглавията:
+First Name | Last Name | Email | Course | Age
+но няма да има редове със студенти.
+Това е правилно. Следващата ни задача ще бъде да направим Create Student и да добавим първия запис.
+Сега
+1.	Запази с Ctrl + S.
+2.	Направи Ctrl + Shift + B.
+3.	Ако Build е успешен, отвори /Students или презареди страницата.
+Кажи ми какво виждаш.
+141.	Вие казахте:
+празна таблица
+142.	ChatGPT каза:
+Точно така! ✅ Празната таблица е правилният резултат.
+Това означава, че всичко по веригата работи:
+SQL Server
+   ↓
+StudentManagementDb
+   ↓
+Students
+   ↓
+ApplicationDbContext
+   ↓
+StudentsController
+   ↓
+Index.cshtml
+   ↓
+Празна таблица
+Просто още нямаме записан студент.
+Стъпка 5.10 — добавяме бутон „Add Student“
+Сега ще направим само бутона. След това ще направим формата.
+Отвори:
+Views
+└── Students
+    └── Index.cshtml
+Най-горе имаш:
+<h1>Students</h1>
+Веднага под него добави:
+<a asp-action="Create" class="btn btn-primary">Add Student</a>
+Така началото на файла ще изглежда:
+@model IEnumerable<StudentManagement.Models.Student>
+
+<h1>Students</h1>
+
+<a asp-action="Create" class="btn btn-primary">Add Student</a>
+
+<table class="table">
+Какво прави този ред?
+<a asp-action="Create" class="btn btn-primary">Add Student</a>
+Това създава Bootstrap бутон Add Student.
+asp-action="Create" казва:
+Когато натисна бутона, отиди към Create action в текущия controller — StudentsController.
+Тоест очакваме:
+Add Student
+     ↓
+StudentsController
+     ↓
+Create()
+⚠️ Но Create() все още не съществува.
+Затова, ако натиснеш бутона сега, ще получиш грешка/404. Това е нормално и точно това ще направим в следващата стъпка.
+Сега само:
+1.	Добави реда.
+2.	Ctrl + S
+3.	Ctrl + Shift + B
+4.	Отвори /Students.
+5.	Провери дали виждаш син бутон Add Student.
+Не натискай бутона още. 😄
+Кажи ми „бутонът е там“, когато го видиш.
+143.	Вие казахте:
+бутонът е там
+144.	ChatGPT каза:
+Супер! 👍 Бутонът е там и вече имаме връзката към бъдещата форма.
+Стъпка 5.11 — създаваме Create action
+В момента бутонът сочи към:
+/Students/Create
+но StudentsController все още няма Create() метод.
+Сега ще добавим само GET версията на Create. Тя ще показва празната форма.
+Отвори:
+Controllers
+└── StudentsController.cs
+Под метода Index() добави:
+public IActionResult Create()
+{
+    return View();
+}
+Така StudentsController трябва да изглежда:
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+
+namespace StudentManagement.Controllers;
+
+public class StudentsController : Controller
+{
+    private readonly ApplicationDbContext _context;
+
+    public StudentsController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var students = await _context.Students.ToListAsync();
+
+        return View(students);
+    }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+}
+Какво прави Create()?
+Когато натиснем:
+Add Student
+ASP.NET ще намери:
+StudentsController
+       ↓
+Create()
+       ↓
+View()
+и ще търси View:
+Views
+└── Students
+    └── Create.cshtml
+Този файл още няма да съществува.
+Сега само проверяваме Controller-а
+1.	Добави метода.
+2.	Ctrl + S
+3.	Ctrl + Shift + B
+4.	Изпрати ми резултата от Build.
+Не създавай Create.cshtml още. След успешния Build ще го направим като Razor View - Empty, както направихме с Index.cshtml.
+145.	Вие казахте:
+Build started at 11:58 PM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 11:59 PM and took 00.865 seconds ==========
+146.	ChatGPT каза:
+Перфектно. ✅ Create() е добавен и проектът се компилира без грешки.
+Стъпка 5.12 — създаваме Create.cshtml
+Сега ще създадем View-то за формата.
+В Solution Explorer:
+1.	Десен бутон върху:
+Views → Students
+2.	Избери Add → New Item...
+3.	Избери:
+Razor View - Empty
+4.	Име:
+Create.cshtml
+5.	Натисни Add.
+Трябва да имаш:
+Views
+└── Students
+    ├── Create.cshtml
+    └── Index.cshtml
+🛑 Засега не пишем код
+Само създай Create.cshtml.
+Когато го видиш в Solution Explorer, кажи „готово“.
+След това ще направим формата поле по поле, за да е ясно как всяко нещо работи.
+147.	Вие казахте:
+готово
+148.	ChatGPT каза:
+Супер! 👍 Сега ще направим само основата на формата. После ще добавим запазването в базата.
+Стъпка 5.13 — моделът на формата
+Отвори:
+Views
+└── Students
+    └── Create.cshtml
+Изтрий всичко вътре и постави:
+@model StudentManagement.Models.Student
+
+<h1>Add Student</h1>
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Course" class="form-label"></label>
+        <input asp-for="Course" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Age" class="form-label"></label>
+        <input asp-for="Age" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>
+Какво направихме?
+Първият ред:
+@model StudentManagement.Models.Student
+казва:
+Тази форма работи с един обект Student.
+След това:
+<form asp-action="Create" method="post">
+казва:
+При натискане на Save изпрати данните към Create action чрез POST.
+Например:
+<input asp-for="FirstName" class="form-control" />
+автоматично се свързва с:
+Student.FirstName
+Същото правим за:
+FirstName
+LastName
+Email
+Course
+Age
+Save изпраща формата, а Cancel ни връща към списъка.
+⚠️ Важно
+В момента формата ще се покаже, но натискането на Save няма да запише студента, защото все още нямаме POST Create action.
+Това ще бъде следващата малка стъпка.
+Засега:
+1.	Запази с Ctrl + S.
+2.	Направи Ctrl + Shift + B.
+3.	Ако Build е успешен, стартирай приложението.
+4.	Отиди на /Students.
+5.	Натисни Add Student.
+Трябва да видиш формата с:
+Add Student
+
+First Name
+Last Name
+Email
+Course
+Age
+
+Save   Cancel
+Не натискай Save още.
+Кажи ми как изглежда формата.
+149.	Вие казахте:
+както при теб
+150.	ChatGPT каза:
+Чудесно! 👍 Значи View-то работи правилно и формата се показва.
+Сега идва важната част: ще направим така, че натискането на Save действително да запише студента в SQL Server.
+Стъпка 5.14 — POST Create
+В момента имаме:
+Create.cshtml
+     ↓
+Save
+     ↓
+/Students/Create
+Но Controller-ът няма метод, който да приеме изпратените данни.
+Отвори:
+Controllers
+└── StudentsController.cs
+Под сегашния Create() метод добави:
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Create(Student student)
+{
+    if (!ModelState.IsValid)
+    {
+        return View(student);
+    }
+
+    _context.Students.Add(student);
+    await _context.SaveChangesAsync();
+
+    return RedirectToAction(nameof(Index));
+}
+⚠️ Ще имаме една малка промяна
+За да разпознае Student, Controller-ът трябва да има:
+using StudentManagement.Models;
+Затова най-отгоре трябва да имаш:
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+using StudentManagement.Models;
+Целият StudentsController.cs ще изглежда така:
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
+using StudentManagement.Models;
+
+namespace StudentManagement.Controllers;
+
+public class StudentsController : Controller
+{
+    private readonly ApplicationDbContext _context;
+
+    public StudentsController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var students = await _context.Students.ToListAsync();
+
+        return View(students);
+    }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(Student student)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(student);
+        }
+
+        _context.Students.Add(student);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
+}
+Какво прави POST методът?
+Когато натиснеш Save, формата изпраща:
+FirstName
+LastName
+Email
+Course
+Age
+към този метод:
+Create(Student student)
+ASP.NET автоматично създава Student обект от въведените данни.
+После:
+_context.Students.Add(student);
+казва на Entity Framework:
+„Искам този студент да бъде добавен към таблицата Students.“
+След това:
+await _context.SaveChangesAsync();
+е моментът, в който промяната реално се записва в SQL Server.
+Накрая:
+return RedirectToAction(nameof(Index));
+връща потребителя обратно към списъка със студенти.
+А какво прави [ValidateAntiForgeryToken]?
+Това е стандартна защита при POST форми в ASP.NET Core MVC. Тя предпазва формата от определен тип атака, наречена Cross-Site Request Forgery (CSRF).
+Razor формата ни автоматично ще добави необходимия anti-forgery token.
+________________________________________
+🛑 Сега само това
+1.	Добави using StudentManagement.Models;
+2.	Добави POST Create.
+3.	Ctrl + S
+4.	Ctrl + Shift + B
+5.	Изпрати ми резултата от Build.
+Още не натискай Save във формата. Първо проверяваме, че Controller-ът се компилира.
+151.	Вие казахте:
+Build started at 12:10 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 12:10 AM and took 01.032 seconds ==========
+152.	ChatGPT каза:
+Перфектно! ✅
+Build: 1 succeeded, 0 failed
+Значи POST Create е добавен правилно.
+Сега идва първият ни истински тест — ще запишем реален студент в SQL Server.
+Стъпка 5.15 — добавяме първия студент
+Стартирай приложението и отвори:
+https://localhost:7295/Students
+Натисни:
+Add Student
+Във формата въведи например:
+First Name: Иван
+Last Name: Петров
+Email: ivan.petrov@example.com
+Course: Computer Science
+Age: 20
+След това натисни:
+Save
+Какво трябва да се случи?
+След натискането на Save:
+Create.cshtml
+      ↓
+POST Create(Student student)
+      ↓
+_context.Students.Add(student)
+      ↓
+SaveChangesAsync()
+      ↓
+SQL Server
+      ↓
+Students таблица
+      ↓
+/Students
+И трябва да се върнеш автоматично на страницата Students.
+Този път таблицата вече трябва да съдържа:
+First Name	Last Name	Email	Course	Age
+Иван	Петров	ivan.petrov@example.com	Computer Science	20
+🛑 Направи само този тест
+Добави един студент и ми кажи какво се случи след натискането на Save.
+Ако се появи грешка, не променяй нищо — изпрати ми текста на грешката и ще я оправим заедно.
+153.	Вие казахте:
+ок
+154.	ChatGPT каза:
+Супер. 👍
+Направи теста:
+1.	Students
+2.	Add Student
+3.	Попълни петте полета.
+4.	Натисни Save.
+5.	Провери дали студентът се появява в таблицата.
+После ми кажи само едно от двете:
+o	„добави се“ ✅
+o	или „има грешка“ ❌ — и ми изпрати грешката.
+Засега не правим други промени.
+155.	Вие казахте:
+добави се
+156.	ChatGPT каза:
+Страхотно! 🎉 Това е важен момент — първият студент вече се записва реално в SQL Server.
+Вече сме доказали, че целият поток работи:
+Форма
+ ↓
+StudentsController
+ ↓
+Entity Framework Core
+ ↓
+SQL Server
+ ↓
+Students таблица
+Стъпка 5.16 — проверяваме базата
+Преди да добавяме нова функционалност, нека видим дали студентът наистина е в SQL Server.
+Отвори SQL Server Management Studio (SSMS).
+В Object Explorer намери:
+DESKTOP-O6FIRML\SQLEXPRESS02
+    └── Databases
+        └── StudentManagementDb
+            └── Tables
+                └── dbo.Students
+Ако dbo.Students е там:
+1.	Десен бутон върху dbo.Students.
+2.	Избери Select Top 1000 Rows.
+Трябва да видиш записания студент.
+Защо правим тази проверка?
+Защото вече знаем, че страницата го показва, но сега ще потвърдим директно в SQL Server:
+StudentManagementDb
+        ↓
+dbo.Students
+        ↓
+Иван Петров
+Това е полезно и за теб като начинаещ — ще виждаш връзката между C# кода и реалната база данни.
+🛑 Направи само тази проверка.
+Кажи ми дали виждаш студента в dbo.Students.
+157.	Вие казахте:
+записа го има
+158.	ChatGPT каза:
+Перфектно! 🎉 Значи всичко работи както трябва.
+Вече имаме реално работещ CRUD проект, но засега сме направили само Create и Read.
+Какво имаме досега
+o	✅ Student модел
+o	✅ Entity Framework Core 8.0.30
+o	✅ SQL Server Express
+o	✅ ApplicationDbContext
+o	✅ Connection String
+o	✅ Migration InitialCreate
+o	✅ База StudentManagementDb
+o	✅ Таблица Students
+o	✅ StudentsController
+o	✅ Списък със студенти
+o	✅ Добавяне на студент
+o	✅ Записване в SQL Server
+o	✅ Проверка директно в SSMS
+Следваща стъпка — Edit
+Сега ще направим възможност да редактираме съществуващ студент.
+Например:
+Иван Петров
+ivan.petrov@example.com
+Computer Science
+20
+да можем да променим на:
+Иван Петров
+ivan.petrov@example.com
+Software Engineering
+21
+Ще направим това отново стъпка по стъпка, без да прескачаме.
+Стъпка 5.17
+Първо ще добавим в таблицата един бутон:
+Edit
+който ще води към:
+/Students/Edit/1
+Но още няма да правим Edit Controller-а и формата.
+Ако си готов, следващата ни малка стъпка е да добавим само Edit линка към всеки студент.
+159.	Вие казахте:
+да
+160.	ChatGPT каза:
+Чудесно. 👍 Правим само Edit бутона към всеки студент.
+Стъпка 5.17 — добавяме Edit
+Отвори:
+Views
+└── Students
+    └── Index.cshtml
+В момента в таблицата имаш нещо подобно:
+@foreach (var student in Model)
+{
+    <tr>
+        <td>@student.FirstName</td>
+        <td>@student.LastName</td>
+        <td>@student.Email</td>
+        <td>@student.Course</td>
+        <td>@student.Age</td>
+    </tr>
+}
+1. Добавяме нова колона
+В <thead> след Age добави:
+<th>Actions</th>
+Получаваш:
+<thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Course</th>
+        <th>Age</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+2. Добавяме Edit към всеки ред
+В <tr> след:
+<td>@student.Age</td>
+добави:
+<td>
+    <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning">Edit</a>
+</td>
+Така целият foreach ще бъде:
+@foreach (var student in Model)
+{
+    <tr>
+        <td>@student.FirstName</td>
+        <td>@student.LastName</td>
+        <td>@student.Email</td>
+        <td>@student.Course</td>
+        <td>@student.Age</td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning">Edit</a>
+        </td>
+    </tr>
+}
+Какво означава това?
+Тази част:
+asp-action="Edit"
+казва:
+Отиди към Edit action.
+А:
+asp-route-id="@student.Id"
+подава Id на конкретния студент.
+Например ако Иван има:
+Id = 1
+бутонът ще води към:
+/Students/Edit/1
+Ако друг студент има Id = 2:
+/Students/Edit/2
+Това е важно, защото по този начин знаем кой точно студент искаме да редактираме.
+🛑 Сега само това
+1.	Добави колоната Actions.
+2.	Добави Edit бутона.
+3.	Ctrl + S
+4.	Ctrl + Shift + B
+5.	Отвори /Students.
+Не натискай Edit още, защото Edit() в Controller-а все още не съществува.
+Изпрати ми Build резултата и ще продължим.
+161.	Вие казахте:
+Build started at 12:24 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 12:24 AM and took 07.311 seconds ==========
+162.	ChatGPT каза:
+Перфектно! ✅ Build-ът е успешен.
+Сега трябва да имаш таблица приблизително така:
+First Name	Last Name	Email	Course	Age	Actions
+Иван	Петров	...	...	20	Edit
+Има само едно нещо, което няма да работи още: натискането на Edit. Това е очаквано, защото още нямаме Edit() в Controller-а.
+Стъпка 5.18 — създаваме GET Edit
+Отвори:
+Controllers
+└── StudentsController.cs
+Под Create методите добави:
+public async Task<IActionResult> Edit(int? id)
+{
+    if (id == null)
+    {
+        return NotFound();
+    }
+
+    var student = await _context.Students.FindAsync(id);
+
+    if (student == null)
+    {
+        return NotFound();
+    }
+
+    return View(student);
+}
+Какво прави този метод?
+Когато натиснем например:
+/Students/Edit/1
+стойността:
+id = 1
+се подава на метода.
+След това:
+var student = await _context.Students.FindAsync(id);
+търси студента с това Id в базата.
+Ако не е намерен:
+return NotFound();
+връщаме 404 Not Found.
+Ако е намерен:
+return View(student);
+подаваме конкретния студент към бъдещото:
+Views/Students/Edit.cshtml
+🛑 Засега само това
+Добави метода, запази и направи:
+Ctrl + Shift + B
+Не създавай Edit.cshtml още и не натискай Edit бутона.
+Изпрати ми Build резултата.
+163.	Вие казахте:
+Build started at 12:26 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 12:26 AM and took 01.009 seconds ==========
+164.	ChatGPT каза:
+Перфектно! ✅ Отново:
+Build: 1 succeeded, 0 failed
+GET Edit вече е готов.
+Стъпка 5.19 — създаваме Edit.cshtml
+Сега ще създадем View-то, което ще покаже данните на избрания студент.
+В Solution Explorer:
+1.	Десен бутон върху:
+Views → Students
+2.	Add → New Item...
+3.	Избери:
+Razor View - Empty
+4.	Име:
+Edit.cshtml
+5.	Натисни Add.
+Трябва да имаш:
+Views
+└── Students
+    ├── Create.cshtml
+    ├── Edit.cshtml
+    └── Index.cshtml
+🛑 Засега не добавяй код
+Само създай Edit.cshtml.
+Когато го видиш в Views → Students, кажи „готово“ и ще направим формата за редактиране, отново стъпка по стъпка.
+165.	Вие казахте:
+готово
+166.	ChatGPT каза:
+Чудесно. 👍 Сега ще направим формата за редактиране.
+Стъпка 5.20 — Edit.cshtml
+Отвори:
+Views → Students → Edit.cshtml
+Изтрий всичко вътре и постави:
+@model StudentManagement.Models.Student
+
+<h1>Edit Student</h1>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Course" class="form-label"></label>
+        <input asp-for="Course" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Age" class="form-label"></label>
+        <input asp-for="Age" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>
+Какво е новото тук?
+Най-важният ред, който не сме имали в Create, е:
+<input type="hidden" asp-for="Id" />
+Той запазва Id на студента във формата.
+Например:
+Id = 1
+Когато редактираме Иван, формата ще знае:
+Редактираме студент №1.
+Останалите полета се попълват автоматично от:
+return View(student);
+който направихме в Edit(int? id).
+Така потокът вече е:
+Students
+   ↓
+Edit
+   ↓
+Edit/1
+   ↓
+FindAsync(1)
+   ↓
+Edit.cshtml
+   ↓
+Показва данните на Иван
+🛑 Засега спираме тук
+Не добавяме POST Edit още.
+Направи:
+1.	Ctrl + S
+2.	Ctrl + Shift + B
+3.	Изпрати ми Build резултата.
+След това ще проверим дали при натискане на Edit се отваря формата с вече попълнените данни.
+167.	Вие казахте:
+Build started at 12:34 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 12:34 AM and took 00.826 seconds ==========
+168.	ChatGPT каза:
+Перфектно! ✅
+Build-ът е успешен.
+Стъпка 5.21 — тестваме Edit формата
+Сега стартирай приложението и:
+1.	Отвори Students от главното меню.
+2.	Трябва да видиш записания от нас студент.
+3.	Натисни Edit срещу него.
+Трябва да се отвори:
+Edit Student
+
+First Name    Иван
+Last Name     Петров
+Email         ...
+Course        ...
+Age           20
+
+Save   Cancel
+Важно
+Не натискай Save още.
+На този етап Edit само зарежда данните. Все още не сме написали POST метода, който да запише промените.
+Провери само дали формата се отваря и дали полетата са попълнени с данните на студента.
+Ако всичко е наред, кажи ми „работи“ и ще направим следващата малка стъпка — записването на промените в SQL Server.
+169.	Вие казахте:
+работи
+170.	ChatGPT каза:
+Супер! 🎉 Това означава, че GET Edit работи правилно — намираме конкретния студент по Id и зареждаме данните му във формата.
+Стъпка 5.22 — записваме промените
+Сега ще добавим POST Edit в StudentsController.
+Отвори:
+Controllers
+└── StudentsController.cs
+Под съществуващия Edit(int? id) метод добави:
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(int id, Student student)
+{
+    if (id != student.Id)
+    {
+        return NotFound();
+    }
+
+    if (!ModelState.IsValid)
+    {
+        return View(student);
+    }
+
+    _context.Update(student);
+    await _context.SaveChangesAsync();
+
+    return RedirectToAction(nameof(Index));
+}
+Какво прави?
+Когато натиснем Save във формата:
+Edit.cshtml
+    ↓
+POST
+    ↓
+Edit(int id, Student student)
+Първо проверяваме:
+if (id != student.Id)
+дали Id от URL адреса съвпада с Id на изпратения студент.
+След това:
+_context.Update(student);
+казваме на Entity Framework:
+Този студент вече съществува. Искам да актуализирам данните му.
+А:
+await _context.SaveChangesAsync();
+записва промяната реално в SQL Server.
+Накрая:
+return RedirectToAction(nameof(Index));
+връщаме потребителя обратно към списъка.
+🛑 Сега само това
+1.	Добави POST метода.
+2.	Запази с Ctrl + S.
+3.	Направи Ctrl + Shift + B.
+4.	Изпрати ми Build резултата.
+Още не променяй данните. Първо ще проверим, че кодът се компилира.
+171.	Вие казахте:
+може ли да скрием https://localhost:7295/Students/Edit/1 -> да скрием от лентата и да пише например името и фамилията за по-голяма сигурност
+172.	ChatGPT каза:
+Да, можем — и е добра идея да го направим, но има едно важно уточнение:
+скриването на Id в адресната лента не е реална защита само по себе си. Например /Students/Edit/1 не разкрива чувствителна информация, но можем да направим URL-а по-удобен и да не показваме числовия Id.
+За начинаещ бих ти предложил първо да направим URL от типа:
+/Students/Edit/Ivan-Petrov
+или:
+/Students/Edit/Ivan/Petrov
+Така вместо:
+https://localhost:7295/Students/Edit/1
+ще виждаш например:
+https://localhost:7295/Students/Edit/Ivan/Petrov
+Но има още по-добър вариант
+Ако целта е сигурност, можем да оставим Id вътрешно в приложението, но да не го показваме в URL-а. Например:
+/Students/Edit/Ivan-Petrov
+Controller-ът ще намери студента по името, а Id ще си остане само вътрешно.
+Само че има един проблем: двама студенти могат да се казват „Иван Петров“. Затова име + фамилия не е уникален идентификатор.
+По-правилният професионален вариант е да използваме GUID/случаен идентификатор в URL-а или да използваме route, който не показва вътрешния database Id.
+Но понеже правим проекта стъпка по стъпка, предлагам да не променяме това точно сега, докато не завършим базовия CRUD.
+След като направим:
+o	✅ Create
+o	✅ Read
+o	🔄 Edit
+o	⬜ Delete
+o	⬜ Details
+ще направим отделна малка стъпка за по-сигурни и чисти URL адреси и ще обсъдим защо избраният вариант е безопасен.
+Така няма да счупим работещия Edit в момента.
+173.	Вие казахте:
+за сега няма да го променяме
+174.	ChatGPT каза:
+Разбрах. 👍 Засега не променяме URL адресите.
+Продължаваме по плана и първо завършваме основния CRUD.
+В момента сме на Edit. Следва:
+1.	Проверяваме POST Edit с реална промяна.
+2.	След това правим Delete.
+3.	Накрая ще имаме основния CRUD напълно работещ.
+Сега
+Имаш вече добавения:
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(int id, Student student)
+Направи Ctrl + Shift + B и ми изпрати резултата, ако още не си го направил след добавянето му.
+После ще променим например курса или възрастта на Иван и ще проверим дали промяната влиза и в SQL Server.
+175.	Вие казахте:
+Build started at 12:45 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 12:45 AM and took 07.334 seconds ==========
+176.	ChatGPT каза:
+Перфектно! ✅ POST Edit се компилира без грешки.
+Стъпка 5.23 — тестваме редактирането
+Сега ще проверим целия процес с реална промяна.
+1.	Стартирай приложението.
+2.	Отвори Students.
+3.	Натисни Edit на Иван Петров.
+4.	Промени само Course, например от:
+Computer Science
+на:
+Software Engineering
+5.	Натисни Save.
+Какво трябва да се случи?
+След Save трябва автоматично да се върнеш на:
+/Students
+и таблицата трябва да показва:
+First Name	Last Name	Course
+Иван	Петров	Software Engineering
+След това можем да направим още една важна проверка в SQL Server Management Studio — дали dbo.Students също съдържа променения курс.
+🛑 Направи само тази промяна и ми кажи:
+„промени се“ или „има грешка“.
+177.	Вие казахте:
+промени се и в dbo.Students също
+178.	ChatGPT каза:
+Отлично! 🎉 Това е точно резултатът, който искахме.
+Вече имаме напълно работещи Create + Read + Update операции:
+Create → добавя студент
+Read   → показва студентите
+Update → променя студент
+И най-важното — проверихме, че промяната стига реално до SQL Server.
+Стъпка 5.24 — Delete
+Следва последната основна CRUD операция:
+Delete → изтрива студент
+Ще го направим внимателно, защото не искам случайно да изтрием студента, който използваме за тестове.
+Първо ще добавим само Delete бутон към таблицата.
+Отвори:
+Views → Students → Index.cshtml
+В колоната Actions, където в момента имаш:
+<td>
+    <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning">Edit</a>
+</td>
+замени я с:
+<td>
+    <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-danger">Delete</a>
+</td>
+Така всеки студент ще има два бутона:
+Edit   Delete
+Какво прави Delete линкът?
+Например за студент с Id = 1:
+/Students/Delete/1
+Точно както направихме при Edit.
+⚠️ Все още няма да работи, защото още нямаме Delete() в Controller-а. Това е нарочно — ще го изградим на отделни стъпки.
+Сега
+1.	Промени само Index.cshtml.
+2.	Запази.
+3.	Ctrl + Shift + B
+4.	Изпрати ми Build резултата.
+После ще направим Delete метода.
+179.	Вие казахте:
+Build started at 12:52 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 12:52 AM and took 01.010 seconds ==========
+180.	ChatGPT каза:
+Перфектно! ✅ Build-ът е успешен.
+Сега имаме бутон Delete, но още няма да го натискаме.
+Стъпка 5.25 — GET Delete
+Първо ще направим страница за потвърждение:
+„Сигурни ли сте, че искате да изтриете този студент?“
+Това е по-добре от директно изтриване при натискане на линка.
+1. Отвори
+Controllers
+└── StudentsController.cs
+Под Edit методите добави:
+public async Task<IActionResult> Delete(int? id)
+{
+    if (id == null)
+    {
+        return NotFound();
+    }
+
+    var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
+
+    if (student == null)
+    {
+        return NotFound();
+    }
+
+    return View(student);
+}
+Какво прави?
+При натискане на:
+/Students/Delete/1
+методът получава:
+id = 1
+След това:
+_context.Students.FirstOrDefaultAsync(m => m.Id == id)
+търси конкретния студент в базата.
+Ако го намери:
+return View(student);
+ще отвори:
+Views/Students/Delete.cshtml
+Там ще направим страницата за потвърждение.
+Ако студентът не съществува, получаваме:
+404 Not Found
+🛑 Само това засега
+1.	Добави GET Delete.
+2.	Ctrl + S
+3.	Ctrl + Shift + B
+4.	Изпрати ми Build резултата.
+Не създавай Delete.cshtml още. Ще го направим след успешния Build.
+181.	Вие казахте:
+Build started at 12:56 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 12:56 AM and took 00.910 seconds ==========
+182.	ChatGPT каза:
+Перфектно! ✅ GET Delete е готов и Build-ът е успешен.
+Стъпка 5.26 — създаваме Delete.cshtml
+Сега ще направим страницата за потвърждение.
+В Solution Explorer:
+1.	Десен бутон върху:
+Views → Students
+2.	Add → New Item...
+3.	Избери:
+Razor View - Empty
+4.	Име:
+Delete.cshtml
+5.	Натисни Add.
+Трябва да имаш:
+Views
+└── Students
+    ├── Create.cshtml
+    ├── Delete.cshtml
+    ├── Edit.cshtml
+    └── Index.cshtml
+Засега не пишем код
+Само създай Delete.cshtml.
+Когато го виждаш в Views → Students, напиши „готово“. После ще направим страницата за потвърждение.
+183.	Вие казахте:
+готово
+184.	ChatGPT каза:
+Чудесно. 👍 Сега ще направим само страницата за потвърждение. Все още няма да изтриваме нищо.
+Стъпка 5.27 — Delete.cshtml
+Отвори:
+Views → Students → Delete.cshtml
+Изтрий всичко вътре и постави:
+@model StudentManagement.Models.Student
+
+<h1>Delete Student</h1>
+
+<h3>Are you sure you want to delete this student?</h3>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">First Name</dt>
+        <dd class="col-sm-10">@Model.FirstName</dd>
+
+        <dt class="col-sm-2">Last Name</dt>
+        <dd class="col-sm-10">@Model.LastName</dd>
+
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+
+        <dt class="col-sm-2">Course</dt>
+        <dd class="col-sm-10">@Model.Course</dd>
+
+        <dt class="col-sm-2">Age</dt>
+        <dd class="col-sm-10">@Model.Age</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+Какво прави тази страница?
+Тук:
+@model StudentManagement.Models.Student
+казваме, че страницата получава един конкретен студент.
+Например:
+Иван
+Петров
+ivan.petrov@example.com
+Software Engineering
+20
+След това показваме информацията, за да може потребителят да провери кой студент ще бъде изтрит.
+Тази част:
+<input type="hidden" asp-for="Id" />
+запазва Id на студента, който ще бъде изпратен при потвърждението.
+А:
+<form asp-action="Delete" method="post">
+означава, че бутонът Delete ще изпрати POST заявка към Delete action.
+Важно
+Все още нямаме POST Delete в Controller-а.
+Следователно:
+Students
+   ↓
+Delete
+   ↓
+Delete.cshtml
+   ↓
+Delete button
+ще покаже страницата, но още няма да изтрие записа.
+🛑 Сега:
+1.	Постави кода.
+2.	Ctrl + S
+3.	Ctrl + Shift + B
+4.	Изпрати ми Build резултата.
+После ще направим последната част — реалното изтриване от SQL Server.
+185.	Вие казахте:
+Build started at 1:00 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 1:00 AM and took 00.775 seconds ==========
+186.	ChatGPT каза:
+Перфектно! ✅
+Build-ът е успешен и Delete.cshtml е наред.
+Стъпка 5.28 — тестваме страницата за потвърждение
+Преди да добавим реалното изтриване, ще проверим само дали страницата се отваря правилно.
+1.	Стартирай приложението.
+2.	Отиди на Students.
+3.	Намери тестовия студент.
+4.	Натисни Delete.
+Трябва да се отвори страница приблизително така:
+Delete Student
+
+Are you sure you want to delete this student?
+
+First Name    Иван
+Last Name     Петров
+Email         ...
+Course        Software Engineering
+Age           20
+
+Delete    Cancel
+⚠️ Много важно
+Не натискай червения Delete бутон още.
+Все още не сме добавили POST метода, който реално изтрива записа.
+Провери само дали:
+o	страницата се отваря;
+o	правилният студент се показва;
+o	виждаш бутоните Delete и Cancel.
+Ако всичко е наред, кажи ми „работи“ и ще направим последната стъпка от CRUD — реалното изтриване от базата.
+187.	Вие казахте:
+работи
+188.	ChatGPT каза:
+Супер! 🎉 Значи GET Delete и страницата за потвърждение работят.
+Сега идва последната част на CRUD — реалното изтриване.
+Стъпка 5.29 — POST Delete
+Отвори:
+Controllers
+└── StudentsController.cs
+Под GET Delete метода добави:
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> DeleteConfirmed(int id)
+{
+    var student = await _context.Students.FindAsync(id);
+
+    if (student == null)
+    {
+        return NotFound();
+    }
+
+    _context.Students.Remove(student);
+    await _context.SaveChangesAsync();
+
+    return RedirectToAction(nameof(Index));
+}
+Но имаме една малка промяна в Delete.cshtml
+В момента формата има:
+<form asp-action="Delete" method="post">
+Трябва да я променим на:
+<form asp-action="DeleteConfirmed" method="post">
+Така натискането на Delete ще извика точно:
+DeleteConfirmed(int id)
+Какво ще се случи?
+Delete.cshtml
+     ↓
+DeleteConfirmed(id)
+     ↓
+FindAsync(id)
+     ↓
+Remove(student)
+     ↓
+SaveChangesAsync()
+     ↓
+SQL Server
+     ↓
+студентът е изтрит
+     ↓
+/Students
+Remove() маркира студента за изтриване, а SaveChangesAsync() реално изпраща промяната към SQL Server.
+Защо не използваме директно Delete()?
+За да разделим ясно двете действия:
+GET Delete
+    ↓
+Показва потвърждението
+
+POST DeleteConfirmed
+    ↓
+Реално изтрива
+Това е по-ясна структура за нашия проект.
+Сега
+1.	Добави DeleteConfirmed в StudentsController.
+2.	В Delete.cshtml промени само:
+3.	asp-action="Delete"
+на:
+asp-action="DeleteConfirmed"
+4.	Ctrl + S
+5.	Ctrl + Shift + B
+6.	Изпрати ми Build резултата.
+🛑 Не натискай Delete в браузъра още. Първо ще проверим Build-а.
+189.	Вие казахте:
+така изглежда Delete.cshtml @model StudentManagement.Models.Student <h1>Delete Student</h1> <h3>Are you sure you want to delete this student?</h3> <div> <dl class="row"> <dt class="col-sm-2">First Name</dt> <dd class="col-sm-10">@Model.FirstName</dd> <dt class="col-sm-2">Last Name</dt> <dd class="col-sm-10">@Model.LastName</dd> <dt class="col-sm-2">Email</dt> <dd class="col-sm-10">@Model.Email</dd> <dt class="col-sm-2">Course</dt> <dd class="col-sm-10">@Model.Course</dd> <dt class="col-sm-2">Age</dt> <dd class="col-sm-10">@Model.Age</dd> </dl> <form asp-action="DeleteConfirmed" method="post"> <input type="hidden" asp-for="Id" /> <button type="submit" class="btn btn-danger">Delete</button> <a asp-action="Index" class="btn btn-secondary">Cancel</a> </form> </div>
+190.	ChatGPT каза:
+Да, точно така трябва да изглежда. ✅
+Особено важно е, че вече си променил:
+<form asp-action="DeleteConfirmed" method="post">
+Това е правилно и съвпада с метода, който добавихме в Controller-а.
+Сега Delete.cshtml е готов.
+Следващото
+Ако вече си добавил и този метод в StudentsController:
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> DeleteConfirmed(int id)
+{
+    var student = await _context.Students.FindAsync(id);
+
+    if (student == null)
+    {
+        return NotFound();
+    }
+
+    _context.Students.Remove(student);
+    await _context.SaveChangesAsync();
+
+    return RedirectToAction(nameof(Index));
+}
+направи:
+Ctrl + S → Ctrl + Shift + B
+и ми изпрати резултата от Build.
+Ако Build е успешен, ще направим контролирано изтриване на тестовия студент и ще проверим и в dbo.Students, както направихме при Edit.
+191.	Вие казахте:
+StudentsController изглежда така using Microsoft.AspNetCore.Mvc; using Microsoft.EntityFrameworkCore; using StudentManagement.Data; using StudentManagement.Models; namespace StudentManagement.Controllers; public class StudentsController : Controller { private readonly ApplicationDbContext _context; public StudentsController(ApplicationDbContext context) { _context = context; } public async Task<IActionResult> Index() { var students = await _context.Students.ToListAsync(); return View(students); } public IActionResult Create() { return View(); } [HttpPost] [ValidateAntiForgeryToken] public async Task<IActionResult> Create(Student student) { if (!ModelState.IsValid) { return View(student); } _context.Students.Add(student); await _context.SaveChangesAsync(); return RedirectToAction(nameof(Index)); } public async Task<IActionResult> Edit(int? id) { if (id == null) { return NotFound(); } var student = await _context.Students.FindAsync(id); if (student == null) { return NotFound(); } return View(student); } [HttpPost] [ValidateAntiForgeryToken] public async Task<IActionResult> Edit(int id, Student student) { if (id != student.Id) { return NotFound(); } if (!ModelState.IsValid) { return View(student); } _context.Update(student); await _context.SaveChangesAsync(); return RedirectToAction(nameof(Index)); } public async Task<IActionResult> Delete(int? id) { if (id == null) { return NotFound(); } var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id); if (student == null) { return NotFound(); } return View(student); } [HttpPost] [ValidateAntiForgeryToken] public async Task<IActionResult> DeleteConfirmed(int id) { var student = await _context.Students.FindAsync(id); if (student == null) { return NotFound(); } _context.Students.Remove(student); await _context.SaveChangesAsync(); return RedirectToAction(nameof(Index)); } }
+192.	ChatGPT каза:
+Да — StudentsController ти е правилен. ✅ Няма нужда да променяме нищо в него на този етап.
+Имаш вече трите основни операции:
+o	Create → добавя студент
+o	Edit → редактира студент
+o	Delete → изтрива студент
+И DeleteConfirmed е свързан правилно с твоя Delete.cshtml.
+Стъпка 5.30 — Build
+Сега направи:
+Ctrl + S
+след това:
+Ctrl + Shift + B
+Ако получиш:
+Build: 1 succeeded, 0 failed
+ще направим теста.
+След успешния Build
+Ще стартираме приложението и ще направим следното:
+4.	Отваряме Students.
+5.	Натискаме Delete на тестовия студент.
+6.	Проверяваме дали се показва страницата за потвърждение.
+7.	Натискаме червения Delete.
+8.	Проверяваме, че студентът е изчезнал от таблицата.
+9.	Проверяваме и dbo.Students в SQL Server.
+Така ще потвърдим, че Delete работи от браузъра чак до SQL Server.
+Направи Build-а и ми изпрати резултата.
+193.	Вие казахте:
+Build started at 1:12 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 1:13 AM and took 07.154 seconds ==========
+194.	ChatGPT каза:
+Перфектно! ✅ Build-ът е успешен.
+Сега правим реалния тест на Delete.
+Стъпка 5.31 — изтриваме тестовия студент
+Стартирай приложението и отвори:
+/Students
+Намери тестовия студент и:
+1.	Натисни Delete.
+2.	Ще се отвори страницата Delete Student.
+3.	Провери дали показва правилния студент.
+4.	Натисни червения Delete.
+След това провери две неща
+В сайта:
+/Students
+Студентът трябва да е изчезнал от таблицата.
+След това в SQL Server Management Studio:
+StudentManagementDb
+    → Tables
+        → dbo.Students
+Изпълни Select Top 1000 Rows.
+Студентът също трябва да е изчезнал от таблицата.
+⚠️ Ако имаш други студенти, не ги изтривай — изтрий само тестовия, който използвахме.
+Кажи ми дали студентът е изчезнал и от сайта, и от dbo.Students.
+195.	Вие казахте:
+да
+196.	ChatGPT каза:
+Супер! 🎉 CRUD-ът вече работи изцяло.
+Имаме:
+CREATE  → добавяне
+READ    → показване
+UPDATE  → редактиране
+DELETE  → изтриване
+И проверихме всичко и директно в SQL Server. Това означава, че основната функционалност на Student Management System вече е налице. ✅
+Какво имаме в проекта
+StudentManagement
+│
+├── Controllers
+│   ├── HomeController.cs
+│   └── StudentsController.cs
+│
+├── Data
+│   └── ApplicationDbContext.cs
+│
+├── Models
+│   └── Student.cs
+│
+├── Views
+│   ├── Home
+│   ├── Students
+│   │   ├── Create.cshtml
+│   │   ├── Delete.cshtml
+│   │   ├── Edit.cshtml
+│   │   └── Index.cshtml
+│   └── Shared
+│
+├── Migrations
+│   └── InitialCreate
+│
+└── appsettings.json
+И базата:
+StudentManagementDb
+└── dbo.Students
+Следващата логична стъпка
+Преди да добавяме нови функции, бих предложил да направим Details страница.
+Тя ще позволява:
+Students
+   ↓
+Details
+   ↓
+/Students/Details/1
+и ще показва информацията за конкретния студент, без да може да я променя.
+След това можем да подобрим интерфейса и да добавим например:
+o	търсене на студент;
+o	филтриране;
+o	сортиране;
+o	validation съобщения на български;
+o	по-добър Bootstrap дизайн;
+o	навигация;
+o	статистика за броя студенти.
+Но ще продължим една стъпка наведнъж, както досега.
+197.	Вие казахте:
+може ли преди да пристъпим към Details да направим една промяна само в таблицата да сложим пореден номер и да си оставим id-то и ако работим в таблицата при нужда ще го крием и ще го правим недостъпно за промяна
+198.	ChatGPT каза:
+Да, разбира се. 👍 И според мен това е по-добрият вариант.
+Нека запазим Id като вътрешен идентификатор на базата, а в таблицата на сайта да имаме отделна колона №, която е само за визуално подреждане.
+Например:
+№	First Name	Last Name	Email	Course	Age	Actions
+1	Иван	Петров	...	...	20	Edit / Delete
+2	Мария	Иванова	...	...	21	Edit / Delete
+При това:
+o	№ → визуален пореден номер за потребителя.
+o	Id → остава в базата и в модела Student.
+o	Id не го показваме в таблицата.
+o	Id не може да се променя от потребителя.
+o	При Edit и Delete продължаваме да използваме истинския Id вътрешно.
+o	Не променяме базата и не ни трябва нова Migration.
+Как ще направим поредния номер?
+В Index.cshtml можем да използваме брояч, например:
+@{
+    var number = 1;
+}
+и при всеки ред:
+<td>@number</td>
+след което увеличаваме:
+number++;
+Така № е само визуален номер и не е част от базата.
+Това е важно, защото ако изтрием студент №2, например:
+№ 1 → Иван
+№ 2 → Мария
+№ 3 → Петър
+след изтриването може да стане:
+№ 1 → Иван
+№ 2 → Петър
+докато истинските Id стойности в базата могат да бъдат:
+Id 1 → Иван
+Id 3 → Петър
+И това е напълно нормално. Не трябва да променяме Id, за да поддържаме визуална номерация.
+Ако си съгласен, ще променим само Index.cshtml, без да пипаме Controller, Model или SQL Server.
+199.	Вие казахте:
+ок
+200.	ChatGPT каза:
+201.	Вие казахте:
+съгласен съм
+202.	ChatGPT каза:
+203.	Вие казахте:
+ето кода в Index.cshtml @model IEnumerable<StudentManagement.Models.Student> <h1>Students</h1> <a asp-action="Create" class="btn btn-primary">Add Student</a> <table class="table"> <thead> <tr> <th>First Name</th> <th>Last Name</th> <th>Email</th> <th>Course</th> <th>Age</th> <th>Actions</th> </tr> </thead> <tbody> @foreach (var student in Model) { <tr> <td>@student.FirstName</td> <td>@student.LastName</td> <td>@student.Email</td> <td>@student.Course</td> <td>@student.Age</td> <td> <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning">Edit</a> <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-danger">Delete</a> </td> </tr> } </tbody> </table>
+204.	ChatGPT каза:
+205.	Вие казахте:
+ок
+206.	ChatGPT каза:
+Супер. 👍 Ще направим само промяната в Index.cshtml.
+Стъпка 5.32 — добавяме пореден №
+Отвори:
+Views → Students → Index.cshtml
+Първо ще ти покажа какво правим, без да променяме Student.cs или базата.
+1. Добавяме брояча
+В началото на файла, след @model, добави:
+@{
+    var number = 1;
+}
+2. Добавяме колоната №
+В <thead> най-отпред добави:
+<th>№</th>
+3. Добавяме номера към всеки ред
+Във foreach, преди името на студента, добави:
+<td>@number</td>
+4. Увеличаваме номера
+В края на всеки ред, след Actions колоната, добави:
+@{
+    number++;
+}
+В крайна сметка
+Твоята таблица трябва да изглежда приблизително така:
+@model IEnumerable<StudentManagement.Models.Student>
+
+@{
+    var number = 1;
+}
+
+<h1>Students</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add Student</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@number</td>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.Email</td>
+                <td>@student.Course</td>
+                <td>@student.Age</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+
+            number++;
+        }
+    </tbody>
+</table>
+Важно
+Тук:
+<td>@number</td>
+показваме поредния номер.
+А тук:
+asp-route-id="@student.Id"
+продължаваме да използваме истинското Id за Edit/Delete.
+Тоест двете са напълно отделни:
+№       → само за показване
+Id      → вътрешен идентификатор
+Не променяме Student.cs, ApplicationDbContext или SQL Server.
+След като го направиш:
+Ctrl + S → Ctrl + Shift + B
+Изпрати ми Build резултата и ще проверим таблицата.
+207.	Вие казахте:
+Build started at 10:50 AM... 1>------ Build started: Project: StudentManagement, Configuration: Debug Any CPU ------ 1>StudentManagement -> D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.dll ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ========== ========== Build completed at 10:50 AM and took 06.531 seconds ==========
+208.	ChatGPT каза:
+Перфектно! ✅ Build-ът е успешен.
+Сега стартирай приложението и отвори Students.
+Трябва да видиш:
+№	First Name	Last Name	Email	Course	Age	Actions
+1	...	...	...	...	...	Edit / Delete
+2	...	...	...	...	...	Edit / Delete
+Ако имаш само един студент, ще има:
+№ 1
+Проверка
+Изтрий или добави студенти и ще видиш, че № се изчислява отново при зареждането на страницата.
+Например ако базата има:
+Id 1 → Иван
+Id 3 → Петър
+Id 7 → Мария
+на сайта ще виждаш:
+№ 1 → Иван
+№ 2 → Петър
+№ 3 → Мария
+Точно това искаме. 👍
+И най-важното — не сме променили Id в базата.
+Когато потвърдиш, че таблицата изглежда правилно, продължаваме към Details.
+209.	Вие казахте:
+ок. Може ли да питам нещо преди да продължим
+210.	ChatGPT каза:
+Разбира се. 👍 Питай спокойно, преди да продължим към Details.
+211.	Вие казахте:
+може ли да обясниш в детайли кода
+212.	ChatGPT каза:
+Разбира се. 👍 И даже е много подходящ момент да го направим, защото вече имаме работещ проект и можем да разгледаме как всяка част си взаимодейства.
+Ще обясня кода като за начинаещ, без да приемам, че вече знаеш ASP.NET Core или Entity Framework.
+Ще започнем от най-важното: какво се случва, когато отвориш /Students.
+________________________________________
+1. Как работи целият поток
+Когато напишеш:
+https://localhost:7295/Students
+се случва приблизително това:
+Браузър
+   ↓
+StudentsController
+   ↓
+ApplicationDbContext
+   ↓
+SQL Server
+   ↓
+Student обекти
+   ↓
+Index.cshtml
+   ↓
+HTML
+   ↓
+Браузър
+Нека разгледаме всяка част.
+________________________________________
+2. Student.cs — какво е Student?
+Нашият модел е:
+using System.ComponentModel.DataAnnotations;
+
+namespace StudentManagement.Models
+{
+    public class Student
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string FirstName { get; set; } = string.Empty;
+
+        [Required]
+        public string LastName { get; set; } = string.Empty;
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+
+        public string Course { get; set; } = string.Empty;
+
+        public int Age { get; set; }
+    }
+}
+Какво е class?
+public class Student
+Това е описание на един студент.
+Можеш да си го представиш като шаблон:
+Student
+├── Id
+├── FirstName
+├── LastName
+├── Email
+├── Course
+└── Age
+От този шаблон можем да създаваме обекти.
+Например:
+Student
+Id: 1
+FirstName: Иван
+LastName: Петров
+Email: ivan@example.com
+Course: Software Engineering
+Age: 20
+________________________________________
+3. Id
+public int Id { get; set; }
+Това е уникалният идентификатор на студента.
+Entity Framework Core разпознава Id като primary key.
+Например:
+Id  FirstName
+1   Иван
+2   Мария
+3   Петър
+Тези стойности се съхраняват в SQL Server.
+И тук идва нашето предишно решение:
+№ → визуален пореден номер
+Id → реален идентификатор
+Например:
+№ 1 → Id 17 → Иван
+№ 2 → Id 25 → Мария
+№ 3 → Id 31 → Петър
+Затова № и Id не са едно и също нещо.
+________________________________________
+4. [Required]
+Например:
+[Required]
+public string FirstName { get; set; } = string.Empty;
+[Required] казва:
+FirstName е задължително поле.
+Ако потребителят изпрати празно име, ModelState ще бъде невалиден.
+Точно това проверяваме в Controller-а:
+if (!ModelState.IsValid)
+{
+    return View(student);
+}
+________________________________________
+5. [EmailAddress]
+[EmailAddress]
+public string Email { get; set; } = string.Empty;
+Това казва:
+Email трябва да има валиден формат за имейл адрес.
+Например:
+ivan@example.com
+е валиден формат.
+________________________________________
+6. ApplicationDbContext
+Нашият клас е:
+public class ApplicationDbContext : DbContext
+Той е връзката между C# приложението и SQL Server.
+Имаме:
+public DbSet<Student> Students { get; set; }
+Това е особено важно.
+DbSet<Student> представлява колекцията от студенти, с която Entity Framework работи.
+Можеш да си го представиш така:
+C#
+ApplicationDbContext
+       ↓
+DbSet<Student>
+       ↓
+SQL Server
+       ↓
+dbo.Students
+________________________________________
+7. StudentsController
+Това е контролерът, който управлява студентите.
+Имаме:
+public class StudentsController : Controller
+Името StudentsController е важно.
+ASP.NET Core MVC автоматично го свързва с:
+/Students
+________________________________________
+8. _context
+В Controller-а имаме:
+private readonly ApplicationDbContext _context;
+Това е променлива, чрез която Controller-ът използва базата.
+В конструктора:
+public StudentsController(ApplicationDbContext context)
+{
+    _context = context;
+}
+ASP.NET Core автоматично ни предоставя ApplicationDbContext.
+Това се нарича Dependency Injection.
+Не е необходимо сега да запомняш термина. Важно е да разбереш идеята:
+StudentsController
+       ↓
+получава ApplicationDbContext
+       ↓
+може да работи с базата
+________________________________________
+9. Index()
+Имаме:
+public async Task<IActionResult> Index()
+{
+    var students = await _context.Students.ToListAsync();
+
+    return View(students);
+}
+Това е кодът, който зарежда списъка.
+_context.Students
+_context.Students
+казва:
+Работи с колекцията Students.
+ToListAsync()
+await _context.Students.ToListAsync();
+казва:
+Вземи студентите от базата и ги превърни в списък.
+Получаваме:
+List<Student>
+________________________________________
+10. Какво означава async и await?
+Имаме:
+public async Task<IActionResult> Index()
+и:
+await _context.Students.ToListAsync();
+Това позволява операцията към базата да бъде асинхронна.
+С други думи, приложението не трябва да блокира нишката, докато SQL Server изпълнява заявката.
+За нашия проект просто запомни:
+ToListAsync()
+    ↓
+операция към базата
+    ↓
+await
+    ↓
+изчакваме резултата
+________________________________________
+11. return View(students)
+Това:
+return View(students);
+казва:
+Използвай View-то и му подай списъка със студенти.
+ASP.NET MVC намира:
+Views
+└── Students
+    └── Index.cshtml
+Тоест:
+Index()
+   ↓
+Views/Students/Index.cshtml
+________________________________________
+12. Index.cshtml
+В началото имаме:
+@model IEnumerable<StudentManagement.Models.Student>
+Това казва:
+Тази Razor страница получава колекция от Student.
+Тоест:
+Index.cshtml
+       ↑
+List<Student>
+________________________________________
+13. Нашият number
+Имаме:
+@{
+    var number = 1;
+}
+Това е Razor блок.
+В него можем да пишем C#.
+Тук създаваме променлива:
+number = 1
+________________________________________
+14. foreach
+След това:
+@foreach (var student in Model)
+Това означава:
+За всеки студент в списъка Model изпълни следващия код.
+Ако имаме:
+Иван
+Мария
+Петър
+цикълът ще се изпълни три пъти.
+Първият път:
+student = Иван
+вторият:
+student = Мария
+третият:
+student = Петър
+________________________________________
+15. Поредният номер
+Имаме:
+<td>@number</td>
+Първия път:
+number = 1
+затова показва:
+1
+След това:
+number++;
+означава:
+number = number + 1
+Следващият студент получава:
+2
+и така нататък.
+________________________________________
+16. Защо @student.FirstName?
+Имаме:
+<td>@student.FirstName</td>
+student е текущият обект.
+А:
+student.FirstName
+означава:
+Вземи FirstName от този Student.
+Например:
+student
+├── Id = 1
+├── FirstName = Иван
+├── LastName = Петров
+├── Email = ...
+├── Course = ...
+└── Age = 20
+Тогава:
+@student.FirstName
+показва:
+Иван
+________________________________________
+17. Edit бутонът
+Имаме:
+<a asp-action="Edit"
+   asp-route-id="@student.Id"
+   class="btn btn-warning">
+    Edit
+</a>
+Това е много важна част.
+asp-action
+asp-action="Edit"
+казва:
+Използвай action-а Edit.
+asp-route-id
+asp-route-id="@student.Id"
+казва:
+Изпрати Id на конкретния студент.
+Ако:
+student.Id = 17
+URL-ът ще бъде:
+/Students/Edit/17
+Затова можем да намерим точно този студент.
+________________________________________
+18. GET Edit
+В Controller-а имаме:
+public async Task<IActionResult> Edit(int? id)
+Тук:
+int? id
+означава, че id може да има стойност или да бъде null.
+След това:
+var student = await _context.Students.FindAsync(id);
+търсим студента по Id.
+Например:
+FindAsync(17)
+търси:
+Id = 17
+________________________________________
+19. Edit.cshtml
+След като намерим студента:
+return View(student);
+изпращаме го към:
+Edit.cshtml
+Там имаме:
+@model StudentManagement.Models.Student
+Следователно Model е един Student, а не списък.
+Затова можем да правим:
+@Model.FirstName
+________________________________________
+20. Hidden Id
+В Edit формата имаме:
+<input type="hidden" asp-for="Id" />
+Това е много важно.
+Id не се показва като нормално поле, но се изпраща заедно с формата.
+Например:
+Id = 17
+FirstName = Иван
+LastName = Петров
+...
+Така POST методът знае кой студент редактираме.
+________________________________________
+21. POST Edit
+След натискане на Save се изпълнява:
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(int id, Student student)
+Тук вече имаме:
+id
++
+student
+ASP.NET MVC автоматично взема данните от формата и ги поставя в Student.
+________________________________________
+22. ModelState.IsValid
+Имаме:
+if (!ModelState.IsValid)
+{
+    return View(student);
+}
+Това проверява дали данните отговарят на правилата в Student.
+Например:
+FirstName → задължително
+LastName  → задължително
+Email     → email формат
+Ако не са валидни:
+ModelState.IsValid = false
+и формата се показва отново.
+________________________________________
+23. Update
+След това:
+_context.Update(student);
+казва:
+Този Student трябва да бъде актуализиран.
+И:
+await _context.SaveChangesAsync();
+изпраща промяната към SQL Server.
+________________________________________
+24. Create
+Create работи по сходен начин.
+GET:
+public IActionResult Create()
+{
+    return View();
+}
+показва празната форма.
+POST:
+public async Task<IActionResult> Create(Student student)
+получава въведените данни.
+След това:
+_context.Students.Add(student);
+казва:
+Добави този Student.
+И:
+await _context.SaveChangesAsync();
+записва го в базата.
+________________________________________
+25. Delete
+При Delete имаме две стъпки.
+Първо:
+public async Task<IActionResult> Delete(int? id)
+намира студента и показва страницата за потвърждение.
+След натискане на Delete:
+public async Task<IActionResult> DeleteConfirmed(int id)
+намира студента:
+var student = await _context.Students.FindAsync(id);
+и го премахва:
+_context.Students.Remove(student);
+След това:
+await _context.SaveChangesAsync();
+реално го изтрива от SQL Server.
+________________________________________
+26. Най-важната картина
+Ако запомниш само една схема от всичко това, нека бъде тази:
+             БРАУЗЪР
+                │
+                ▼
+       StudentsController
+                │
+       ┌────────┼────────┐
+       │        │        │
+       ▼        ▼        ▼
+    Create     Edit    Delete
+       │        │        │
+       └────────┼────────┘
+                ▼
+      ApplicationDbContext
+                │
+                ▼
+       Entity Framework Core
+                │
+                ▼
+           SQL Server
+                │
+                ▼
+        dbo.Students
+А при показване:
+SQL Server
+    ↓
+ApplicationDbContext
+    ↓
+List<Student>
+    ↓
+StudentsController
+    ↓
+Index.cshtml
+    ↓
+HTML таблица
+    ↓
+Браузър
+И още нещо много важно
+В момента вече имаш ясно разделение на отговорностите:
+Models
+   → Какви данни има Student
+
+Data
+   → Как приложението говори с базата
+
+Controllers
+   → Какво да се случи при дадена заявка
+
+Views
+   → Какво вижда потребителят
+Това е основната идея на ASP.NET Core MVC.
+И според мен е добре да задържим темпото точно така — не просто да копираме код, а да разбираме какво прави всяка част. Следващия път, когато добавяме Details, мога да обяснявам всеки нов ред по същия начин.
+
