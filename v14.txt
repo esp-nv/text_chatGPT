@@ -1,0 +1,1450 @@
+1.	 Погледнах конкретно repository-то ти: това е Student System, базиран на Entity Framework и entity relationships, с Data папка, .csproj и StartUp.cs. G GitHub
+Само че бих направил нещо важно: няма да го оставим като учебното задание. Ще го превърнем в самостоятелен проект, който можеш да сложиш като portfolio project.
+Какво предлагам
+Да започнем от този проект:
+Student System в GitHub
+И постепенно да го превърнем примерно в:
+🎓 Student Management System
+Backend:
+o	C#
+o	.NET
+o	ASP.NET Core Web API
+o	Entity Framework Core
+o	SQL Server
+o	LINQ
+o	REST API
+Architecture:
+StudentManagement
+│
+├── API
+│   ├── Controllers
+│   └── Program.cs
+│
+├── Application
+│   ├── DTOs
+│   ├── Services
+│   └── Interfaces
+│
+├── Infrastructure
+│   ├── Data
+│   └── Configurations
+│
+├── Domain
+│   └── Entities
+│
+└── Tests
+Но няма да правим всичко наведнъж.
+Ще го изградим на етапи
+Етап 1 — Разбираме сегашния проект
+Ще разгледаме:
+o	Student
+o	Course
+o	Resource
+o	Homework
+o	StudentCourse
+o	DbContext
+o	relationships
+o	migrations
+o	seed data
+Етап 2 — Refactoring
+Ще изчистим учебния код и ще го организираме като реален проект.
+Етап 3 — ASP.NET Core Web API
+Например:
+GET    /api/students
+GET    /api/students/5
+POST   /api/students
+PUT    /api/students/5
+DELETE /api/students/5
+После:
+GET /api/courses
+POST /api/courses
+GET /api/students/5/courses
+Етап 4 — DTO + Services + Dependency Injection
+Тук вече започваме да прилагаме неща, които са много важни за Junior .NET позиция.
+Етап 5 — Validation + Error Handling
+Например:
+o	невалиден email
+o	липсващ студент
+o	duplicate enrollment
+o	course не съществува
+Етап 6 — Authentication/Authorization
+Например Admin/Teacher/Student роли.
+Етап 7 — Tests
+Ще добавим unit tests и евентуално integration tests.
+Етап 8 — README + GitHub
+Накрая ще го направим така, че когато recruiter отвори проекта, да вижда реално приложение, а не просто SoftUni exercise.
+________________________________________
+Искам да го направим заедно, а не просто аз да ти напиша проекта
+Например аз казвам:
+„Сега трябва да направим StudentService. Какво според теб трябва да съдържа?“
+Ти опитваш.
+Ако не стане — разглеждаме грешката заедно.
+Така накрая ще можеш сам да обясниш проекта на интервю, което е много по-ценно от това просто да имаш готов GitHub repository.
+Предлагам да започнем от Етап 1. Ще разгледаме сегашния Student System файл по файл и ще решим какво запазваме, какво променяме и какво добавяме.
+G Източници
+2.	Вие казахте:
+да го изградим заедно и да обяняваш стъпка по стъпка като за начинаещ да го изградим от нулата ще е най добре аз да го разбера с коментари за всяко нещо тъкмо и да разбера основите на asp.net core кое е най добре
+3.	ChatGPT каза:
+Да — точно така бих го направил. И според мен за твоето ниво е по-добре да го изградим от нулата, вместо просто да надграждаме готовия Student System.
+Така ще използваме познатата ти тема, но ще научиш как реално се прави ASP.NET Core приложение.
+🎯 Крайният проект
+Ще направим:
+Student Management System — ASP.NET Core Web API
+Ще започнем от празен проект и постепенно ще стигнем до:
+Client
+   ↓
+ASP.NET Core Web API
+   ↓
+Controllers
+   ↓
+Services
+   ↓
+Entity Framework Core
+   ↓
+SQL Server
+По пътя ще разбереш какво е всяко ниво и защо съществува.
+Какво ще научиш
+Ще минем през:
+o	C# и OOP в реален проект
+o	ASP.NET Core fundamentals
+o	Program.cs
+o	Dependency Injection
+o	Controllers
+o	Routing
+o	HTTP / REST
+o	GET / POST / PUT / DELETE
+o	Models / Entities
+o	DTO
+o	Entity Framework Core
+o	DbContext
+o	Relationships
+o	Migrations
+o	SQL Server
+o	LINQ
+o	Services
+o	Interfaces
+o	Repository pattern — когато има смисъл
+o	Validation
+o	Exception handling
+o	HTTP status codes
+o	Authentication
+o	Authorization
+o	Unit tests
+o	Integration tests
+o	Swagger
+o	Git
+o	README
+o	по-късно Docker
+И ще го правим на начинаещ език, не с „ето кода, копирай го“.
+________________________________________
+🧱 Етап 0 — започваме от абсолютната основа
+Преди да напишем дори един Controller, искам да разбереш какво всъщност правим.
+ASP.NET Core Web API е приложение, което чака HTTP заявки.
+Например клиентът изпраща:
+GET /api/students
+Нашето приложение получава заявката:
+Browser / Postman / Frontend
+             │
+             ▼
+       ASP.NET Core
+             │
+             ▼
+        Controller
+             │
+             ▼
+         Service
+             │
+             ▼
+      Entity Framework
+             │
+             ▼
+        SQL Server
+SQL Server връща данните обратно нагоре:
+SQL Server
+    ↓
+EF Core
+    ↓
+Service
+    ↓
+Controller
+    ↓
+HTTP Response
+    ↓
+Client
+Например:
+[
+  {
+    "id": 1,
+    "firstName": "Ivan",
+    "lastName": "Ivanov"
+  },
+  {
+    "id": 2,
+    "firstName": "Petar",
+    "lastName": "Petrov"
+  }
+]
+Това е сърцето на Web API.
+________________________________________
+🛠️ Етап 1 — създаваме проекта
+Ще използваме актуалния .NET SDK, който имаш инсталиран.
+Можеш да работиш с:
+o	Visual Studio
+o	VS Code
+o	Rider
+Ако си с Visual Studio, избери:
+Create a new project
+        ↓
+ASP.NET Core Web API
+След това:
+Project name:
+StudentManagement.Api
+И избери:
+Framework:
+.NET 10
+ако това е наличната стабилна версия при теб.
+За authentication засега:
+Authentication type:
+None
+И:
+Configure for HTTPS:
+✓
+За OpenAPI/Swagger:
+Enable OpenAPI support:
+✓
+После Create.
+________________________________________
+📁 Какво ще видиш
+В началото вероятно ще имаш нещо подобно:
+StudentManagement.Api
+│
+├── Properties
+│
+├── appsettings.json
+├── appsettings.Development.json
+│
+├── Program.cs
+│
+└── StudentManagement.Api.csproj
+Може да има и примерен Controller.
+Не бързай да го триеш.
+Първо искам да разбереш какво гледаш.
+________________________________________
+🧠 Първото нещо: .csproj
+Ще изглежда приблизително така:
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>
+Това не е обикновен C# файл.
+Това е project configuration файл.
+Той казва на .NET:
+„Това е Web проект и използва .NET 10.“
+Например:
+<TargetFramework>net10.0</TargetFramework>
+означава:
+Проектът се компилира за .NET 10.
+По-късно тук ще се появят и NuGet package references, например за Entity Framework Core.
+________________________________________
+⭐ Най-важният файл в началото — Program.cs
+Това е файлът, който искам да разбереш много добре.
+При съвременен ASP.NET Core може да изглежда примерно така:
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+builder.Services.AddOpenApi();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+app.UseHttpsRedirection();
+
+app.MapControllers();
+
+app.Run();
+На пръв поглед изглежда малко.
+Но тук има много важни концепции.
+________________________________________
+🔍 Нека го разбием
+1. WebApplication.CreateBuilder
+var builder = WebApplication.CreateBuilder(args);
+Това създава builder за нашето ASP.NET Core приложение.
+Можеш да го мислиш като:
+„Подготви ми Web Application и ми дай място, където да конфигурирам как ще работи.“
+Тук ще конфигурираме:
+o	services
+o	configuration
+o	logging
+o	dependency injection
+o	middleware
+o	environment
+________________________________________
+2. builder.Services
+builder.Services.AddControllers();
+Това е много важно.
+Services е мястото, където регистрираме зависимостите, които приложението ще използва.
+Тук започва да се появява една от най-важните концепции в ASP.NET Core:
+Dependency Injection
+Не се притеснявай, ако терминът още не ти е ясен.
+Ще го научим с практически пример.
+По-късно например ще направим:
+builder.Services.AddScoped<IStudentService, StudentService>();
+Това казва на ASP.NET Core:
+„Когато някой поиска IStudentService, дай му StudentService.“
+Това ще стане много по-ясно, когато стигнем до Services.
+________________________________________
+3. builder.Build()
+var app = builder.Build();
+До този момент казваме:
+„Ето как искам да бъде конфигурирано приложението.“
+С Build() казваме:
+„Добре, създай приложението според тази конфигурация.“
+Получаваме:
+WebApplication app
+________________________________________
+4. Middleware
+След това:
+app.UseHttpsRedirection();
+Това е middleware.
+Middleware можеш засега да го мислиш като стъпка през която минава HTTP заявката.
+По-късно ще имаме нещо подобно:
+Request
+   ↓
+HTTPS middleware
+   ↓
+Authentication middleware
+   ↓
+Authorization middleware
+   ↓
+Controller
+   ↓
+Response
+Middleware е огромна част от ASP.NET Core.
+Ще го изучим отделно.
+________________________________________
+5. MapControllers()
+app.MapControllers();
+Това казва:
+„ASP.NET Core, използвай Controller-ите в приложението и техните routes.“
+Например ако имаме:
+[ApiController]
+[Route("api/[controller]")]
+public class StudentsController : ControllerBase
+{
+}
+ASP.NET Core ще знае, че този Controller обработва определени HTTP заявки.
+________________________________________
+6. app.Run()
+app.Run();
+Това стартира приложението.
+След него нашият API започва да слуша за HTTP заявки.
+________________________________________
+🧩 Една важна картина
+Искам да запомниш засега следното:
+Program.cs
+    │
+    ├── Създаваме application builder
+    │
+    ├── Регистрираме services
+    │
+    ├── Build()
+    │
+    ├── Конфигурираме middleware
+    │
+    ├── Казваме кои endpoints/controllers да използваме
+    │
+    └── Run()
+             ↓
+       ASP.NET Core API
+Това е скелетът на приложението.
+________________________________________
+🚀 Следващата ни стъпка
+Не искам още да правим Entity Framework, SQL Server и 20 папки.
+Първо ще направим най-малкия възможен Web API.
+Ще създадем:
+StudentManagement.Api
+│
+├── Controllers
+│   └── StudentsController.cs
+│
+└── Program.cs
+И ще направим първия endpoint:
+GET /api/students
+който първоначално ще връща просто:
+[
+    "Ivan",
+    "Maria",
+    "Petar"
+]
+После ще го променим на истински Student обекти.
+След това ще добавим Service → EF Core → SQL Server.
+Това според мен е най-добрият подход за теб: първо да разбереш HTTP → Controller → Response, после постепенно да добавяме останалите слоеве.
+Ако си готов, в следващата стъпка ще започнем буквално от създаването на StudentsController.cs, ще напишем първия код ред по ред и ще обясня всеки [ApiController], ControllerBase, [Route], [HttpGet] и IActionResult.
+4.	Вие казахте:
+vs 2022
+5.	ChatGPT каза:
+Да 👍 Visual Studio 2022 е напълно подходяща. Даже за този проект бих ти препоръчал да използваме именно нея.
+Ще работим стъпка по стъпка във VS 2022, без да прескачаме основите.
+Първата ни задача
+Отвори Visual Studio 2022 и:
+1.	Избери Create a new project
+2.	В търсачката напиши:
+ASP.NET Core Web API
+3.	Избери шаблона ASP.NET Core Web API
+4.	Натисни Next
+5.	Име на проекта:
+StudentManagement.Api
+6.	Можеш да сложиш примерно:
+StudentManagement
+като Solution name.
+7.	На следващия екран избери наличната при теб стабилна .NET версия.
+8.	Authentication type:
+None
+9.	Configure for HTTPS → включено
+10.	Enable OpenAPI support → включено
+11.	Use controllers → включено, ако тази опция я виждаш.
+12.	Натисни Create.
+Важно
+Засега не добавяй Entity Framework, SQL Server или други NuGet пакети.
+Искам първо да направим:
+ASP.NET Core
+   ↓
+Controller
+   ↓
+HTTP GET
+   ↓
+Response
+и да разбереш как работи това.
+След това ще започнем да добавяме базата.
+________________________________________
+Когато създадеш проекта, не променяй нищо. Прати ми какво виждаш в Solution Explorer (може и screenshot), например:
+StudentManagement
+└── StudentManagement.Api
+    ├── Controllers
+    ├── Properties
+    ├── appsettings.json
+    ├── Program.cs
+    └── StudentManagement.Api.csproj
+И оттам започваме първия урок: какво представлява ASP.NET Core проектът и какво прави Program.cs — ред по ред.
+6.	Вие казахте:
+може ли едно по едно като кажа че съм готова тогава ми даи следващата стъпка
+7.	ChatGPT каза:
+Разбира се. ❤️ Ще го правим само по една стъпка.
+Няма да ти давам предварително целия проект. Когато приключиш със стъпката, ми пишеш „готово“, и тогава ти давам следващата.
+Ще обяснявам като за начинаещ, включително:
+o	какво правим;
+o	защо го правим;
+o	какво означава всеки важен ред;
+o	какво трябва да видиш;
+o	и ако получиш грешка — ще я оправим заедно.
+Стъпка 1
+Отвори Visual Studio 2022.
+На началния екран избери:
+Create a new project
+Само това засега.
+Когато го направиш, напиши „готово“.
+8.	Вие казахте:
+готово
+9.	ChatGPT каза:
+Супер. 👍
+Стъпка 2
+В прозореца Create a new project има поле за търсене.
+В него напиши:
+ASP.NET Core Web API
+От списъка намери шаблона:
+ASP.NET Core Web API
+и го избери.
+⚠️ Важно: засега само го избери, не натискай Next още.
+Когато си го намерила и избрала, напиши „готово“.
+10.	Вие казахте:
+може ли да е с mvc
+11.	ChatGPT каза:
+Да, може. И всъщност MVC е много добър вариант, ако искаш да разбереш по-дълбоко основите на ASP.NET Core.
+Само трябва да уточним едно важно нещо:
+o	ASP.NET Core MVC → използва Controllers + Views, обикновено за уеб приложение с HTML страници.
+o	ASP.NET Core Web API → използва Controllers, но връща данни (най-често JSON), които после може да използва frontend приложение.
+За да научиш ASP.NET Core от нулата, можем да започнем с MVC, а по-късно да добавим Web API. Това ще ти даде много добра основа.
+Стъпка 2 — MVC
+В Create a new project потърси:
+ASP.NET Core Web App (Model-View-Controller)
+Избери точно този шаблон.
+Не натискай Next още.
+Когато го намериш и избереш, напиши „готово“.
+12.	Вие казахте:
+mvc не става ли и за web и за различните платформи не само windows
+13.	ChatGPT каза:
+Да, точно така. 👍
+ASP.NET Core MVC не е само за Windows. Това е едно от важните предимства на ASP.NET Core.
+Какво означава това?
+С ASP.NET Core MVC можеш да разработваш уеб приложения, които се изпълняват на:
+o	Windows
+o	Linux
+o	macOS
+Например:
+                    ASP.NET Core MVC
+                           │
+             ┌─────────────┼─────────────┐
+             ↓             ↓             ↓
+          Windows         Linux         macOS
+             │             │             │
+             └─────────────┼─────────────┘
+                           ↓
+                        Web App
+Потребителят може да отвори приложението през браузър независимо дали използва Windows, Linux, macOS, Android и т.н.
+Това е и причината да не трябва да мислим за ASP.NET Core MVC = Windows приложение.
+А какво е MVC?
+MVC означава:
+M — Model
+Данните и бизнес моделът.
+V — View
+Това, което потребителят вижда в браузъра — HTML страниците.
+C — Controller
+Посредникът, който получава заявката и решава какво трябва да се случи.
+Browser
+   │
+   │ HTTP Request
+   ↓
+Controller
+   │
+   ├── Model / Database
+   │
+   ↓
+View
+   │
+   ↓
+HTML Response
+   │
+   ↓
+Browser
+И точно тази архитектура е много полезна за разбирането на ASP.NET Core.
+За нашия учебен проект аз бих предложил да започнем с ASP.NET Core MVC, както искаш, и да изградим Student Management System от нулата.
+Така че избери:
+ASP.NET Core Web App (Model-View-Controller)
+Само го избери. Не натискай Next още.
+Като си готова, напиши „готово“.
+14.	Вие казахте:
+готово
+15.	ChatGPT каза:
+Супер! 👍
+Стъпка 3 — име на проекта
+Сега след избора на ASP.NET Core Web App (Model-View-Controller) натисни Next.
+Ще се появи екран Configure your new project.
+В полето Project name напиши:
+StudentManagement
+За Solution name също можеш да оставиш:
+StudentManagement
+Засега не променяй нищо друго.
+Когато си въвела името и си готова, напиши „готово“.
+16.	Вие казахте:
+готово
+17.	ChatGPT каза:
+Чудесно. 👍
+Стъпка 4 — Framework
+Сега натисни Next и ще стигнеш до екрана Additional information.
+Там ще видиш поле Framework.
+Избери най-новата стабилна версия на .NET, която Visual Studio 2022 ти предлага.
+Например, ако виждаш:
+.NET 10.0
+избери него.
+Ако .NET 10.0 не се показва, не инсталирай нищо допълнително засега — просто ми кажи какви версии виждаш.
+Останалите настройки не ги пипай още.
+Когато видиш Framework и го избереш, напиши „готово“.
+18.	Вие казахте:
+8.0 и 9.0 макар че предпочитам да е на е на 8.0
+19.	ChatGPT каза:
+Да — избираме .NET 8.0. 👍
+И това е напълно разумен избор за този проект. Ще го използваме, за да учиш стабилно основите на ASP.NET Core MVC, без да се разсейваме с разлики между версиите.
+Стъпка 4
+На Framework избери:
+.NET 8.0 (Long Term Support)
+Ако има отметка Do not use top-level statements, не я включвай — остави настройката по подразбиране.
+Останалите настройки засега остави както са.
+Само избери .NET 8.0.
+Когато го направиш, напиши „готово“.
+20.	Вие казахте:
+включена е при мен - тя кво означава
+21.	ChatGPT каза:
+Да, добре че попита. 👍 Това е важно да го разбереш, вместо просто да го оставяме по подразбиране.
+Какво означава „Do not use top-level statements“?
+Това определя как ще изглежда началният C# код на приложението.
+При стандартния модерен C# имаме т.нар. top-level statements. Например Program.cs може да изглежда така:
+var builder = WebApplication.CreateBuilder(args);
+
+var app = builder.Build();
+
+app.Run();
+Няма:
+class Program
+{
+    static void Main(string[] args)
+    {
+        // ...
+    }
+}
+C# автоматично разбира, че тези команди са началната точка на програмата.
+________________________________________
+Ако включиш:
+Do not use top-level statements
+Visual Studio ще създаде по-стария/класически стил:
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Тук започва приложението
+    }
+}
+Кое предпочитам за нашето обучение?
+Остави я включена. ✅
+Причината е, че искам първоначално да виждаш по-класическата структура:
+Program
+  ↓
+Main()
+  ↓
+стартиране на приложението
+Това ще ти помогне да разбереш как реално започва изпълнението на една C# програма.
+По-късно ще видим и modern/top-level варианта и ще разбереш защо ASP.NET Core използва него.
+Така че засега:
+o	Framework → .NET 8.0
+o	Do not use top-level statements → включено ☑️
+Останалите настройки не ги променяй.
+Когато си готова с тези две неща, напиши „готово“.
+22.	Вие казахте:
+нещата в този прозорец по подробно
+23.	ChatGPT каза:
+Разбира се. Нека спрем тук, преди да продължим, и да разгледаме подробно какво има в този прозорец. Това е по-добрият начин за обучение.
+Ти си на Additional information при създаването на ASP.NET Core MVC проекта във Visual Studio 2022.
+Ще минаваме едно по едно, както поиска.
+Стъпка 4.1 — Framework
+Това е първото нещо:
+Framework → .NET 8.0
+Какво е Framework?
+.NET е платформата, върху която ще работи нашето приложение.
+Можеш да го мислиш така:
+Нашето приложение
+       ↓
+ASP.NET Core MVC
+       ↓
+.NET 8
+       ↓
+Операционна система
+Ние пишем C# кода си, а .NET предоставя средата и библиотеките, необходими приложението да работи.
+Защо .NET 8?
+.NET 8 е LTS (Long Term Support) версия.
+LTS означава, че Microsoft я поддържа за по-дълъг период.
+За учебен и portfolio проект това е много добър избор.
+Затова:
+Framework: .NET 8.0 ✅
+________________________________________
+Стъпка 4.2 — Authentication type
+Вероятно виждаш:
+Authentication type → None
+Това означава:
+Все още няма да имаме система за вход на потребители.
+Например няма да имаме:
+Username
+Password
+     ↓
+Login
+     ↓
+Student Management System
+По-късно можем да добавим ASP.NET Core Identity и да направим:
+Admin
+Teacher
+Student
+с различни права.
+Но не ни трябва в началото.
+Затова:
+Authentication type → None ✅
+________________________________________
+Стъпка 4.3 — Configure for HTTPS
+Вероятно имаш:
+Configure for HTTPS ☑
+Остави го включено.
+HTTPS означава, че комуникацията между браузъра и приложението е криптирана.
+Вместо:
+http://localhost:5000
+ще използваме нещо от типа:
+https://localhost:7xxx
+При локална разработка Visual Studio създава development certificate, за да можем да използваме HTTPS.
+За реални приложения HTTPS е изключително важно.
+Configure for HTTPS → включено ✅
+________________________________________
+Стъпка 4.4 — Enable container support
+В зависимост от версията на Visual Studio може да виждаш:
+Enable container support
+или подобна опция.
+Ако я виждаш — остави я изключена засега.
+По-късно ще говорим за Docker, но не искам още от първия ден да добавяме допълнителна сложност.
+Първо:
+C#
+ ↓
+ASP.NET Core
+ ↓
+MVC
+ ↓
+SQL Server
+После Docker.
+________________________________________
+Стъпка 4.5 — Do not use top-level statements
+Това е отметката, за която попита.
+При теб е:
+☑ Do not use top-level statements
+Както вече казахме, това означава, че Program.cs ще бъде създаден в по-класическия C# стил.
+Ще имаме нещо подобно:
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Тук започва приложението
+    }
+}
+В modern C# обикновено се използват top-level statements:
+var builder = WebApplication.CreateBuilder(args);
+
+var app = builder.Build();
+
+app.Run();
+Какво ще изберем ние?
+За нашето обучение:
+☑ Do not use top-level statements
+Така ще можем да видим ясно:
+Program
+   ↓
+Main()
+   ↓
+Application starts
+Това ще ни помогне да свържем ASP.NET Core с основите на C#, които вече учиш.
+________________________________________
+Накрая настройките ни трябва да са приблизително
+Framework
+    .NET 8.0
+
+Authentication type
+    None
+
+Configure for HTTPS
+    ☑
+
+Enable container support
+    ☐
+
+Do not use top-level statements
+    ☑
+Ако при теб има други полета, не натискай Create още.
+Напиши ми точно какви полета виждаш в твоя прозорец (или изпрати screenshot) и ще ги разгледаме едно по едно, преди да продължим.
+24.	Вие казахте:
+Do not use top-level statements ☑ да я включа ли
+25.	ChatGPT каза:
+Да — включи я. ✅
+Тоест:
+Do not use top-level statements → ☑ включено
+За нашето обучение това е добър избор, защото ще започнем с класическата структура на C#:
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // тук стартира програмата
+    }
+}
+Така по-лесно ще видиш връзката между C# програмата и ASP.NET Core приложението.
+👉 Засега само я включи. Не натискай Create още.
+Като я включиш, кажи „готово“.
+26.	Вие казахте:
+имам още една опция тя кво означава Enlist in .Net Aspire orchestration
+27.	ChatGPT каза:
+Да — ако го виждаш при създаване на .NET проект, опцията “Enlist in .NET Aspire orchestration” означава:
+Да включиш този проект като част от .NET Aspire приложение, което управлява и стартира няколко услуги заедно.
+Какво е .NET Aspire?
+.NET Aspire е набор от инструменти на Microsoft за разработване на приложения, съставени от няколко компонента, например:
+o	🖥️ ASP.NET Core Web API
+o	🌐 Frontend
+o	🗄️ SQL Server / PostgreSQL
+o	🔴 Redis
+o	📨 RabbitMQ
+o	други микросървиси
+Aspire ти позволява да ги стартираш и управляваш като едно приложение, вместо ръчно да пускаш всеки проект отделно.
+Да я включиш ли?
+Ако в момента правиш обикновен ASP.NET Core Web API / MVC приложение и учиш .NET → остави я изключена.
+Ако обаче правиш приложение с няколко услуги, Docker контейнери, Redis, база данни и т.н. и искаш Aspire да ги управлява → включи я.
+Примерно:
+MyApp
+├── MyApp.Api
+├── MyApp.Web
+├── MyApp.Worker
+├── MyApp.AppHost       ← Aspire orchestrator
+└── MyApp.ServiceDefaults
+Тогава Aspire AppHost може да казва приблизително:
+Стартирай API
+Стартирай Frontend
+Стартирай Redis
+Стартирай Database
+Свържи ги помежду им
+За нормален проект, който започваш сега, бих казал: не я избирай. Можеш да добавиш Aspire по-късно, ако ти потрябва.
+28.	Вие казахте:
+ok
+29.	ChatGPT каза:
+👍 Супер! Ако изскочи още някоя опция при създаването на проекта и не си сигурен какво означава, прати я насам — ще ти кажа какво прави и дали да я включиш.
+30.	Вие казахте:
+не съм я включила
+31.	ChatGPT каза:
+Да, правилно си направила 👍
+Ако проектът ти е обикновен .NET/ASP.NET Core проект, няма нужда от “Enlist in .NET Aspire orchestration”.
+Можеш спокойно да продължиш с останалите настройки. Ако ми пратиш снимка на следващия екран, мога да ти кажа какво да избереш на всяка опция.
+32.	Вие казахте:
+т.е. да натисна Create
+33.	ChatGPT каза:
+Да 😊 Натисни Create.
+Щом “Enlist in .NET Aspire orchestration” не е включено и останалите настройки са както ги искаш, можеш спокойно да създадеш проекта.
+34.	Вие казахте:
+готово
+35.	ChatGPT каза:
+Супер! 🎉 Проектът вече е създаден.
+Следващата стъпка е да го стартираме и да видим дали всичко работи. Натисни ▶️ Run (или F5) и виж какво се отваря.
+Ако искаш, прати ми какво виждаш след стартирането и ще продължим стъпка по стъпка.
+36.	Вие казахте:
+иска Trust Asp.net core ssl certificate
+37.	ChatGPT каза:
+Да, това е нормално при първо стартиране на ASP.NET Core проект. 😊
+Това съобщение означава, че Visual Studio иска разрешение да добави локалния HTTPS сертификат като доверен, за да може приложението ти да работи през https://localhost.
+👉 Натисни Yes / Trust.
+Това е сертификат само за твоето локално разработване, не е сертификат за реалния ти сайт.
+След това стартирай проекта отново с ▶ Run / F5.
+38.	Вие казахте:
+info: Microsoft.Hosting.Lifetime[14] Now listening on: https://localhost:7295 info: Microsoft.Hosting.Lifetime[14] Now listening on: http://localhost:5263 info: Microsoft.Hosting.Lifetime[0] Application started. Press Ctrl+C to shut down. info: Microsoft.Hosting.Lifetime[0] Hosting environment: Development info: Microsoft.Hosting.Lifetime[0] Content root path: D:\nv\SoftUni\CSharp\WebMVC\StudentManagement\StudentManagement излезе това
+39.	ChatGPT каза:
+Да! 🎉 Всичко е наред. Проектът ти се е стартирал успешно.
+Тези редове:
+Now listening on: https://localhost:7295
+Now listening on: http://localhost:5263
+Application started.
+означават, че твоето ASP.NET Core приложение вече работи.
+o	🔒 https://localhost:7295 → защитената HTTPS версия
+o	🌐 http://localhost:5263 → HTTP версията
+o	Hosting environment: Development → работиш в режим за разработка
+Какво да направиш сега
+Отвори браузър и въведи:
+https://localhost:7295
+Трябва да ти се покаже началната страница на приложението.
+Ако Visual Studio вече е отворило браузър автоматично — просто виж какво показва.
+Прати ми какво ти се появи в браузъра и продължаваме оттам. 🚀
+40.	Вие казахте:
+ето ти кода
+41.	ChatGPT каза:
+Да, прати го 😊
+Можеш да го копираш и поставиш тук, или ако е по-удобно — изпрати снимка/скрийншот на кода.
+Ще го разгледаме заедно и ще ти обясня какво прави всяка част, стъпка по стъпка.
+42.	Вие казахте:
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Home Page - StudentManagement</title> <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" /> <link rel="stylesheet" href="/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0" /> <link rel="stylesheet" href="/StudentManagement.styles.css?v=J8HIlgePW9NlpQzb3tFrnxtS-y0GhZ_fh9sumvG8ORY" /> </head> <body> <header b-y9obw7rtys> <nav b-y9obw7rtys class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"> <div b-y9obw7rtys class="container-fluid"> <a class="navbar-brand" href="/">StudentManagement</a> <button b-y9obw7rtys class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span b-y9obw7rtys class="navbar-toggler-icon"></span> </button> <div b-y9obw7rtys class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> <ul b-y9obw7rtys class="navbar-nav flex-grow-1"> <li b-y9obw7rtys class="nav-item"> <a class="nav-link text-dark" href="/">Home</a> </li> <li b-y9obw7rtys class="nav-item"> <a class="nav-link text-dark" href="/Home/Privacy">Privacy</a> </li> </ul> </div> </div> </nav> </header> <div b-y9obw7rtys class="container"> <main b-y9obw7rtys role="main" class="pb-3"> <div class="text-center"> <h1 class="display-4">Welcome</h1> <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> </div> </main> </div> <footer b-y9obw7rtys class="border-top footer text-muted"> <div b-y9obw7rtys class="container"> &copy; 2026 - StudentManagement - <a href="/Home/Privacy">Privacy</a> </div> </footer> <script src="/lib/jquery/dist/jquery.min.js"></script> <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <script src="/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo"></script> <!-- Visual Studio Browser Link --> <script type="text/javascript" src="/_vs/browserLink" async="async" id="__browserLink_initializationData" data-requestId="0642b3345cc04a96853296867acd2118" data-requestMappingFromServer="false" data-connectUrl="http://localhost:59002/61515fdc3276431e9a8a5a666713ce11/browserLink"></script> <!-- End Browser Link --> <script src="/_framework/aspnetcore-browser-refresh.js"></script></body> </html>
+43.	ChatGPT каза:
+Да, виждам го 👍 Това, което си ми изпратила, е HTML кодът, който браузърът получава от твоя ASP.NET Core MVC проект.
+И всъщност това ни показва нещо важно: проектът работи правилно. 🎉
+Какво виждаш в момента?
+Това:
+<h1 class="display-4">Welcome</h1>
+<p>Learn about <a href="https://learn.microsoft.com/aspnet/core">
+    building Web apps with ASP.NET Core
+</a>.</p>
+е стандартната начална страница, която Visual Studio създава автоматично.
+В браузъра тя изглежда приблизително така:
+Welcome
+Learn about building Web apps with ASP.NET Core.
+А горе имаш:
+o	StudentManagement → името на приложението
+o	Home → началната страница
+o	Privacy → стандартната Privacy страница
+Но има нещо много важно
+Този HTML не е мястото, където обикновено ще го променяш.
+При ASP.NET Core MVC имаш структура приблизително така:
+StudentManagement
+│
+├── Controllers
+│   └── HomeController.cs
+│
+├── Models
+│
+├── Views
+│   ├── Home
+│   │   ├── Index.cshtml
+│   │   └── Privacy.cshtml
+│   │
+│   └── Shared
+│       └── _Layout.cshtml
+│
+├── wwwroot
+│   ├── css
+│   ├── js
+│   └── lib
+│
+└── Program.cs
+Например Welcome, което виждаш, най-вероятно идва от:
+Views
+  → Home
+    → Index.cshtml
+А менюто:
+Home | Privacy
+идва от:
+Views
+  → Shared
+    → _Layout.cshtml
+Така че не редактирай HTML-а, който ми копира. Той е генерираният резултат.
+Ако целта ни е да направим твоя Student Management система, следващото, което бих направил, е да отворим Views/Home/Index.cshtml и да започнем оттам.
+Ако ми покажеш как изглежда Solution Explorer при теб, ще ти кажа точно на кой файл да кликнеш.
+44.	Вие казахте:
+може ли първо да направим друго да добавя проекта в GitHub
+45.	ChatGPT каза:
+Да, даже много добра идея 👍 Особено преди да започнем да променяме проекта — ще имаш backup и ще можем да следим промените.
+Можем да го направим стъпка по стъпка през Visual Studio, без да се занимаваме с командния ред.
+Планът
+1.	Ще създадем Git repository за проекта.
+2.	Ще направим първия commit.
+3.	Ще създадем repository в GitHub.
+4.	Ще свържем локалния проект с GitHub.
+5.	Ще направим Push и ще проверим, че проектът е качен.
+Първо: отвори проекта в Visual Studio и ми прати снимка на Solution Explorer-а и горната лента на Visual Studio.
+Ще ти кажа точно къде да натиснеш, без да прескачаме стъпки.
+46.	Вие казахте:
+мога ли да използвам github desktop да прехвърля там
+47.	ChatGPT каза:
+Да, можеш — и според мен GitHub Desktop е много удобен вариант, особено ако тепърва започваш с Git. 👍
+Идеята е:
+Visual Studio
+      ↓
+проектът ти на компютъра
+      ↓
+GitHub Desktop
+      ↓
+GitHub
+Как ще го направим
+1.	Не местиш физически папката на проекта. Тя си остава:
+D:\nv\SoftUni\CSharp\WebMVC\StudentManagement
+2.	Отваряш GitHub Desktop.
+3.	Избираш Add → Add existing repository.
+4.	Посочваш папката:
+D:\nv\SoftUni\CSharp\WebMVC\StudentManagement
+5.	GitHub Desktop ще разпознае проекта като repository или ще ни даде възможност да го създадем.
+6.	След това ще направим първия Commit.
+7.	Накрая Publish repository → и проектът ще се качи в GitHub.
+⚠️ Само едно важно нещо: преди да натиснем Publish, ще проверим какви файлове ще бъдат качени. При .NET проектите има някои файлове/папки, които не трябва да се качват (bin, obj, .vs и др.). Обикновено .gitignore ги изключва автоматично.
+Ако вече имаш инсталиран GitHub Desktop, отвори го и ми кажи какво виждаш на началния екран. Ще вървим заедно, стъпка по стъпка.
+48.	Вие казахте:
+аз имам отделна папка където ми стоят проектите на GitHub
+49.	ChatGPT каза:
+Да, това е напълно окей. 👍 Само има една важна разлика:
+Не е задължително проектът да бъде преместен в папката, където държиш GitHub проектите си.
+Ако искаш всички твои GitHub repositories да са например:
+D:\GitHub\
+    Project1\
+    Project2\
+    StudentManagement\
+можем да направим StudentManagement repository директно там.
+В момента обаче твоят проект е тук:
+D:\nv\SoftUni\CSharp\WebMVC\StudentManagement\
+Има два варианта
+Вариант 1 — препоръчвам го:
+Оставяме проекта там, където е, и чрез GitHub Desktop го свързваме с GitHub.
+Вариант 2:
+Преместваме целия проект в твоята GitHub папка и тогава го добавяме там.
+👉 Аз бих избрал вариант 1, за да не местим работещия Visual Studio проект и да не създаваме излишни проблеми с пътища.
+Кажи ми къде точно е твоята GitHub папка (например D:\GitHub) и ще ти кажа какво да натиснеш в GitHub Desktop.
+50.	Вие казахте:
+може ли вар 2
+51.	ChatGPT каза:
+Да, разбира се. 😊 Вариант 2 е напълно подходящ и ако искаш всички GitHub проекти да са ти на едно място, даже е доста удобно.
+Ще преместим целия проект, не отделни файлове.
+Стъпка 1 — затвори проекта
+В Visual Studio:
+File → Close Solution
+Можеш и просто да затвориш Visual Studio. Това е за да не местим файлове, докато проектът е отворен.
+Стъпка 2 — намери проекта
+В момента той е:
+D:\nv\SoftUni\CSharp\WebMVC\StudentManagement
+Трябва да преместим цялата папка StudentManagement в твоята GitHub папка.
+Например, ако GitHub папката ти е:
+D:\GitHub
+крайният резултат ще бъде:
+D:\GitHub\StudentManagement
+Стъпка 3 — премести папката
+В Windows Explorer:
+1.	Отиди на:
+D:\nv\SoftUni\CSharp\WebMVC\
+2.	Десен бутон върху StudentManagement
+3.	Cut
+4.	Отиди в твоята GitHub папка
+5.	Paste
+⚠️ Не изтривай старата папка ръчно — използвай Cut/Paste, за да се премести.
+След това ще отворим проекта от новото му място във Visual Studio и ще го добавим през GitHub Desktop.
+Преди да местиш: ако ми кажеш точния път до твоята GitHub папка, ще ти дам конкретния краен път, за да няма объркване.
+52.	Вие казахте:
+D:\nv\SoftUni\CSharp\WebMVC\StudentManagement то е тук и трябва да отиде на D:\GitHub
+53.	ChatGPT каза:
+Да, точно така 👍
+В момента проектът е:
+D:\nv\SoftUni\CSharp\WebMVC\StudentManagement
+и искаме да стане:
+D:\GitHub\StudentManagement
+Направи следното:
+1.	Затвори Visual Studio напълно.
+2.	Отвори File Explorer.
+3.	Отиди на:
+4.	D:\nv\SoftUni\CSharp\WebMVC
+5.	Намери папката StudentManagement.
+6.	Десен бутон → Cut.
+7.	Отиди в:
+8.	D:\GitHub
+9.	Десен бутон → Paste.
+След това провери дали имаш:
+D:\GitHub\StudentManagement
+и вътре трябва да виждаш неща като:
+StudentManagement.sln
+StudentManagement.csproj
+Controllers
+Models
+Views
+wwwroot
+Program.cs
+Не трий нищо от проекта. Само преместваме цялата папка.
+Като го преместиш, кажи ми „готово“ и ще продължим с GitHub Desktop. 🚀
+54.	Вие казахте:
+стъпка по стъпка
+55.	ChatGPT каза:
+Разбира се ❤️ Ще го правим буквално по една стъпка, без да бързаме.
+Стъпка 1
+Първо затвори Visual Studio.
+Натисни X горе вдясно на Visual Studio.
+👉 Когато го затвориш, не прави нищо друго. Кажи ми „готово“ и ще ти дам само следващата стъпка.
+56.	Вие казахте:
+готово
+57.	ChatGPT каза:
+Стъпка 2
+Отвори File Explorer (папката 📁 на Windows).
+След това в горната лента въведи:
+D:\nv\SoftUni\CSharp\WebMVC
+и натисни Enter.
+Трябва да видиш папка:
+StudentManagement
+👉 Когато я виждаш, не я отваряй. Кажи ми „виждам я“ и ще продължим.
+58.	Вие казахте:
+виждам я
+59.	ChatGPT каза:
+Стъпка 3
+Сега върху папката StudentManagement:
+1.	Натисни десен бутон.
+2.	Избери Cut / Изрежи.
+⚠️ Не избирай Delete.
+Когато си готова, кажи „готово“.
+60.	Вие казахте:
+готово
+61.	ChatGPT каза:
+Стъпка 4
+Сега отвори тази папка:
+D:\GitHub
+Когато я отвориш, не прави нищо друго.
+Кажи ми „отворих я“.
+62.	Вие казахте:
+готово
+63.	ChatGPT каза:
+Стъпка 5
+Докато си в:
+D:\GitHub
+на празно място натисни десен бутон.
+Избери:
+Paste / Поставяне
+Това ще премести папката StudentManagement тук:
+D:\GitHub\StudentManagement
+Изчакай да приключи преместването.
+Когато видиш папката StudentManagement в D:\GitHub, кажи „готово“.
+64.	Вие казахте:
+готово
+65.	ChatGPT каза:
+Стъпка 6
+Сега не отваряй още GitHub Desktop.
+Първо трябва да проверим, че проектът е преместен правилно.
+В D:\GitHub отвори папката:
+StudentManagement
+Вътре трябва да виждаш файлове и папки, сред които вероятно:
+StudentManagement.sln
+StudentManagement
+и/или:
+StudentManagement.csproj
+Controllers
+Models
+Views
+wwwroot
+Program.cs
+👉 Отвори StudentManagement папката и ми кажи какво виждаш вътре.
+66.	Вие казахте:
+StudentManagement.sln StudentManagement
+67.	ChatGPT каза:
+Перфектно 👍 Това е точно както трябва.
+Стъпка 7
+Сега отвори:
+D:\GitHub\StudentManagement
+и двукратно кликни върху:
+StudentManagement.sln
+Това ще отвори проекта от новото му място във Visual Studio.
+Изчакай Visual Studio да се зареди напълно.
+👉 Когато се отвори, кажи ми „отвори се“.
+68.	Вие казахте:
+плюс скрита папка .vs
+69.	ChatGPT каза:
+Да 👍 .vs е нормално — това е скрита папка, която Visual Studio използва за свои локални настройки и кеш.
+Важно: не я пипай и не я трий сега. По-късно Git ще я изключи от качването чрез .gitignore.
+Продължаваме само с една стъпка:
+Стъпка 7
+В D:\GitHub\StudentManagement двукратно кликни върху:
+StudentManagement.sln
+Когато Visual Studio се отвори напълно, кажи ми „отвори се“.
+70.	Вие казахте:
+готово
+71.	ChatGPT каза:
+Супер! 👍
+Стъпка 8
+Сега стартирай проекта, за да проверим, че преместването не е счупило нищо.
+Във Visual Studio натисни:
+▶️ Run или клавиша F5.
+Изчакай браузърът да се отвори и да покаже страницата с Welcome.
+👉 Ако се отвори успешно, кажи ми „работи“.
+72.	Вие казахте:
+работи
+73.	ChatGPT каза:
+Перфектно! 🎉 Значи преместването е минало успешно и проектът вече работи от:
+D:\GitHub\StudentManagement
+Стъпка 9
+Сега затвори само браузъра, който се отвори с проекта.
+Visual Studio остави отворено.
+Когато го затвориш, кажи ми „готово“.
+74.	Вие казахте:
+info: Microsoft.Hosting.Lifetime[14] Now listening on: https://localhost:7295 info: Microsoft.Hosting.Lifetime[14] Now listening on: http://localhost:5263 info: Microsoft.Hosting.Lifetime[0] Application started. Press Ctrl+C to shut down. info: Microsoft.Hosting.Lifetime[0] Hosting environment: Development info: Microsoft.Hosting.Lifetime[0] Content root path: D:\GitHub\StudentManagement\StudentManagement D:\GitHub\StudentManagement\StudentManagement\bin\Debug\net8.0\StudentManagement.exe (process 22900) exited with code -1 (0xffffffff). To automatically close the console when debugging stops, enable Tools->Options->Debugging->Automatically close the console when debugging stops. Press any key to close this window . . .
+75.	ChatGPT каза:
+Да, спокойно 😊 Това не е проблем с проекта.
+Виж най-важното:
+Content root path: D:\GitHub\StudentManagement\StudentManagement
+Това потвърждава, че проектът вече се стартира от новото място. ✅
+А това:
+exited with code -1
+се е появило, защото стартирането/дебъгването е приключило. Не означава непременно, че проектът е счупен.
+Стъпка 10
+Сега се върни във Visual Studio.
+Намери Solution Explorer вдясно и провери дали виждаш проекта:
+StudentManagement
+👉 Не натискай нищо друго. Кажи ми какво виждаш там.
+76.	Вие казахте:
+да и не дава грешки за момента
+77.	ChatGPT каза:
+Чудесно! 🎉 Значи сме добре засега.
+Стъпка 11
+Сега вече можем да отворим GitHub Desktop.
+👉 Отвори GitHub Desktop и не натискай нищо още.
+Кажи ми какво пише на началния екран — например дали виждаш Add, Create a New Repository, Clone a Repository и т.н.
+Ще продължим само с една стъпка наведнъж.
+78.	Вие казахте:
+да
+79.	ChatGPT каза:
+Супер 👍
+Стъпка 12
+В GitHub Desktop натисни:
+Add
+Ще се появи меню. От него избери:
+Add existing repository...
+👉 Когато го натиснеш и видиш прозореца за избор на папка, спри там и ми кажи.
+80.	Вие казахте:
+готово
+81.	ChatGPT каза:
+Стъпка 13
+В прозореца, който се е отворил, трябва да посочим папката на проекта.
+Избери:
+D:\GitHub\StudentManagement
+⚠️ Избери папката StudentManagement, не файла StudentManagement.sln.
+След това натисни Add repository.
+Кажи ми какво ти показва GitHub Desktop след това.
+82.	Вие казахте:
+D:\GitHub\StudentManagement -> local path
+83.	ChatGPT каза:
+Да, точно това е. ✅
+В полето Local path трябва да пише:
+D:\GitHub\StudentManagement
+Стъпка 14
+Сега погледни под Local path.
+Ако GitHub Desktop ти показва съобщение от типа:
+This directory does not appear to be a Git repository
+това е нормално, защото още не сме създали Git repository.
+👉 Кажи ми точно какво пише под Local path и ще ти кажа следващото натискане.
+84.	Вие казахте:
+D:\GitHub\StudentManagement
+85.	ChatGPT каза:
+Да 👍 Пътят е правилният:
+D:\GitHub\StudentManagement
+Стъпка 14
+Сега погледни долу вдясно в прозореца.
+Трябва да има бутон Add или Add repository.
+👉 Натисни него.
+Ако ти покаже съобщение за това, че папката не е Git repository, не се притеснявай — точно това очакваме на този етап.
+Кажи ми какво се появи след натискането.
+86.	Вие казахте:
+само това е написано. не е написано име на Name в прозареца
+87.	ChatGPT каза:
+Аха, разбрах. 👍 Значи си в прозореца Add existing repository и виждаш само:
+Local path:
+D:\GitHub\StudentManagement
+Това е правилно. Тук няма поле Name — не ти трябва.
+Стъпка 14 — поправка
+Погледни долу в същия прозорец.
+Ако виждаш бутон Add, натисни него.
+Ако Add е сиво/неактивно и има съобщение, че папката не е Git repository, не натискай нищо.
+Кажи ми какво пише долу под пътя или какви бутони виждаш долу вдясно.
+88.	Вие казахте:
+да не е активно
+89.	ChatGPT каза:
+Точно така — Add е неактивен, защото папката още не е Git repository. Нищо не си направила грешно. 👍
+Стъпка 15
+Затвори този прозорец с Cancel.
+След това в началния екран на GitHub Desktop натисни:
+File → New repository...
+Спираме дотук.
+Кажи ми какво се появява след New repository... и ще продължим с една стъпка.
+90.	Вие казахте:
+няма име
+91.	ChatGPT каза:
+Да, нормално е — при New repository вече трябва да има поле Name. 😊
+Стъпка 16
+В прозореца Create a new repository потърси полето:
+Name
+В него напиши точно:
+StudentManagement
+⚠️ Не пишѝ целия път в Name. Само StudentManagement.
+Кажи ми, когато си го написала, и ще ти кажа какво да сложим в Local path.
+92.	Вие казахте:
+description кво да напиша
+93.	ChatGPT каза:
+Можеш да го оставиш празно — Description не е задължително. 👍
+Но понеже проектът ти е Student Management, ако искаш, можеш да напишеш:
+Student Management system built with ASP.NET Core MVC
+Аз бих го сложил, защото ще ти е полезно после в GitHub да знаеш какво е repository-то.
+👉 Напиши описанието и не натискай Create още. Кажи ми, когато си готова.
+94.	Вие казахте:
+кво означават другите неща
+95.	ChatGPT каза:
+Разбира се 😊 Нека ги минем едно по едно, за да не объркаме нещо.
+В прозореца Create a new repository вероятно виждаш нещо подобно:
+1. Name
+StudentManagement
+Името на GitHub repository-то.
+2. Description
+Кратко описание на проекта. Не е задължително.
+Можеш да напишеш:
+Student Management system built with ASP.NET Core MVC
+3. Local path
+Това е къде на компютъра ще се намира Git repository-то.
+При теб искаме:
+D:\GitHub
+⚠️ Тук е важно: не слагай D:\GitHub\StudentManagement, защото Name вече е StudentManagement. GitHub Desktop ще създаде папката.
+4. Initialize this repository with a README
+Това създава README.md файл с информация за проекта.
+👉 За нашия случай: не го включвай. Ще го направим по-късно, ако искаш.
+5. Git ignore
+Това казва на Git кои файлове да не качва в GitHub.
+За .NET проект избери:
+VisualStudio
+Това е важно, защото ще изключи неща като .vs, bin, obj и други временни файлове.
+6. License
+Определя как други хора могат да използват кода ти.
+👉 Засега можеш да оставиш:
+None
+________________________________________
+При теб настройките трябва да изглеждат приблизително така:
+Name:          StudentManagement
+Description:   Student Management system built with ASP.NET Core MVC
+Local path:    D:\GitHub
+README:        ❌
+Git ignore:    VisualStudio
+License:       None
+Не натискай Create още. Ако при теб полетата изглеждат различно, напиши ми какви точно виждаш и ще ги минем едно по едно.
+96.	Вие казахте:
+в local path ->D:\GitHub да остане така
+97.	ChatGPT каза:
+Да, точно така. ✅
+В Local path остави:
+D:\GitHub
+А Name да бъде:
+StudentManagement
+Така GitHub Desktop ще използва:
+D:\GitHub\StudentManagement
+като repository.
+👉 Не натискай Create още. Кажи ми какво си избрала за Git ignore и License, за да ги проверим преди създаването.
+98.	Вие казахте:
+може ли да сложа отметка на Initialize this repo with a README
+99.	ChatGPT каза:
+Да, можеш. 👍 Даже е добра идея за GitHub repository.
+Отметни:
+☑️ Initialize this repository with a README
+README файлът е началната страница на repository-то в GitHub — там по-късно можем да напишем какво представлява StudentManagement, как се стартира и какви технологии използва.
+Само остави останалите настройки така, както ги уточнихме:
+o	Name: StudentManagement
+o	Local path: D:\GitHub
+o	README: ✅
+o	Git ignore: VisualStudio
+o	License: None
+След това не натискай Create още — кажи ми какво имаш избрано на Git ignore.
+100.	Вие казахте:
+Git ignore: VisualStudio
+101.	ChatGPT каза:
+Да, точно VisualStudio избери. ✅
+Това е правилният избор за твоя ASP.NET Core проект. То ще помогне Git да не следи временни файлове и папки на Visual Studio като .vs, bin и obj.
+Значи засега имаме:
+o	Name: StudentManagement ✅
+o	Description: по желание
+o	Local path: D:\GitHub ✅
+o	Initialize with README: ✅
+o	Git ignore: VisualStudio ✅
+o	License: None — засега
+👉 Следващото е да проверим License. Кажи ми какво пише/какво е избрано там.
+102.	Вие казахте:
+License: None — засега може ли да изберем MIT License
+103.	ChatGPT каза:
+Да, може 👍 И за учебен проект като твоя MIT License е напълно подходящ избор.
+Накратко, MIT позволява на други хора сравнително свободно да използват, променят и разпространяват кода ти, при условие че запазят лицензионното известие.
+Ако искаш repository-то ти да е публично в GitHub и нямаш проблем други хора да използват кода — избери MIT License. ✅
+Тогава настройките ти са:
+o	Name: StudentManagement
+o	Description: Student Management system built with ASP.NET Core MVC
+o	Local path: D:\GitHub
+o	README: ✅
+o	Git ignore: VisualStudio
+o	License: MIT License ✅
+Когато всичко е така, можеш да натиснеш Create repository. 🚀
+104.	Вие казахте:
+имам въпрос
+105.	ChatGPT каза:
+Разбира се 😊 Кажи въпроса си.
+106.	Вие казахте:
+the repo will be create D:\GitHub\StudentManagement това ще е пътя на които ще е създаден
+107.	ChatGPT каза:
+Да, точно така. ✅
+GitHub Desktop ти показва:
+The repo will be created:
+D:\GitHub\StudentManagement
+Това е точно правилният път, който искаме.
+Имаш:
+Local path: D:\GitHub
+Name:       StudentManagement
+и GitHub Desktop ги комбинира:
+D:\GitHub\StudentManagement
+Това съвпада с папката, в която вече преместихме твоя проект.
+⚠️ Само че тук има един важен момент: понеже D:\GitHub\StudentManagement вече съществува и вътре е твоят проект, не искаме GitHub Desktop да се опита да създаде нова папка със същото име върху нея.
+Затова не натискай Create repository още. Кажи ми какво пише в прозореца около това съобщение (особено ако има предупреждение), за да не направим дублирана папка.
+108.	Вие казахте:
+ето тук грешах преди
+109.	ChatGPT каза:
+Да ❤️ точно тук е била грешката преди. Добре, че го забеляза!
+В момента имаме вече съществуваща папка:
+D:\GitHub\StudentManagement
+и в нея е твоят реален Visual Studio проект.
+Ако сега натиснем Create repository от прозореца New repository, GitHub Desktop ще се опита да създаде repository в:
+D:\GitHub\StudentManagement
+а ние всъщност искаме да превърнем съществуващата папка в Git repository, без да създаваме нов проект/нова папка.
+Затова спираме тук 🛑
+Не натискай Create repository.
+Затвори прозореца с Cancel.
+После ще използваме правилната опция за съществуващата папка — Add existing repository — но първо трябва да създадем Git repository в самата папка.
+Ще го направим стъпка по стъпка, без да местим проекта повече. 👍
+110.	Вие казахте:
+натискам create repo
+111.	ChatGPT каза:
+Чакай 🛑 не натискай Create repository още.
+Причината е, че:
+D:\GitHub\StudentManagement
+вече съществува и вътре е твоят работещ проект.
+Ако натиснеш Create repository, има риск GitHub Desktop да не използва съществуващия проект по начина, който искаме.
+Направи само това сега:
+Натисни Cancel на този прозорец.
+После ще ти покажа точно как да направим Git repository върху вече съществуващия проект, без да го местим отново.
+Кажи ми „отказах“, когато натиснеш Cancel.
+112.	Вие казахте:
+още не съм го качила в github
+113.	ChatGPT каза:
+Да, разбрах те. ❤️ Проектът още не е качен в GitHub. В момента само го преместихме локално в:
+D:\GitHub\StudentManagement
+Искаме крайният резултат да бъде:
+Твоят проект
+D:\GitHub\StudentManagement
+        ↓
+Git repository
+        ↓
+GitHub.com
+И понеже папката вече съществува, не трябва да създаваме нова папка със същото име.
+Няма проблем — можем да го направим правилно през GitHub Desktop.
+Сега
+Ако още си на прозореца Create a new repository, натисни Cancel.
+После ще направим repository-то вече съществуващата папка и след това ще го качим в GitHub.
+Кажи ми само „Cancel натиснах“ и продължаваме с една стъпка.
+114.	Вие казахте:
+не съм качила репо още а това ми е целта
+115.	ChatGPT каза:
+Да ❤️ Разбирам те напълно — крайната ти цел е StudentManagement да бъде качен като repository в GitHub, а не просто да е папка на компютъра.
+И можем да го направим. Просто има една малка подробност: папката вече съществува, защото в нея е проектът.
+Целта ни е:
+D:\GitHub\StudentManagement
+        ↓
+    Git repository
+        ↓
+GitHub → StudentManagement
+Направи сега това
+Ако в момента си на прозореца Create a new repository и виждаш:
+Name: StudentManagement
+Local path: D:\GitHub
+не натискай Create repository.
+Натисни Cancel.
+След това ще направим локалната папка D:\GitHub\StudentManagement Git repository и после ще натиснем Publish repository, което ще я качи в GitHub.
+Няма да губим проекта и няма да го местим повече. 👍
+Кажи ми „Cancel“ след като го натиснеш и продължаваме.
+116.	Вие казахте:
+може ли да провериш че тя не е качена а аз искам да я кача
+117.	ChatGPT каза:
+Да. И тук е важно да разделим две различни неща:
+o	D:\GitHub\StudentManagement → това е само папка на твоя компютър.
+o	GitHub repository → това е repository, което съществува онлайн в твоя GitHub акаунт.
+От това, което ми показа досега, не сме я качвали онлайн. Не сме стигали до Publish repository, така че няма причина да е качена.
+Как можем да проверим
+В GitHub Desktop, ако repository-то вече е свързано с GitHub, обикновено ще виждаш Publish repository или информация за remote/repository.
+Но за да сме 100% сигурни, можем да проверим директно в GitHub.
+Отвори GitHub и влез в акаунта си.
+После отиди в Your repositories и виж дали има repository с име:
+StudentManagement
+Ако няма такова repository → супер, можем да го качим.
+Ако искаш, можем да направим проверката стъпка по стъпка. Кажи ми какво виждаш в Your repositories.
+118.	Вие казахте:
+https://github.com/esp-nv?tab=repositories
+119.	ChatGPT каза:
+I checked the GitHub profile you sent. It’s the esp-nv account, and it currently has 3 public repositories, all updated today (August 29, 2026). G GitHub
+o	esp-nv — public repository.
+o	Software-Engineering — a structured software-engineering portfolio covering programming concepts, development practices, web fundamentals, version control, and language-independent principles. It uses the MIT License. G GitHub
+o	CSharp — a C# portfolio covering programming fundamentals, advanced concepts, OOP, SQL Server, Entity Framework, practical exercises, and projects. G GitHub
+The profile describes the developer as a Junior Developer focused on C#, .NET, and web development. G GitHub
+Open the esp-nv GitHub repositories
+If you want, I can also review these repositories like a recruiter/technical interviewer and tell you what looks strong, what is missing, and what to improve to make the GitHub profile job-ready.
+G Източници
+120.	Вие казахте:
+може ли на български
+121.	ChatGPT каза:
+Разбира се! 😊 Мога да продължа изцяло на български.
+За GitHub профила ти мога например да направя подробен анализ като технически интервюиращ/рекрутър:
+o	📁 структурата и организацията на repository-тата;
+o	💻 качеството на C#/.NET кода;
+o	🧠 какво показват проектите за нивото ти;
+o	📄 README файловете и документацията;
+o	🏆 какво прави добро впечатление на работодател;
+o	⚠️ какво изглежда слабо или незавършено;
+o	🚀 какво конкретно да добавиш, за да изглеждаш като по-силен Junior .NET Developer;
+o	🎯 как бих оценил профила ти при кандидатстване за работа.
+Ако искаш, мога да започна с пълен review на трите repository-та, включително конкретни препоръки какво да промениш.
+
