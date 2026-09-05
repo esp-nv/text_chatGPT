@@ -1,0 +1,151 @@
+Ти си на Additional information при създаването на ASP.NET Core MVC проекта във Visual Studio 2022.
+Ще минаваме едно по едно, както поиска.
+Стъпка 4.1 — Framework
+Това е първото нещо:
+Framework → .NET 8.0
+Какво е Framework?
+.NET е платформата, върху която ще работи нашето приложение.
+Можеш да го мислиш така:
+Нашето приложение
+       ↓
+ASP.NET Core MVC
+       ↓
+.NET 8
+       ↓
+Операционна система
+Ние пишем C# кода си, а .NET предоставя средата и библиотеките, необходими приложението да работи.
+Защо .NET 8?
+.NET 8 е LTS (Long Term Support) версия.
+LTS означава, че Microsoft я поддържа за по-дълъг период.
+За учебен и portfolio проект това е много добър избор.
+Затова:
+Framework: .NET 8.0 ✅
+________________________________________
+Стъпка 4.2 — Authentication type
+Вероятно виждаш:
+Authentication type → None
+Това означава:
+Все още няма да имаме система за вход на потребители.
+Например няма да имаме:
+Username
+Password
+     ↓
+Login
+     ↓
+Student Management System
+По-късно можем да добавим ASP.NET Core Identity и да направим:
+Admin
+Teacher
+Student
+с различни права.
+Но не ни трябва в началото.
+Затова:
+Authentication type → None ✅
+________________________________________
+Стъпка 4.3 — Configure for HTTPS
+Вероятно имаш:
+Configure for HTTPS ☑
+Остави го включено.
+HTTPS означава, че комуникацията между браузъра и приложението е криптирана.
+Вместо:
+http://localhost:5000
+ще използваме нещо от типа:
+https://localhost:7xxx
+При локална разработка Visual Studio създава development certificate, за да можем да използваме HTTPS.
+За реални приложения HTTPS е изключително важно.
+Configure for HTTPS → включено ✅
+________________________________________
+Стъпка 4.4 — Enable container support
+В зависимост от версията на Visual Studio може да виждаш:
+Enable container support
+или подобна опция.
+Ако я виждаш — остави я изключена засега.
+По-късно ще говорим за Docker, но не искам още от първия ден да добавяме допълнителна сложност.
+Първо:
+C#
+ ↓
+ASP.NET Core
+ ↓
+MVC
+ ↓
+SQL Server
+После Docker.
+________________________________________
+Стъпка 4.5 — Do not use top-level statements
+Това е отметката, за която попита.
+При теб е:
+☑ Do not use top-level statements
+Както вече казахме, това означава, че Program.cs ще бъде създаден в по-класическия C# стил.
+Ще имаме нещо подобно:
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Тук започва приложението
+    }
+}
+В modern C# обикновено се използват top-level statements:
+var builder = WebApplication.CreateBuilder(args);
+
+var app = builder.Build();
+
+app.Run();
+Какво ще изберем ние?
+За нашето обучение:
+☑ Do not use top-level statements
+Така ще можем да видим ясно:
+Program
+   ↓
+Main()
+   ↓
+Application starts
+Това ще ни помогне да свържем ASP.NET Core с основите на C#, които вече учиш.
+________________________________________
+Накрая настройките ни трябва да са приблизително
+Framework
+    .NET 8.0
+
+Authentication type
+    None
+
+Configure for HTTPS
+    ☑
+
+Enable container support
+    ☐
+
+Do not use top-level statements
+    ☑
+Ако при теб има други полета, не натискай Create още.
+Напиши ми точно какви полета виждаш в твоя прозорец (или изпрати screenshot) и ще ги разгледаме едно по едно, преди да продължим.
+1.	имам още една опция тя кво означава Enlist in .Net Aspire orchestration
+2.	ChatGPT каза:
+Да — ако го виждаш при създаване на .NET проект, опцията “Enlist in .NET Aspire orchestration” означава:
+Да включиш този проект като част от .NET Aspire приложение, което управлява и стартира няколко услуги заедно.
+Какво е .NET Aspire?
+.NET Aspire е набор от инструменти на Microsoft за разработване на приложения, съставени от няколко компонента, например:
+o	🖥️ ASP.NET Core Web API
+o	🌐 Frontend
+o	🗄️ SQL Server / PostgreSQL
+o	🔴 Redis
+o	📨 RabbitMQ
+o	други микросървиси
+Aspire ти позволява да ги стартираш и управляваш като едно приложение, вместо ръчно да пускаш всеки проект отделно.
+Да я включиш ли?
+Ако в момента правиш обикновен ASP.NET Core Web API / MVC приложение и учиш .NET → остави я изключена.
+Ако обаче правиш приложение с няколко услуги, Docker контейнери, Redis, база данни и т.н. и искаш Aspire да ги управлява → включи я.
+Примерно:
+MyApp
+├── MyApp.Api
+├── MyApp.Web
+├── MyApp.Worker
+├── MyApp.AppHost       ← Aspire orchestrator
+└── MyApp.ServiceDefaults
+Тогава Aspire AppHost може да казва приблизително:
+Стартирай API
+Стартирай Frontend
+Стартирай Redis
+Стартирай Database
+Свържи ги помежду им
+За нормален проект, който започваш сега, бих казал: не я избирай. Можеш да добавиш Aspire по-късно, ако ти потрябва.
+
